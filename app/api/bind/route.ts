@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { bindAcc } from "@/app/libs/utils";
+import { bindAcc } from "@/lib/utils";
 
 export async function POST(request: Request) {
   try {

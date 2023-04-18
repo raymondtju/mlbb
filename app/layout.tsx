@@ -1,10 +1,10 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 
-import Navbar from "./components/navbar/Navbar";
-import getCurrentUser from "./actions/getCurrentUser";
-import ToasterProvider from "./providers/ToasterProvider";
-import Client from "./components/Client";
+import Navbar from "@/components/navbar/Navbar";
+import ToasterProvider from "@/components/providers/ToasterProvider";
+import Client from "@/components/Client";
+import getCurrentUser from "@/lib/actions/getCurrentUser";
 
 export const metadata = {
   title: "MLMastermind's",

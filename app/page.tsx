@@ -1,9 +1,6 @@
-import getHeroes from "./actions/getHeroes";
-import HeroList from "./components/HeroList";
-import { Button } from "./components/ui/Button";
+import { Button } from "@/components/ui/Button";
 
 export default async function Home() {
-  const heroes = await getHeroes();
   return (
     <>
       <main className="mt-36">
@@ -18,13 +15,6 @@ export default async function Home() {
           </p>
           <Button className="mt-8">Get Started</Button>
         </div>
-        {/* <div className="mt-[100px] text-start">
-          <h1 className="text-[28px] font-bold leading-10 tracking-tight md:text-[36px] md:leading-[60px]">
-            Explore Heroes
-          </h1>
-
-          <HeroList heroes={heroes} /> 
-        </div> */}
       </main>
     </>
   );

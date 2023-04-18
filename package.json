@@ -6,9 +6,9 @@
     "dev": "next dev -p 3010",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ./app",
+    "lint": "eslint ./components ./app ./lib",
     "lint:debug": "eslint ./app --debug",
-    "lint:fix": "eslint ./app --fix"
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",

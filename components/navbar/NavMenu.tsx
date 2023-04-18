@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "../ui/Button";
 import { signOut } from "next-auth/react";
-import { SafeUser } from "@/app/types";
+import { SafeUser } from "@/types";
 import { cn } from "@/lib/utils";
 import Burger from "../shared/icons/burger";
 import Close from "../shared/icons/close";

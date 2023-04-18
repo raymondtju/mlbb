@@ -1,5 +1,3 @@
-import getCurrentUser from "../actions/getCurrentUser";
-
 export const metadata = {
   title: "App",
   description: "MLBB App",

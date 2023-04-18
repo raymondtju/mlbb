@@ -1,5 +1,5 @@
 import axios from "axios";
-import prisma from "@/app/libs/prismadb";
+import prisma from "@/lib/prismadb";
 
 export interface ITopPlayed {
   id: string;

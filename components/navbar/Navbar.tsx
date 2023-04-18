@@ -4,7 +4,7 @@ import React from "react";
 
 import NavLogo from "./NavLogo";
 import NavMenu from "./NavMenu";
-import { SafeUser } from "@/app/types";
+import { SafeUser } from "@/types";
 
 interface NavbarProps {
   currentUser?: SafeUser | null;

@@ -1,11 +1,11 @@
 import { toast } from "sonner";
-import getCurrentUser from "../actions/getCurrentUser";
-import getMatchPlayed from "../actions/getMatchPlayed";
-import getMlbbAcc from "../actions/getMlbbAcc";
-import getOwnedHero from "../actions/getOwnedHero";
-import getWinRate from "../actions/getWinRate";
-import MainApp from "../components/app/MainApp";
-import getTopPlayedHero from "../actions/getTopPlayedHero";
+import getCurrentUser from "@/lib/actions/getCurrentUser";
+import getMatchPlayed from "@/lib/actions/getMatchPlayed";
+import getMlbbAcc from "@/lib/actions/getMlbbAcc";
+import getOwnedHero from "@/lib/actions/getOwnedHero";
+import getWinRate from "@/lib/actions/getWinRate";
+import MainApp from "@/components/app/MainApp";
+import getTopPlayedHero from "@/lib/actions/getTopPlayedHero";
 
 export default async function App() {
   const currentUser = await getCurrentUser();

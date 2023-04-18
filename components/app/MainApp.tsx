@@ -1,13 +1,13 @@
 "use client";
 
-import { SafeUser } from "@/app/types";
+import { SafeUser } from "@/types";
 import { mlbbaccs } from "@prisma/client";
 import { Progress } from "../ui/Progress";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "../ui/Button";
 import Link from "next/link";
-import { ITopPlayed } from "@/app/actions/getTopPlayedHero";
+import { ITopPlayed } from "@/lib/actions/getTopPlayedHero";
 
 export type MatchPLayedProps = {
   totalClassic: number | 0;
@@ -79,15 +79,15 @@ const MainApp: React.FC<MainAppProps> = ({
       </div>
 
       <div className="mt-12">
-        <h3 className="mb-2 text-lg font-bold">Match Insight</h3>
-        <div className="max-w-lg p-4 rounded-md shadow-md border-slate-900 bg-gray-50/50 backdrop-blur-3xl">
+        <h3 className="text-lg mb-2 font-bold">Match Insight</h3>
+        <div className="max-w-lg rounded-md border-slate-900 bg-gray-50/50 p-4 shadow-md backdrop-blur-3xl">
           <p className="text-sm">Ranked - {matchPlayed?.totalRanked}</p>
           <Progress
             value={matchPlayed?.totalRanked}
             max={matchPlayed?.totalRanked + matchPlayed?.totalClassic}
           />
 
-          <p className="mt-2 text-sm text-right">
+          <p className="mt-2 text-right text-sm">
             Classic - {matchPlayed?.totalClassic}{" "}
           </p>
           <Progress
@@ -100,8 +100,8 @@ const MainApp: React.FC<MainAppProps> = ({
       </div>
 
       <div className="mt-12">
-        <h3 className="mb-2 text-lg font-bold">Match Winrate</h3>
-        <div className="max-w-lg p-4 rounded-md shadow-md border-slate-900 bg-gray-50/50 backdrop-blur-3xl">
+        <h3 className="text-lg mb-2 font-bold">Match Winrate</h3>
+        <div className="max-w-lg rounded-md border-slate-900 bg-gray-50/50 p-4 shadow-md backdrop-blur-3xl">
           <p className="text-sm">
             Ranked -{" "}
             {((winRate?.totalRanked * 100) / matchPlayed?.totalRanked).toFixed(
@@ -131,8 +131,8 @@ const MainApp: React.FC<MainAppProps> = ({
       </div>
 
       <div className="mt-12">
-        <h3 className="mb-2 text-lg font-bold">Classic Top 5 Played</h3>
-        <div className="max-w-lg p-4 rounded-md shadow-md border-slate-900 bg-gray-50/50 backdrop-blur-3xl">
+        <h3 className="text-lg mb-2 font-bold">Classic Top 5 Played</h3>
+        <div className="max-w-lg rounded-md border-slate-900 bg-gray-50/50 p-4 shadow-md backdrop-blur-3xl">
           {topPlayedHero?.topPlayedClassic.map((data, i) => {
             return (
               <div key={i}>
@@ -156,8 +156,8 @@ const MainApp: React.FC<MainAppProps> = ({
       </div>
 
       <div className="mt-12">
-        <h3 className="mb-2 text-lg font-bold">Ranked Top 5 Played</h3>
-        <div className="max-w-lg p-4 rounded-md shadow-md border-slate-900 bg-gray-50/50 backdrop-blur-3xl">
+        <h3 className="text-lg mb-2 font-bold">Ranked Top 5 Played</h3>
+        <div className="max-w-lg rounded-md border-slate-900 bg-gray-50/50 p-4 shadow-md backdrop-blur-3xl">
           {topPlayedHero?.topPlayedRanked.map((data, i) => {
             return (
               <div key={i}>

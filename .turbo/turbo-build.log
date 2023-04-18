@@ -1,0 +1,25 @@
+
+> mlbbforum@0.1.0 build
+> next build
+
+info  - Loaded env from C:\Users\raymo\Documents\Project\moleg-forum\.env.local
+warn  - You have enabled experimental feature (appDir) in next.config.js.
+warn  - Experimental features are not covered by semver, and may cause unexpected or broken application behavior. Use at your own risk.
+info  - Thank you for testing `appDir` please leave your feedback at https://nextjs.link/app-feedback
+
+info  - Creating an optimized production build...
+info  - Compiled successfully
+info  - Linting and checking validity of types...
+Failed to compile.
+
+./app/app/page.tsx:39:11
+Type error: Type '{ totalClassic: number; totalRanked: number; } | null | undefined' is not assignable to type 'MatchPLayedProps'.
+  Type 'undefined' is not assignable to type 'MatchPLayedProps'.
+
+[0m [90m 37 | [39m          mlbbAcc[33m=[39m{mlbbAcc}[0m
+[0m [90m 38 | [39m          currentUser[33m=[39m{currentUser}[0m
+[0m[31m[1m>[22m[39m[90m 39 | [39m          matchPlayed[33m=[39m{matchPlayed}[0m
+[0m [90m    | [39m          [31m[1m^[22m[39m[0m
+[0m [90m 40 | [39m          winRate[33m=[39m{winRate}[0m
+[0m [90m 41 | [39m          ownedHero[33m=[39m{ownedHero}[0m
+[0m [90m 42 | [39m          err[33m=[39m{err}[0m

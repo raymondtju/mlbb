@@ -1,8 +1,7 @@
-import React from "react";
 import { getCsrfToken } from "next-auth/react";
-import LoginForm from "@/app/components/LoginForm";
-import getCurrentUser from "@/app/actions/getCurrentUser";
-import Redirect from "@/app/components/Redirect";
+import LoginForm from "@/components/LoginForm";
+import getCurrentUser from "@/lib/actions/getCurrentUser";
+import Redirect from "@/components/Redirect";
 
 export default async function Signin() {
   const csrfToken = await getCsrfToken();
