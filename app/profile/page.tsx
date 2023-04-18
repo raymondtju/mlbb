@@ -4,7 +4,7 @@ import getMatchPlayed from "@/lib/actions/getMatchPlayed";
 import getMlbbAcc from "@/lib/actions/getMlbbAcc";
 import getOwnedHero from "@/lib/actions/getOwnedHero";
 import getWinRate from "@/lib/actions/getWinRate";
-import MainApp from "@/components/app/MainApp";
+import MainApp from "@/components/profile/MainApp";
 import getTopPlayedHero from "@/lib/actions/getTopPlayedHero";
 
 export default async function App() {
@@ -32,7 +32,7 @@ export default async function App() {
 
   return (
     <main>
-      <div className="mt-24">
+      <div className="mt-24 overflow-hidden">
         <MainApp
           mlbbAcc={mlbbAcc}
           currentUser={currentUser}

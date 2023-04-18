@@ -54,7 +54,7 @@ const NavMenu: React.FC<NavMenuProps> = ({ currentUser }) => {
               {pathname === "/" ? (
                 <Button
                   onClick={() => {
-                    router.push("/app");
+                    router.push("/profile");
                     setCollapse(false);
                   }}
                   className={cn(
@@ -62,7 +62,7 @@ const NavMenu: React.FC<NavMenuProps> = ({ currentUser }) => {
                     collapse && "w-full"
                   )}
                 >
-                  App
+                  Profile
                 </Button>
               ) : (
                 <Button
