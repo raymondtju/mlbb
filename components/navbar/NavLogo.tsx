@@ -12,7 +12,7 @@ const NavLogo = () => {
         }}
         className="cursor-pointer text-xl font-bold tracking-tighter"
       >
-        mastermind
+        mlbb.fyi
       </a>
     </>
   );

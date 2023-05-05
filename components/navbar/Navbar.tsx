@@ -14,7 +14,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
   return (
     <nav
       className={cn(
-        "after-w-full fixed inset-x-0 top-0 z-30 bg-white py-3 after:absolute after:inset-x-0 after:bottom-0 after:w-full after:border-b-[1px] after:border-slate-200 xl:mx-auto",
+        "fixed inset-x-0 top-0 z-30 py-3 after:absolute after:inset-x-0 after:bottom-0 after:mx-auto after:w-[80rem] after:border-b-[1px] after:border-slate-100 after:opacity-20 xl:mx-auto",
         "w-full px-4"
       )}
     >

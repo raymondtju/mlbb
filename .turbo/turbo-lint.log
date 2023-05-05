@@ -1,22 +1,4 @@
 
-> mlbbforum@0.1.0 lint
-> eslint ./components ./app ./lib
+> mlbb-fyi@0.1.0 lint
+> eslint ./components ./app ./lib .
 
-
-Oops! Something went wrong! :(
-
-ESLint: 8.37.0
-
-SyntaxError: Invalid regular expression: /^((?(bg|text)\-).*)$/: Invalid group
-Occurred while linting C:\Users\raymo\Documents\Project\mlbbforum\components\navbar\Navbar.tsx:16
-Rule: "tailwindcss/no-custom-classname"
-    at new RegExp (<anonymous>)
-    at String.<anonymous> (C:\Users\raymo\Documents\Project\mlbbforum\node_modules\eslint-plugin-tailwindcss\lib\util\groupMethods.js:420:21)
-    at Array.findIndex (<anonymous>)
-    at Object.getGroupIndex (C:\Users\raymo\Documents\Project\mlbbforum\node_modules\eslint-plugin-tailwindcss\lib\util\groupMethods.js:419:17)
-    at C:\Users\raymo\Documents\Project\mlbbforum\node_modules\eslint-plugin-tailwindcss\lib\rules\no-custom-classname.js:129:40
-    at Array.forEach (<anonymous>)
-    at parseForCustomClassNames (C:\Users\raymo\Documents\Project\mlbbforum\node_modules\eslint-plugin-tailwindcss\lib\rules\no-custom-classname.js:120:18)
-    at Object.parseNodeRecursive (C:\Users\raymo\Documents\Project\mlbbforum\node_modules\eslint-plugin-tailwindcss\lib\util\ast.js:325:5)
-    at C:\Users\raymo\Documents\Project\mlbbforum\node_modules\eslint-plugin-tailwindcss\lib\rules\no-custom-classname.js:173:17
-    at Array.forEach (<anonymous>)

@@ -40,4 +40,7 @@ yarn-error.log*
 next-env.d.ts
 
 #turborepo
-+ .turbo
+# + .turbo
+/.turbo/
+.turbo/
+.turbo

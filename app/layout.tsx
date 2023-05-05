@@ -1,30 +1,39 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 
 import Navbar from "@/components/navbar/Navbar";
 import ToasterProvider from "@/components/providers/ToasterProvider";
-import Client from "@/components/Client";
 import getCurrentUser from "@/lib/actions/getCurrentUser";
+import { NextRequest, NextResponse } from "next/server";
 
 export const metadata = {
-  title: "MLMastermind's",
+  title: "mlbb.fyi",
   description: "MLBB Forum hehehehe",
 };
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin-ext"] });
+
+const fontHeading = localFont({
+  src: "../assets/fonts/cal-sans/CalSans-SemiBold.woff2",
+  variable: "--font-heading",
+});
 
 export default async function RootLayout({
   children,
+  req,
+  res,
 }: {
   children: React.ReactNode;
+  req: NextRequest;
+  res: NextResponse;
 }) {
   const currentUser = await getCurrentUser();
 
   return (
-    <html lang="en">
-      {/* bg-Gray-900 text-[#FFFFFF] */}
-      <body className={`${inter.className}`}>
-        <div className="relative mx-auto min-h-screen overflow-hidden">
+    <html lang="en" className={`${inter.className} ${fontHeading.variable}`}>
+      <body>
+        <div className="relative mx-auto min-h-screen overflow-hidden bg-bgblack text-pwhite">
           <div className="max-w-7xl px-4 xl:mx-auto">
             <Navbar currentUser={currentUser} />
             <ToasterProvider />

@@ -1,12 +1,12 @@
 {
-  "name": "mlbbforum",
+  "name": "mlbb-fyi",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3010",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ./components ./app ./lib",
+    "lint": "eslint ./components ./app ./lib .",
     "lint:debug": "eslint ./app --debug",
     "lint:fix": "eslint . --fix"
   },
@@ -21,26 +21,26 @@
     "axios": "^1.3.5",
     "class-variance-authority": "^0.5.1",
     "clsx": "^1.2.1",
-    "eslint": "8.37.0",
-    "eslint-config-next": "13.2.4",
-    "next": "13.2.4",
+    "eslint-config-next": "^13.4.0",
+    "next": "^13.4.0",
     "next-auth": "^4.21.1",
     "nodemailer": "^6.9.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "sonner": "^0.3.0",
-    "tailwind-merge": "^1.11.0",
-    "typescript": "5.0.3"
+    "tailwind-merge": "^1.11.0"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^5.57.0",
     "autoprefixer": "^10.4.14",
+    "eslint": "^8.39.0",
     "eslint-plugin-tailwindcss": "^3.10.3",
     "postcss": "^8.4.21",
     "prettier": "^2.8.7",
     "prettier-plugin-tailwindcss": "^0.2.7",
     "prisma": "^4.12.0",
-    "tailwindcss": "^3.3.1"
+    "tailwindcss": "^3.3.1",
+    "typescript": "^5.0.4"
   },
   "description": "test",
   "main": "next.config.js",
@@ -49,13 +49,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/raymondtju/mlbbforum.git"
+    "url": "git+https://github.com/raymondtju/mlbb-fyi.git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/raymondtju/mlbbforum/issues"
+    "url": "https://github.com/raymondtju/mlbb-fyi/issues"
   },
-  "homepage": "https://github.com/raymondtju/mlbbforum#readme"
+  "homepage": "https://github.com/raymondtju/mlbb-fyi#readme"
 }

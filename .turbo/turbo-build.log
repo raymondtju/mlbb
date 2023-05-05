@@ -1,25 +1,72 @@
 
-> mlbbforum@0.1.0 build
+> mlbb-fyi@0.1.0 build
 > next build
 
-info  - Loaded env from C:\Users\raymo\Documents\Project\mlbbforum\.env.local
-warn  - You have enabled experimental feature (appDir) in next.config.js.
-warn  - Experimental features are not covered by semver, and may cause unexpected or broken application behavior. Use at your own risk.
-
-info  - Thank you for testing `appDir` please leave your feedback at https://nextjs.link/app-feedback
+info  - Loaded env from C:\Users\raymo\Documents\Project\mlbb-fyi\.env.local
 info  - Creating an optimized production build...
 info  - Compiled successfully
 info  - Linting and checking validity of types...
-Failed to compile.
+info  - Collecting page data...
+info  - Generating static pages (0/10)
+info  - Generating static pages (2/10)
+info  - Generating static pages (4/10)
+(node:15288) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[next-auth][error][CLIENT_FETCH_ERROR] 
+https://next-auth.js.org/errors#client_fetch_error fetch failed {
+  error: {
+    message: 'fetch failed',
+    stack: 'TypeError: fetch failed\n' +
+      '    at Object.fetch (node:internal/deps/undici/undici:11118:11)\n' +
+      '    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)',
+    name: 'TypeError'
+  },
+  url: 'http://localhost:3010/api/auth/csrf',
+  message: 'fetch failed'
+}
+info  - Generating static pages (7/10)
+[next-auth][error][CLIENT_FETCH_ERROR] 
+https://next-auth.js.org/errors#client_fetch_error fetch failed {
+  error: {
+    message: 'fetch failed',
+    stack: 'TypeError: fetch failed\n' +
+      '    at Object.fetch (node:internal/deps/undici/undici:11118:11)\n' +
+      '    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)',
+    name: 'TypeError'
+  },
+  url: 'http://localhost:3010/api/auth/csrf',
+  message: 'fetch failed'
+}
+null
+null
+info  - Generating static pages (10/10)
+info  - Finalizing page optimization...
 
-./app/app/page.tsx:39:11
-Type error: Type '{ totalClassic: number; totalRanked: number; } | null | undefined' is not assignable to type 'MatchPLayedProps'.
-  Type 'undefined' is not assignable to type 'MatchPLayedProps'.
+Route (app)                                Size     First Load JS
+┌ λ /                                      141 B          77.1 kB
+├ λ /api/bind                              0 B                0 B
+├ λ /api/code                              0 B                0 B
+├ λ /api/test                              0 B                0 B
+├ λ /auth/signin                           1.6 kB          102 kB
+├ ○ /favicon.ico                           0 B                0 B
+├ λ /profile                               9.25 kB        99.7 kB
+└ λ /profile/bind                          1.71 kB        92.2 kB
++ First Load JS shared by all              76.9 kB
+  ├ chunks/139-bec1ce00f6f822ae.js         24.4 kB
+  ├ chunks/2443530c-cf19084764e737ac.js    50.5 kB
+  ├ chunks/main-app-450cbedaf4e2e245.js    213 B
+  └ chunks/webpack-8aa3d16522621c23.js     1.77 kB
 
-[0m [90m 37 | [39m          mlbbAcc[33m=[39m{mlbbAcc}[0m
-[0m [90m 38 | [39m          currentUser[33m=[39m{currentUser}[0m
-[0m[31m[1m>[22m[39m[90m 39 | [39m          matchPlayed[33m=[39m{matchPlayed}[0m
-[0m [90m    | [39m          [31m[1m^[22m[39m[0m
-[0m [90m 40 | [39m          winRate[33m=[39m{winRate}[0m
-[0m [90m 41 | [39m          ownedHero[33m=[39m{ownedHero}[0m
-[0m [90m 42 | [39m          err[33m=[39m{err}[0m
+Route (pages)                              Size     First Load JS
+┌ ○ /404                                   178 B          86.2 kB
+└ λ /api/auth/[...nextauth]                0 B              86 kB
++ First Load JS shared by all              86 kB
+  ├ chunks/main-a0376639345f805c.js        84 kB
+  ├ chunks/pages/_app-c544d6df833bfd4a.js  192 B
+  └ chunks/webpack-8aa3d16522621c23.js     1.77 kB
+
+ƒ Middleware                               23.3 kB
+
+λ  (Server)  server-side renders at runtime (uses getInitialProps or getServerSideProps)
+○  (Static)  automatically rendered as static HTML (uses no initial props)
+

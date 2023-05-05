@@ -54,7 +54,7 @@ const MainApp: React.FC<MainAppProps> = ({
     return (
       <div className="max-w-[100px]">
         <p className="text-2xl font-semibold leading-6">Welcome</p>
-        <Link href="/app/bind">
+        <Link href="/profile/bind">
           <Button>MLBB Bind</Button>
         </Link>
       </div>
@@ -76,13 +76,13 @@ const MainApp: React.FC<MainAppProps> = ({
         <p className="text-sm">Hero Owned: {ownedHero?.length || 0}</p>
       </div>
 
-      <div className="inset-y-0 bottom-2 right-[max(0px,calc(50%-40rem))] top-24 hidden w-[24rem] overflow-y-auto rounded-xl border-[1px] border-slate-200 md:fixed md:block">
-        <h3 className="sticky top-0 z-10 block border-b-[1px] border-slate-200 bg-white px-4 py-2 text-xl font-bold">
+      <div className="bottom-2 right-[max(8px,calc(50%-40rem))] top-24 hidden w-[24rem] overflow-hidden rounded-2xl bg-pblack md:fixed md:block">
+        <h3 className="sticky top-0 z-10 block bg-pblack/70 px-4 py-2 text-xl font-bold tracking-tighter backdrop-blur-sm">
           Analytics
         </h3>
-        <div className="flex flex-col gap-y-5 px-3 py-2">
+        <div className="absolute inset-y-0 mt-12 flex w-full flex-col gap-y-5 overflow-y-auto px-3 py-2">
           <div className="w-full max-w-sm">
-            <div className="max-w-lg rounded-xl border-[1px] border-slate-200 bg-gray-50/50 p-4">
+            <div className="max-w-lg rounded-2xl bg-sblack p-4">
               <h3 className="text-lg mb-2 font-semibold">Match Insight</h3>
               <p className="text-sm">Ranked - {matchPlayed?.totalRanked}</p>
               <Progress
@@ -103,7 +103,7 @@ const MainApp: React.FC<MainAppProps> = ({
           </div>
 
           <div className="w-full max-w-sm">
-            <div className="max-w-lg rounded-xl border-[1px] border-slate-200 bg-gray-50/50 p-4">
+            <div className="max-w-lg rounded-2xl bg-sblack p-4">
               <h3 className="text-lg mb-2 font-semibold">Match Winrate</h3>
               <p className="text-sm">
                 Ranked -{" "}
@@ -137,7 +137,7 @@ const MainApp: React.FC<MainAppProps> = ({
           </div>
 
           <div className="w-full max-w-sm">
-            <div className="max-w-lg rounded-xl border-[1px] border-slate-200 bg-gray-50/50 p-4">
+            <div className="max-w-lg rounded-2xl bg-sblack p-4">
               <h3 className="text-lg mb-2 font-semibold">
                 Classic Top 5 Played
               </h3>
@@ -164,7 +164,7 @@ const MainApp: React.FC<MainAppProps> = ({
           </div>
 
           <div className="w-full max-w-sm">
-            <div className="max-w-lg rounded-xl border-[1px] border-slate-200 bg-gray-50/50 p-4">
+            <div className="max-w-lg rounded-2xl bg-sblack p-4">
               <h3 className="text-lg mb-2 font-semibold">
                 Ranked Top 5 Played
               </h3>

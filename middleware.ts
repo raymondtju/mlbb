@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(request: NextRequest) {
-  if (request.nextUrl.pathname.startsWith("/app")) {
+  if (request.nextUrl.pathname.startsWith("/profile")) {
     const currentSession = request.cookies.get("next-auth.session-token");
 
     if (!currentSession) {
@@ -13,5 +13,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/app/:path*"],
+  matcher: ["/profile/:path*"],
 };

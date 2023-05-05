@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "App",
-  description: "MLBB App",
+  title: "Profile - mlbb.fyi",
+  description: "Your mlbb.fyi Profile ",
 };
 
 export default async function AppLayout({

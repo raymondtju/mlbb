@@ -18,9 +18,6 @@ export default async function getMatchPlayed(accId: number) {
       totalRanked += ranked[x].total;
     }
 
-    // console.log("totalClassic", totalClassic);
-    // console.log("totalRanked", totalRanked);
-
     return { totalClassic, totalRanked };
   } catch (error) {
     return null;
