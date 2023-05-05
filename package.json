@@ -1,5 +1,5 @@
 {
-  "name": "mlbb-fyi",
+  "name": "mlbb",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -49,13 +49,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/raymondtju/mlbb-fyi.git"
+    "url": "git+https://github.com/raymondtju/mlbb.git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/raymondtju/mlbb-fyi/issues"
+    "url": "https://github.com/raymondtju/mlbb/issues"
   },
-  "homepage": "https://github.com/raymondtju/mlbb-fyi#readme"
+  "homepage": "https://github.com/raymondtju/mlbb#readme"
 }
