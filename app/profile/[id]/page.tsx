@@ -7,13 +7,30 @@ import getWinRate from "@/lib/actions/getWinRate";
 import MainApp from "@/components/profile/MainApp";
 import getTopPlayedHero from "@/lib/actions/getTopPlayedHero";
 
-export default async function App() {
-  const currentUser = await getCurrentUser();
-  if (!currentUser) return null;
+export async function getMLBBID(id: string) {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/profile/${id}/api`, {
+      method: "GET",
+    });
+    if (res.status !== 200) return null;
+
+    const data = await res.json();
+    return data.email;
+  } catch (error) {
+    return null;
+  }
+}
+
+const ProfilePage = async ({params}: { params: { id: string } }) => {
+  console.log(params);
+
+  const mlid = await getMLBBID(params.id)
+  if (!mlid) return null;
+  console.log(mlid);
 
   let mlbbBind = true;
 
-  const mlbbAcc = await getMlbbAcc(currentUser.email);
+  const mlbbAcc = await getMlbbAcc(mlid);
   if (!mlbbAcc) {
     mlbbBind = false;
   }
@@ -36,7 +53,6 @@ export default async function App() {
       <div className="mt-24 overflow-hidden">
         <MainApp
           mlbbAcc={mlbbAcc}
-          currentUser={currentUser}
           matchPlayed={matchPlayed}
           winRate={winRate}
           ownedHero={ownedHero}
@@ -48,3 +64,5 @@ export default async function App() {
     </main>
   );
 }
+ 
+export default ProfilePage;

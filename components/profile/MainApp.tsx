@@ -15,7 +15,7 @@ export type MatchPLayedProps = {
 };
 
 interface MainAppProps {
-  currentUser: SafeUser | null;
+  // currentUser: SafeUser | null;
   mlbbAcc: mlbbaccs | null | undefined;
   matchPlayed: MatchPLayedProps;
   winRate: {
@@ -32,7 +32,6 @@ interface MainAppProps {
 }
 
 const MainApp: React.FC<MainAppProps> = ({
-  currentUser,
   mlbbAcc,
   matchPlayed,
   winRate,
