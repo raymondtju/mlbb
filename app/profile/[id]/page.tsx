@@ -7,7 +7,7 @@ import getWinRate from "@/lib/actions/getWinRate";
 import MainApp from "@/components/profile/MainApp";
 import getTopPlayedHero from "@/lib/actions/getTopPlayedHero";
 
-export async function getMLBBID(id: string) {
+async function getMLBBID(id: string) {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/profile/${id}/api`, {
       method: "GET",
