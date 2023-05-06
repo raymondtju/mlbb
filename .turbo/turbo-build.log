@@ -1,16 +1,29 @@
 
-> mlbb-fyi@0.1.0 build
+> mlbb@0.1.0 build
 > next build
 
-info  - Loaded env from C:\Users\raymo\Documents\Project\mlbb-fyi\.env.local
+info  - Loaded env from C:\Users\raymo\Documents\Project\mlbb\.env.local
 info  - Creating an optimized production build...
-info  - Compiled successfully
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (659kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+warn  - Compiled with warnings
+
+./node_modules/next/dist/server/web/spec-extension/image-response.js
+A Node.js API is used (process.turbopack at line: 14) which is not supported in the Edge Runtime.
+Learn more: https://nextjs.org/docs/api-reference/edge-runtime
+
+Import trace for requested module:
+./node_modules/next/dist/server/web/spec-extension/image-response.js
+./node_modules/next/server.js
+./node_modules/next-auth/next/middleware.js
+./node_modules/next-auth/middleware.js
+
 info  - Linting and checking validity of types...
 info  - Collecting page data...
-info  - Generating static pages (0/10)
-info  - Generating static pages (2/10)
-info  - Generating static pages (4/10)
-(node:15288) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
+info  - Generating static pages (0/9)
+info  - Generating static pages (2/9)
+info  - Generating static pages (4/9)
+info  - Generating static pages (6/9)
+(node:19852) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 [next-auth][error][CLIENT_FETCH_ERROR] 
 https://next-auth.js.org/errors#client_fetch_error fetch failed {
@@ -24,22 +37,9 @@ https://next-auth.js.org/errors#client_fetch_error fetch failed {
   url: 'http://localhost:3010/api/auth/csrf',
   message: 'fetch failed'
 }
-info  - Generating static pages (7/10)
-[next-auth][error][CLIENT_FETCH_ERROR] 
-https://next-auth.js.org/errors#client_fetch_error fetch failed {
-  error: {
-    message: 'fetch failed',
-    stack: 'TypeError: fetch failed\n' +
-      '    at Object.fetch (node:internal/deps/undici/undici:11118:11)\n' +
-      '    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)',
-    name: 'TypeError'
-  },
-  url: 'http://localhost:3010/api/auth/csrf',
-  message: 'fetch failed'
-}
 null
 null
-info  - Generating static pages (10/10)
+info  - Generating static pages (9/9)
 info  - Finalizing page optimization...
 
 Route (app)                                Size     First Load JS
@@ -49,23 +49,24 @@ Route (app)                                Size     First Load JS
 ├ λ /api/test                              0 B                0 B
 ├ λ /auth/signin                           1.6 kB          102 kB
 ├ ○ /favicon.ico                           0 B                0 B
-├ λ /profile                               9.25 kB        99.7 kB
+├ λ /profile/[id]                          9.24 kB        99.7 kB
+├ λ /profile/[id]/api                      0 B                0 B
 └ λ /profile/bind                          1.71 kB        92.2 kB
 + First Load JS shared by all              76.9 kB
   ├ chunks/139-bec1ce00f6f822ae.js         24.4 kB
   ├ chunks/2443530c-cf19084764e737ac.js    50.5 kB
-  ├ chunks/main-app-450cbedaf4e2e245.js    213 B
-  └ chunks/webpack-8aa3d16522621c23.js     1.77 kB
+  ├ chunks/main-app-fcb2c18be553bd8c.js    215 B
+  └ chunks/webpack-57c38feed4c529d9.js     1.77 kB
 
 Route (pages)                              Size     First Load JS
 ┌ ○ /404                                   178 B          86.2 kB
 └ λ /api/auth/[...nextauth]                0 B              86 kB
 + First Load JS shared by all              86 kB
-  ├ chunks/main-a0376639345f805c.js        84 kB
+  ├ chunks/main-ab8b433671c8f295.js        84 kB
   ├ chunks/pages/_app-c544d6df833bfd4a.js  192 B
-  └ chunks/webpack-8aa3d16522621c23.js     1.77 kB
+  └ chunks/webpack-57c38feed4c529d9.js     1.77 kB
 
-ƒ Middleware                               23.3 kB
+ƒ Middleware                               214 kB
 
 λ  (Server)  server-side renders at runtime (uses getInitialProps or getServerSideProps)
 ○  (Static)  automatically rendered as static HTML (uses no initial props)
