@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
+import { Analytics } from '@vercel/analytics/react';
 
 import Navbar from "@/components/navbar/Navbar";
 import ToasterProvider from "@/components/providers/ToasterProvider";
@@ -40,6 +41,7 @@ export default async function RootLayout({
             {children}
           </div>
         </div>
+        <Analytics />
       </body>
     </html>
   );
