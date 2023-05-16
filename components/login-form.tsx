@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import { toast } from "sonner";
 
 import { signIn } from "next-auth/react";
-import { Input } from "./ui/Input";
-import { Button } from "./ui/Button";
 import LoadingDots from "./shared/icons/loading-dots";
+import { Button } from "./shared/button";
+import { Input } from "./shared/input";
 
 export default function LoginForm({ csrfToken }: { csrfToken?: string }) {
   const [email, setEmail] = useState("");

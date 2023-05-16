@@ -1,5 +1,5 @@
 import getCurrentUser from "@/lib/actions/getCurrentUser";
-import SyncForm from "@/components/profile/bind/BindForm";
+import SyncForm from "@/components/profile/bind/bind-form";
 
 export default async function AppBind() {
   const currentUser = await getCurrentUser();

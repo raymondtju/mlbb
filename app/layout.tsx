@@ -1,19 +1,19 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from "@vercel/analytics/react";
 
-import Navbar from "@/components/navbar/Navbar";
-import ToasterProvider from "@/components/providers/ToasterProvider";
+import ToasterProvider from "@/components/providers/toaster-provider";
 import getCurrentUser from "@/lib/actions/getCurrentUser";
 import { NextRequest, NextResponse } from "next/server";
+import Navbar from "@/components/shared/navbar/navbar";
 
 export const metadata = {
   title: "mlbb.fyi",
   description: "MLBB Forum hehehehe",
 };
 
-const inter = Inter({ subsets: ["latin-ext"] });
+const inter = Inter({ subsets: ["latin"] });
 
 const fontHeading = localFont({
   src: "../assets/fonts/cal-sans/CalSans-SemiBold.woff2",
@@ -32,10 +32,13 @@ export default async function RootLayout({
   const currentUser = await getCurrentUser();
 
   return (
-    <html lang="en" className={`${inter.className} ${fontHeading.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.className} ${fontHeading.variable} text-softGray`}
+    >
       <body>
         <div className="relative mx-auto min-h-screen overflow-hidden bg-bgblack text-pwhite">
-          <div className="max-w-7xl px-4 xl:mx-auto">
+          <div className="mt-24 max-w-[1440px] xl:mx-auto">
             <Navbar currentUser={currentUser} />
             <ToasterProvider />
             {children}
