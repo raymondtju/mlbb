@@ -13,7 +13,7 @@ export default function LoginForm({ csrfToken }: { csrfToken?: string }) {
   const [loading, setLoading] = useState(false);
 
   return (
-    <>
+    <div className="mx-auto mt-14 max-w-md">
       <form
         onSubmit={async (e) => {
           e.preventDefault();
@@ -35,7 +35,7 @@ export default function LoginForm({ csrfToken }: { csrfToken?: string }) {
               setLoading(false);
             });
         }}
-        className="mx-auto mt-14 max-w-md space-y-2"
+        className="space-y-2"
       >
         <Input name="csrfToken" type="hidden" defaultValue={csrfToken} />
         <Input
@@ -50,6 +50,19 @@ export default function LoginForm({ csrfToken }: { csrfToken?: string }) {
           {loading ? <LoadingDots color="#fafafa" /> : <p>Send login link</p>}
         </Button>
       </form>
-    </>
+
+      <div className="mt-12 flex justify-center">
+        <Button
+          className="w-full"
+          onClick={() => {
+            signIn("google", {
+              callbackUrl: "/",
+            });
+          }}
+        >
+          Signin with Guu guu
+        </Button>
+      </div>
+    </div>
   );
 }
