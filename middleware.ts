@@ -6,5 +6,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/profile/bind", "profile/:id"],
+  matcher: ["/profile/bind"],
 };
