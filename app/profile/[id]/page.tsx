@@ -1,17 +1,18 @@
-import { toast } from "sonner";
-import getCurrentUser from "@/lib/actions/getCurrentUser";
 import getMatchPlayed from "@/lib/actions/getMatchPlayed";
 import getMlbbAcc from "@/lib/actions/getMlbbAcc";
 import getOwnedHero from "@/lib/actions/getOwnedHero";
 import getWinRate from "@/lib/actions/getWinRate";
-import MainApp from "@/components/profile/MainApp";
+import MainApp from "@/components/profile/profile-container";
 import getTopPlayedHero from "@/lib/actions/getTopPlayedHero";
 
 async function getMLBBID(id: string) {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/profile/${id}/api`, {
-      method: "GET",
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/profile/${id}/api`,
+      {
+        method: "GET",
+      }
+    );
     if (res.status !== 200) return null;
 
     const data = await res.json();
@@ -21,10 +22,8 @@ async function getMLBBID(id: string) {
   }
 }
 
-const ProfilePage = async ({params}: { params: { id: string } }) => {
-  console.log(params);
-
-  const mlid = await getMLBBID(params.id)
+const ProfilePage = async ({ params }: { params: { id: string } }) => {
+  const mlid = await getMLBBID(params.id);
   if (!mlid) return null;
   console.log(mlid);
 
@@ -49,20 +48,18 @@ const ProfilePage = async ({params}: { params: { id: string } }) => {
   }
 
   return (
-    <main>
-      <div className="mt-24 overflow-hidden">
-        <MainApp
-          mlbbAcc={mlbbAcc}
-          matchPlayed={matchPlayed}
-          winRate={winRate}
-          ownedHero={ownedHero}
-          err={err}
-          mlbbBind={mlbbBind}
-          topPlayedHero={topPlayedHero}
-        />
-      </div>
-    </main>
+    <div className="overflow-hidden">
+      <MainApp
+        mlbbAcc={mlbbAcc}
+        matchPlayed={matchPlayed}
+        winRate={winRate}
+        ownedHero={ownedHero}
+        err={err}
+        mlbbBind={mlbbBind}
+        topPlayedHero={topPlayedHero}
+      />
+    </div>
   );
-}
- 
+};
+
 export default ProfilePage;

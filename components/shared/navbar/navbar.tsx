@@ -1,10 +1,11 @@
-import { cn } from "@/lib/utils";
+"use client"
 
 import React from "react";
 
-import NavLogo from "./NavLogo";
-import NavMenu from "./NavMenu";
+import { cn } from "@/lib/utils";
 import { SafeUser } from "@/types";
+import NavLogo from "./navbar-logo";
+import NavMenu from "./navbar-menu";
 
 interface NavbarProps {
   currentUser?: SafeUser | null;
@@ -14,11 +15,11 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
   return (
     <nav
       className={cn(
-        "fixed inset-x-0 top-0 z-30 py-3 after:absolute after:inset-x-0 after:bottom-0 after:mx-auto after:w-[80rem] after:border-b-[1px] after:border-slate-100 after:opacity-20 xl:mx-auto",
+        "fixed inset-x-0 top-0 z-30 block bg-bgblack/80 py-3 backdrop-blur-sm xl:mx-auto",
         "w-full px-4"
       )}
     >
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-[1440px]">
         <div className="flex items-center justify-between">
           <NavLogo />
           <NavMenu currentUser={currentUser} />
@@ -29,3 +30,5 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
 };
 
 export default Navbar;
+
+// after:absolute after:inset-x-0 after:bottom-0 after:mx-auto after:w-[80rem] after:border-b-[1px] after:border-slate-100 after:opacity-20

@@ -8,5 +8,9 @@ export default async function AppLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <section className="max-w-7xl xl:mx-auto">{children}</section>;
+  return (
+    <main className="max-w-[1440px] overflow-hidden xl:mx-auto">
+      {children}
+    </main>
+  );
 }

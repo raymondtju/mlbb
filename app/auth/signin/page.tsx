@@ -1,5 +1,5 @@
 import { getCsrfToken } from "next-auth/react";
-import LoginForm from "@/components/LoginForm";
+import LoginForm from "@/components/login-form";
 import getCurrentUser from "@/lib/actions/getCurrentUser";
 import Redirect from "@/components/Redirect";
 

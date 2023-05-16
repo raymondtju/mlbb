@@ -29,7 +29,7 @@ const Progress = React.forwardRef<
     >
       {pos == "right" ? (
         <ProgressPrimitive.Indicator
-          className="h-full w-full flex-1 bg-sgreen transition-all duration-700 ease-in-out"
+          className="h-full w-full flex-1 bg-softBlue transition-all duration-700 ease-in-out"
           style={{
             transform: `translateX(${
               100 - (((currentValue || 0) * 100) / (max || 0) || 0)
@@ -38,7 +38,7 @@ const Progress = React.forwardRef<
         />
       ) : (
         <ProgressPrimitive.Indicator
-          className="h-full w-full flex-1 bg-sgreen transition-transform duration-700 ease-in-out"
+          className="h-full w-full flex-1 bg-softBlue transition-transform duration-700 ease-in-out"
           style={{
             transform: `translateX(-${
               100 - (((currentValue || 0) * 100) / (max || 0) || 0)
