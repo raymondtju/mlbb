@@ -22,7 +22,7 @@ export default function LoginForm({ csrfToken }: { csrfToken?: string }) {
         "Your email seems to have been registered using a different sign-in method."
       );
     }
-  });
+  }, [params]);
 
   return (
     <div className="mx-auto mt-14 max-w-md">

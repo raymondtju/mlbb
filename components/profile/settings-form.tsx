@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
 
 interface ISettingsForm {
   currentUser?: SafeUser | null;
-  mlbbAcc?: mlbbaccs;
+  mlbbAcc?: mlbbaccs | null;
 }
 
 const SettingsForm: React.FC<ISettingsForm> = ({ currentUser, mlbbAcc }) => {
@@ -100,7 +100,6 @@ const SettingsForm: React.FC<ISettingsForm> = ({ currentUser, mlbbAcc }) => {
         </div>
         <div className="space-y-1">
           <Label htmlFor="username">Username</Label>
-          <span>max 20 character</span>
           <Input
             type="text"
             placeholder="Username"
@@ -109,7 +108,14 @@ const SettingsForm: React.FC<ISettingsForm> = ({ currentUser, mlbbAcc }) => {
             name="username"
             maxLength={20}
             required
+            pattern="[a-z0-9]{4,}"
+            title="Only allow lowercase, number, minimum 4 digit"
+            className="peer"
           />
+          <p className="invisible absolute text-sm text-red-500 peer-invalid:visible peer-invalid:static peer-invalid:mt-2">
+            Please provide a minimum of 4 characters without any uppercase and
+            special characters
+          </p>
         </div>
 
         <Button className="mt-1 rounded-full" variant="gradiantNavy">

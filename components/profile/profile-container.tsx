@@ -16,36 +16,33 @@ export type MatchPLayedProps = {
 };
 
 interface MainAppProps {
-  // currentUser: SafeUser | null;
-  mlbbAcc?: mlbbaccs | null | undefined;
-  matchPlayed?: any[];
-  winRate?: {
+  matchPlayed?: {
+    mode: string;
     total: number;
+    data: {
+      id: string;
+      total: number;
+      win: number;
+      name: string;
+      _id: string;
+    }[];
+  }[];
+  ownedHero?: {
+    total: number;
+    data: {
+      hero: string;
+      id: number;
+      _id: string;
+    }[];
   };
-  ownedHero?: any;
-  err?: boolean;
-  mlbbBind?: boolean;
   username: string;
 }
 
 const MainApp: React.FC<MainAppProps> = ({
-  mlbbAcc,
   matchPlayed,
   username,
-  winRate,
   ownedHero,
-  err,
-  mlbbBind,
 }) => {
-  useEffect(() => {
-    if (err) {
-      toast.error("Failed to fetch data");
-      return () => {
-        toast.error("Failed to fetch data");
-      };
-    }
-  }, [err]);
-
   return (
     <>
       <div className="flex flex-col gap-5 md:flex-row">
@@ -99,7 +96,7 @@ const MainApp: React.FC<MainAppProps> = ({
                   <h1 className="font-bold tracking-[-3%]">Hero Owned</h1>
                   <Info />
                   <p className="mt-9 text-right text-3xl font-bold">
-                    {ownedHero.total}
+                    {ownedHero?.total}
                   </p>
                 </GradiantCard>
                 <GradiantCard className="w-full md:w-60 md:max-w-[240px]">
@@ -121,7 +118,7 @@ const MainApp: React.FC<MainAppProps> = ({
                         Ranked Matches
                       </h2>
                       <p className="mt-9 text-right text-3xl font-bold">
-                        {matchPlayed && matchPlayed[1].total}
+                        {matchPlayed && matchPlayed[1]?.total}
                       </p>
                     </GradiantCard>
                     <GradiantCard>
