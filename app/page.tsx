@@ -13,13 +13,19 @@ export const metadata = {
     siteName: "Next.js",
     images: [
       {
-        url: "https://mlbb.fyi/og.jpg",
+        url: "/og.jpg",
         width: 1260,
         height: 600,
       },
     ],
     locale: "en-US",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MLBB fyi - Elevate Your Mobile Legends Game",
+    description: "Access hero stats, optimal builds, and connect with a community of expert players.",
+    images: ["/og.png"],
   },
 };
 
