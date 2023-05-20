@@ -25,7 +25,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "MLBB fyi - Elevate Your Mobile Legends Game",
     description: "Access hero stats, optimal builds, and connect with a community of expert players.",
-    images: ["/og.png"],
+    images: ["/og.jpg"],
   },
 };
 
