@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-const CardBlack = ({
+const GradiantCard = ({
   children,
   className,
 }: {
@@ -10,7 +10,7 @@ const CardBlack = ({
   return (
     <div
       className={cn(
-        "relative z-[1] w-full rounded-[20px] bg-gradient-to-b from-navy-800/80 to-black p-5",
+        "relative z-[1] h-fit w-full rounded-[20px] bg-gradient-to-b from-navy-800/80 to-black p-5",
         className
       )}
     >
@@ -20,4 +20,4 @@ const CardBlack = ({
   );
 };
 
-export default CardBlack;
+export { GradiantCard };

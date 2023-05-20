@@ -3,21 +3,20 @@
 > next build
 
 info  - Loaded env from C:\Users\raymo\Documents\Project\mlbb\.env.local
+info  - Loaded env from C:\Users\raymo\Documents\Project\mlbb\.env
 info  - Creating an optimized production build...
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (659kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
 info  - Compiled successfully
 info  - Linting and checking validity of types...
-
-./components/navbar/navbar-menu.tsx
-97:28  Warning: Arbitrary value classname '-translate-x-[0.5px]' should not start with a dash (-)  tailwindcss/enforces-negative-arbitrary-values
-108:29  Warning: Arbitrary value classname '-translate-x-[0.5px]' should not start with a dash (-)  tailwindcss/enforces-negative-arbitrary-values
-
-info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
 info  - Collecting page data...
-info  - Generating static pages (0/9)
-info  - Generating static pages (2/9)
-info  - Generating static pages (4/9)
-auth
-(node:12680) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
+info  - Generating static pages (0/13)
+info  - Generating static pages (3/13)
+info  - Generating static pages (6/13)
+
+warn  - metadata.metadataBase is not set for resolving social open graph or twitter images, fallbacks to "http://localhost:3000". See https://beta.nextjs.org/docs/api-reference/metadata#metadatabase
+warn  - Entire page /auth/signin deopted into client-side rendering. https://nextjs.org/docs/messages/deopted-into-client-rendering /auth/signin
+
+(node:12988) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 [next-auth][error][CLIENT_FETCH_ERROR] 
 https://next-auth.js.org/errors#client_fetch_error fetch failed {
@@ -31,49 +30,37 @@ https://next-auth.js.org/errors#client_fetch_error fetch failed {
   url: 'http://localhost:3010/api/auth/csrf',
   message: 'fetch failed'
 }
-[next-auth][error][CLIENT_FETCH_ERROR] 
-https://next-auth.js.org/errors#client_fetch_error fetch failed {
-  error: {
-    message: 'fetch failed',
-    stack: 'TypeError: fetch failed\n' +
-      '    at Object.fetch (node:internal/deps/undici/undici:11118:11)\n' +
-      '    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)',
-    name: 'TypeError'
-  },
-  url: 'http://localhost:3010/api/auth/csrf',
-  message: 'fetch failed'
-}
-info  - Generating static pages (6/9)
-null
-profile
-null
-
-info  - Generating static pages (9/9)
+info  - Generating static pages (9/13)
+info  - Generating static pages (13/13)
 info  - Finalizing page optimization...
 
 Route (app)                                Size     First Load JS
-┌ λ /                                      141 B          77.1 kB
-├ λ /api/bind                              0 B                0 B
+┌ λ /                                      175 B          82.8 kB
 ├ λ /api/code                              0 B                0 B
 ├ λ /api/test                              0 B                0 B
-├ λ /auth/signin                           11.2 kB         102 kB
+├ λ /auth/signin                           1.97 kB         107 kB
+├ λ /explore                               145 B          77.1 kB
 ├ ○ /favicon.ico                           0 B                0 B
-├ λ /profile/[id]                          11.7 kB         108 kB
-├ λ /profile/[id]/api                      0 B                0 B
-└ λ /profile/bind                          1.72 kB        92.2 kB
-+ First Load JS shared by all              76.9 kB
-  ├ chunks/139-e8f3a1906da82a4e.js         24.4 kB
-  ├ chunks/2443530c-2a060bb667a8716d.js    50.5 kB
+├ λ /profile/[username]                    3.53 kB        97.9 kB
+├ λ /profile/[username]/api                0 B                0 B
+├ λ /profile/settings                      3.52 kB          99 kB
+├ λ /profile/settings/api/bind             0 B                0 B
+├ λ /profile/settings/api/username         0 B                0 B
+├ λ /profile/settings/bind                 1.71 kB        92.5 kB
+└ λ /wiki                                  4.43 kB        94.1 kB
++ First Load JS shared by all              77 kB
+  ├ chunks/139-234d5cd1a6980f36.js         24.4 kB
+  ├ chunks/2443530c-f0ae597f67f7c78e.js    50.5 kB
   ├ chunks/main-app-fcb2c18be553bd8c.js    215 B
-  └ chunks/webpack-c477a55c445b8c5e.js     1.78 kB
+  └ chunks/webpack-20cae69d23b68cb1.js     1.78 kB
 
 Route (pages)                              Size     First Load JS
 ┌ ○ /404                                   178 B          86.2 kB
 └ λ /api/auth/[...nextauth]                0 B              86 kB
 + First Load JS shared by all              86 kB
-  ├ chunks/main-ab8b433671c8f295.js        84 kB
+  ├ chunks/main-bcb6b9357dd8d6c4.js        84 kB
   ├ chunks/pages/_app-c544d6df833bfd4a.js  192 B
-  └ chunks/webpack-c477a55c445b8c5e.js     1.78 kB
+  └ chunks/webpack-20cae69d23b68cb1.js     1.78 kB
 
 ƒ Middleware                               214 kB
 

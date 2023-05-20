@@ -1,6 +1,28 @@
 import { Button } from "@/components/shared/button";
 import Link from "next/link";
 
+export const metadata = {
+  title: "MLBB fyi - Elevate Your Mobile Legends Game",
+  description:
+    "Access hero stats, optimal builds, and connect with a community of expert players.",
+  openGraph: {
+    title: "MLBB fyi - Elevate Your Mobile Legends Game",
+    description:
+      "Access hero stats, optimal builds, and connect with a community of expert players.",
+    url: "https://mlbb.fyi",
+    siteName: "Next.js",
+    images: [
+      {
+        url: "https://mlbb.fyi/og.jpg",
+        width: 1260,
+        height: 600,
+      },
+    ],
+    locale: "en-US",
+    type: "website",
+  },
+};
+
 export default async function Home() {
   return (
     <>

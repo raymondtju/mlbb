@@ -5,7 +5,7 @@ import { Progress } from "../shared/progress";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import Image from "next/image";
-import GradiantCard from "../shared/gradiant-card";
+import { GradiantCard } from "../shared/gradiant-card";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../shared/tabs";
 import Info from "../shared/icons/info";
