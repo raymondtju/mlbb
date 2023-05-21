@@ -1,11 +1,14 @@
 import { cn } from "@/lib/utils";
+import Info from "./icons/info";
 
 const GradiantCard = ({
   children,
   className,
+  title,
 }: {
   children: React.ReactNode;
   className?: string;
+  title?: string;
 }) => {
   return (
     <div
@@ -20,6 +23,10 @@ const GradiantCard = ({
           "absolute inset-[1px] z-[-2] overflow-hidden rounded-[20px] bg-black shadow-inner shadow-navy-700 after:absolute after:right-[-72px] after:top-[-72px] after:z-[-1] after:h-32 after:w-32 after:rounded-full after:bg-navy-500/60 after:blur-[40px]"
         )}
       ></div> */}
+      {/* <Info /> */}
+      <h1 className="text-sm/[10px] font-bold tracking-[-3%] md:text-base/[16px]">
+        {title}
+      </h1>
       {children}
     </div>
   );

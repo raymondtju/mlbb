@@ -92,41 +92,39 @@ const MainApp: React.FC<MainAppProps> = ({
           >
             <div className="flex w-full max-w-lg flex-col gap-y-4 md:w-fit">
               <div className="flex w-full flex-row gap-x-4 md:w-fit">
-                <GradiantCard className="w-full md:w-60 md:max-w-[240px]">
-                  <h1 className="font-bold tracking-[-3%]">Hero Owned</h1>
-                  <Info />
-                  <p className="mt-9 text-right text-3xl font-bold">
-                    {ownedHero?.total}
+                <GradiantCard
+                  className="w-full md:w-60 md:max-w-[240px]"
+                  title="Hero Owned"
+                >
+                  {/* <Info /> */}
+                  <p className="mt-8 text-right text-xl/[16px] font-semibold sm:mt-7 md:mt-12 md:text-2xl lg:text-3xl">
+                    {ownedHero?.total}x
                   </p>
                 </GradiantCard>
-                <GradiantCard className="w-full md:w-60 md:max-w-[240px]">
-                  <h1 className="font-bold tracking-[-3%]">Match Played</h1>
-                  <Info />
-                  <p className="mt-9 text-right text-3xl font-bold">
+                <GradiantCard
+                  className="w-full md:w-60 md:max-w-[240px]"
+                  title="Match Played"
+                >
+                  {/* <Info /> */}
+                  <p className="mt-8 text-right text-xl/[16px] font-semibold sm:mt-7 md:mt-12 md:text-2xl lg:text-3xl">
                     {matchPlayed && matchPlayed[0].total + matchPlayed[1].total}
+                    x
                   </p>
                 </GradiantCard>
               </div>
 
               <div className="w-full">
-                <GradiantCard className="">
-                  <h1 className="font-bold tracking-[-3%]">Match Insight</h1>
-                  <Info />
+                <GradiantCard className="" title="Match Insight">
+                  {/* <Info /> */}
                   <div className="mt-4 flex gap-x-4">
-                    <GradiantCard>
-                      <h2 className="font-bold tracking-[-3%] ">
-                        Ranked Matches
-                      </h2>
-                      <p className="mt-9 text-right text-3xl font-bold">
-                        {matchPlayed && matchPlayed[1]?.total}
+                    <GradiantCard title="Ranked Matches">
+                      <p className="mt-8 text-right text-xl/[16px] font-semibold sm:mt-7 md:mt-12 md:text-2xl lg:text-3xl">
+                        {matchPlayed && matchPlayed[1]?.total}x
                       </p>
                     </GradiantCard>
-                    <GradiantCard>
-                      <h2 className="font-bold tracking-[-3%]">
-                        Classic Matches
-                      </h2>
-                      <p className="mt-9 text-right text-3xl font-bold">
-                        {matchPlayed && matchPlayed[0].total}
+                    <GradiantCard title="Classic Matches">
+                      <p className="mt-8 text-right text-xl/[16px] font-semibold sm:mt-7 md:mt-12 md:text-2xl lg:text-3xl">
+                        {matchPlayed && matchPlayed[0].total}x
                       </p>
                     </GradiantCard>
                   </div>
@@ -135,14 +133,11 @@ const MainApp: React.FC<MainAppProps> = ({
             </div>
 
             <div className="flex w-full max-w-lg flex-col gap-4">
-              <GradiantCard>
-                <h1 className="mb-4 font-bold tracking-[-3%]">
-                  Classic Top 5 Played
-                </h1>
+              <GradiantCard title="Classic Top 5 Played">
                 {matchPlayed &&
                   matchPlayed[0].data.map((data: any, i: number) => {
                     return (
-                      <div key={i}>
+                      <div key={i} className="mt-3">
                         <div className="flex justify-between">
                           <p className="text-sm">
                             {data.name} - {data.total}x
@@ -160,14 +155,11 @@ const MainApp: React.FC<MainAppProps> = ({
                     );
                   })}
               </GradiantCard>
-              <GradiantCard>
-                <h1 className="mb-4 font-bold tracking-[-3%]">
-                  Ranked Top 5 Played
-                </h1>
+              <GradiantCard title="Ranked Top 5 Played">
                 {matchPlayed &&
                   matchPlayed[1].data.map((data: any, i: number) => {
                     return (
-                      <div key={i}>
+                      <div key={i} className="mt-3">
                         <div className="flex justify-between">
                           <p className="text-sm">
                             {data.name} - {data.total}x
