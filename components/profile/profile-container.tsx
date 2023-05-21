@@ -53,8 +53,8 @@ const MainApp: React.FC<MainAppProps> = ({
             <Image
               src={"/nana.jpg"}
               alt=""
-              width={225}
-              height={225}
+              width={203}
+              height={203}
               className="mx-auto rounded-full"
             />
             <h1 className="mt-3 text-center font-heading text-xl">
@@ -93,38 +93,37 @@ const MainApp: React.FC<MainAppProps> = ({
             <div className="flex w-full max-w-lg flex-col gap-y-4 md:w-fit">
               <div className="flex w-full flex-row gap-x-4 md:w-fit">
                 <GradiantCard
-                  className="w-full md:w-60 md:max-w-[240px]"
-                  title="Hero Owned"
+                  className="md:max-w-[240px] w-full md:w-60"
+                  title="Heroes Owned"
                 >
                   {/* <Info /> */}
                   <p className="mt-8 text-right text-xl/[16px] font-semibold sm:mt-7 md:mt-12 md:text-2xl lg:text-3xl">
-                    {ownedHero?.total}x
+                    {ownedHero?.total}
                   </p>
                 </GradiantCard>
                 <GradiantCard
-                  className="w-full md:w-60 md:max-w-[240px]"
-                  title="Match Played"
+                  className="md:max-w-[240px] w-full md:w-60"
+                  title="Matches Played"
                 >
                   {/* <Info /> */}
                   <p className="mt-8 text-right text-xl/[16px] font-semibold sm:mt-7 md:mt-12 md:text-2xl lg:text-3xl">
                     {matchPlayed && matchPlayed[0].total + matchPlayed[1].total}
-                    x
                   </p>
                 </GradiantCard>
               </div>
 
               <div className="w-full">
-                <GradiantCard className="" title="Match Insight">
+                <GradiantCard className="" title="Match Insights">
                   {/* <Info /> */}
                   <div className="mt-4 flex gap-x-4">
-                    <GradiantCard title="Ranked Matches">
+                    <GradiantCard title="Ranked">
                       <p className="mt-8 text-right text-xl/[16px] font-semibold sm:mt-7 md:mt-12 md:text-2xl lg:text-3xl">
-                        {matchPlayed && matchPlayed[1]?.total}x
+                        {matchPlayed && matchPlayed[1]?.total}
                       </p>
                     </GradiantCard>
-                    <GradiantCard title="Classic Matches">
+                    <GradiantCard title="Classic">
                       <p className="mt-8 text-right text-xl/[16px] font-semibold sm:mt-7 md:mt-12 md:text-2xl lg:text-3xl">
-                        {matchPlayed && matchPlayed[0].total}x
+                        {matchPlayed && matchPlayed[0].total}
                       </p>
                     </GradiantCard>
                   </div>
@@ -133,14 +132,14 @@ const MainApp: React.FC<MainAppProps> = ({
             </div>
 
             <div className="flex w-full max-w-lg flex-col gap-4">
-              <GradiantCard title="Classic Top 5 Played">
+              <GradiantCard title="Classic Favourites">
                 {matchPlayed &&
                   matchPlayed[0].data.map((data: any, i: number) => {
                     return (
                       <div key={i} className="mt-3">
                         <div className="flex justify-between">
                           <p className="text-sm">
-                            {data.name} - {data.total}x
+                            {data.name} - {data.total}
                           </p>
                           <p className="text-sm">
                             {((data.win * 100) / data.total).toFixed(2)}%
@@ -155,7 +154,7 @@ const MainApp: React.FC<MainAppProps> = ({
                     );
                   })}
               </GradiantCard>
-              <GradiantCard title="Ranked Top 5 Played">
+              <GradiantCard title="Ranked Favourites">
                 {matchPlayed &&
                   matchPlayed[1].data.map((data: any, i: number) => {
                     return (
@@ -180,7 +179,9 @@ const MainApp: React.FC<MainAppProps> = ({
             </div>
           </TabsContent>
 
-          <TabsContent value="posts">User Posts</TabsContent>
+          <TabsContent value="posts">
+            <p className="pl-2">User Posts</p>
+          </TabsContent>
         </Tabs>
       </div>
     </>

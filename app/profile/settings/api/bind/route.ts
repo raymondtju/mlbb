@@ -81,7 +81,7 @@ export async function POST(request: Request) {
     }
     return NextResponse.json(
       {
-        message: "Successful bind but failed to sync data with your profile",
+        message: "Successfully bound but failed to sync your data to profile",
       },
       { status: 400 }
     );

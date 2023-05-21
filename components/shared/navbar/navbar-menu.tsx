@@ -28,11 +28,6 @@ const MenuList = [
     href: "/explore",
   },
   {
-    name: "Github",
-    active: false,
-    href: "/github",
-  },
-  {
     name: "Profile",
     active: false,
     href: "/profile",
