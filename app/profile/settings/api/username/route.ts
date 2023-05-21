@@ -33,7 +33,7 @@ export async function POST(req: Request) {
   if (!set)
     return NextResponse.json(
       {
-        message: "Error set Username",
+        message: "Error setting username",
       },
       {
         status: 400,
@@ -42,7 +42,7 @@ export async function POST(req: Request) {
 
   return NextResponse.json(
     {
-      message: "Successfully set Username",
+      message: "Successfully set username",
     },
     {
       status: 200,

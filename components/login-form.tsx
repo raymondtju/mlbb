@@ -19,7 +19,7 @@ export default function LoginForm({ csrfToken }: { csrfToken?: string }) {
   useEffect(() => {
     if (params?.get("error") === "OAuthAccountNotLinked") {
       toast.error(
-        "Your email seems to have been registered using a different sign-in method."
+        "Your email has been registered with a different sign-in method"
       );
     }
   }, [params]);
@@ -38,12 +38,12 @@ export default function LoginForm({ csrfToken }: { csrfToken?: string }) {
             .then((res) => {
               console.log(res);
               if (res?.ok) {
-                toast.success("Kindly check login link in your inbox");
+                toast.success("Kindly check your inbox for the login link");
               }
               setLoading(false);
             })
             .catch((err) => {
-              toast.error("something went wrong");
+              toast.error("Something went wrong");
               setLoading(false);
             });
         }}

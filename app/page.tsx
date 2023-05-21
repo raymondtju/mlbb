@@ -2,11 +2,11 @@ import { Button } from "@/components/shared/button";
 import Link from "next/link";
 
 export const metadata = {
-  title: "MLBB fyi - Elevate Your Mobile Legends Game",
+  title: "mlbb.fyi - Elevate Your Mobile Legends Game",
   description:
     "Access hero stats, optimal builds, and connect with a community of expert players.",
   openGraph: {
-    title: "MLBB fyi - Elevate Your Mobile Legends Game",
+    title: "mlbb.fyi - Elevate Your Mobile Legends Game",
     description:
       "Access hero stats, optimal builds, and connect with a community of expert players.",
     url: "https://mlbb.fyi",
@@ -23,8 +23,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "MLBB fyi - Elevate Your Mobile Legends Game",
-    description: "Access hero stats, optimal builds, and connect with a community of expert players.",
+    title: "mlbb.fyi - Elevate Your Mobile Legends Game",
+    description:
+      "Access hero stats, optimal builds, and connect with a community of expert players.",
     images: ["/og.jpg"],
   },
 };
@@ -49,6 +50,17 @@ export default async function Home() {
           >
             <Link href="/auth/signin">Get Started</Link>
           </Button>
+
+          <div className="flex flex-col items-center justify-center pt-[250px]">
+            <div className="flex items-end justify-center">
+              <h1 className="text-center text-[12px] text-neutral-500">
+                mlbb.fyi was made as part of 2023 Orbital project, and is not
+                endorsed by Moonton or Mobile Legends: Bang Bang. mlbb.fyi does
+                not reflect the views or opinions of Moonton or anyone
+                officially involved in producing or managing Mobile Legends.
+              </h1>
+            </div>
+          </div>
         </div>
       </main>
     </>

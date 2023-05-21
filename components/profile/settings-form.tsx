@@ -70,10 +70,10 @@ const SettingsForm: React.FC<ISettingsForm> = ({ currentUser, mlbbAcc }) => {
           });
           if (!set.ok) {
             setLoading(false);
-            toast.error("Error update profile");
+            toast.error("Error updating profile");
           } else {
             setLoading(false);
-            toast.success("Successfully update profile");
+            toast.success("Successfully updated profile");
             router.push("/explore");
           }
         }}
@@ -109,7 +109,6 @@ const SettingsForm: React.FC<ISettingsForm> = ({ currentUser, mlbbAcc }) => {
             maxLength={20}
             required
             pattern="[a-z0-9]{4,}"
-            title="Only allow lowercase, number, minimum 4 digit"
             className="peer"
           />
           <p className="invisible absolute text-sm text-red-500 peer-invalid:visible peer-invalid:static peer-invalid:mt-2">
