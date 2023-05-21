@@ -33,7 +33,7 @@ const HeroesContainer = ({ heros }: IHeroesContainer) => {
   return (
     <>
       <HeroesFilter />
-      <div className="grid grid-cols-3 gap-0.5 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8">
+      <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8">
         {hero?.length === undefined
           ? heros.map((hero) => (
               <Fragment key={hero.id}>

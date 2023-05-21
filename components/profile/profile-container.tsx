@@ -88,10 +88,10 @@ const MainApp: React.FC<MainAppProps> = ({
           </TabsList>
           <TabsContent
             value="statistics"
-            className="flex flex-col gap-5 xl:flex-row"
+            className="flex flex-col gap-4 xl:flex-row"
           >
-            <div className="flex w-full max-w-lg flex-col gap-y-5 md:w-fit">
-              <div className="flex w-full flex-row gap-x-5 md:w-fit">
+            <div className="flex w-full max-w-lg flex-col gap-y-4 md:w-fit">
+              <div className="flex w-full flex-row gap-x-4 md:w-fit">
                 <GradiantCard className="w-full md:w-60 md:max-w-[240px]">
                   <h1 className="font-bold tracking-[-3%]">Hero Owned</h1>
                   <Info />
@@ -112,9 +112,9 @@ const MainApp: React.FC<MainAppProps> = ({
                 <GradiantCard className="">
                   <h1 className="font-bold tracking-[-3%]">Match Insight</h1>
                   <Info />
-                  <div className="mt-4 flex gap-x-5">
+                  <div className="mt-4 flex gap-x-4">
                     <GradiantCard>
-                      <h2 className="font-bold tracking-[-3%]">
+                      <h2 className="font-bold tracking-[-3%] ">
                         Ranked Matches
                       </h2>
                       <p className="mt-9 text-right text-3xl font-bold">
@@ -134,7 +134,7 @@ const MainApp: React.FC<MainAppProps> = ({
               </div>
             </div>
 
-            <div className="flex w-full max-w-lg flex-col gap-5">
+            <div className="flex w-full max-w-lg flex-col gap-4">
               <GradiantCard>
                 <h1 className="mb-4 font-bold tracking-[-3%]">
                   Classic Top 5 Played
