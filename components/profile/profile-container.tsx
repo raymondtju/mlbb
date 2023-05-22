@@ -2,6 +2,7 @@
 
 import { mlbbaccs } from "@prisma/client";
 import { Progress } from "../shared/progress";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import Image from "next/image";
@@ -37,6 +38,10 @@ interface MainAppProps {
   };
   username: string;
   accId?: string | null;
+  winRate?: {
+    totalClassic: number | 0;
+    totalRanked: number | 0;
+  } | null;
 }
 
 const MainApp: React.FC<MainAppProps> = ({
@@ -44,39 +49,62 @@ const MainApp: React.FC<MainAppProps> = ({
   username,
   ownedHero,
   accId,
+  winRate,
 }) => {
-  if (username) {
+  if (username && !accId) {
     return (
-      <div className="flex gap-5 text-softGray">
-        {/* Profile Head */}
-        <GradiantCard className="mx-auto h-fit w-[18rem] max-w-full md:mx-0">
-          <Image
-            src={"/nana.jpg"}
-            alt=""
-            width={203}
-            height={203}
-            className="mx-auto rounded-full"
-          />
-          <h1 className="mt-3 text-center font-heading text-xl">{username}</h1>
-          <Button
-            className="mx-auto mt-2 flex h-fit w-fit justify-center rounded-2xl px-10 py-1"
-            variant="gradiantNavySec"
-          >
-            Follow
-          </Button>
+      <>
+        <div className="flex flex-col gap-5 md:flex-row">
+          <div className="flex gap-5 text-softGray">
+            {/* Profile Head */}
+            <GradiantCard className="mx-auto h-fit w-[18rem] max-w-full md:mx-0">
+              <Image
+                src={"/nana.jpg"}
+                alt=""
+                width={203}
+                height={203}
+                className="mx-auto rounded-full"
+              />
+              <h1 className="mt-3 text-center font-heading text-xl">
+                {username}
+              </h1>
+              <Button
+                className="mx-auto mt-2 flex h-fit w-fit justify-center rounded-2xl px-10 py-1"
+                variant="gradiantNavySec"
+              >
+                Follow
+              </Button>
 
-          <div className="mt-4 flex flex-row justify-between px-8 font-heading">
-            <div className="flex flex-col text-center">
-              <p className="text-xl">123</p>
-              <p className="text-[14px]">FOLLOWING</p>
-            </div>
-            <div className="flex flex-col text-center">
-              <p className="text-xl">1000</p>
-              <p className="text-[14px]">FOLLOWERS</p>
-            </div>
+              <div className="mt-4 flex flex-row justify-between px-8 font-heading">
+                <div className="flex flex-col text-center">
+                  <p className="text-xl">123</p>
+                  <p className="text-[14px]">FOLLOWING</p>
+                </div>
+                <div className="flex flex-col text-center">
+                  <p className="text-xl">1000</p>
+                  <p className="text-[14px]">FOLLOWERS</p>
+                </div>
+              </div>
+            </GradiantCard>
           </div>
-        </GradiantCard>
-      </div>
+          <Tabs defaultValue="statistics" className="w-full">
+            <TabsList>
+              <TabsTrigger value="statistics">Statistics</TabsTrigger>
+              <TabsTrigger value="posts">Posts</TabsTrigger>
+            </TabsList>
+            <TabsContent value="statistics">
+              {/* <p className="pl-6">
+                To view your statistical data, please link your Mobile Legends
+                account in the settings menu.
+              </p> */}
+              <p className="pl-6">{username} stats</p>
+            </TabsContent>
+            <TabsContent value="posts">
+              <p className="pl-6">{username} posts</p>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </>
     );
   }
   return (
@@ -150,21 +178,55 @@ const MainApp: React.FC<MainAppProps> = ({
               </div>
 
               <div className="w-full">
-                <GradiantCard className="" title="Match Insights">
-                  {/* <Info /> */}
-                  <div className="mt-4 flex gap-x-4">
-                    <GradiantCard title="Ranked">
-                      <p className="mt-8 text-right text-xl/[16px] font-semibold sm:mt-7 md:mt-12 md:text-2xl lg:text-3xl">
-                        {matchPlayed && matchPlayed[1]?.total}
-                      </p>
-                    </GradiantCard>
-                    <GradiantCard title="Classic">
-                      <p className="mt-8 text-right text-xl/[16px] font-semibold sm:mt-7 md:mt-12 md:text-2xl lg:text-3xl">
-                        {matchPlayed && matchPlayed[0].total}
-                      </p>
-                    </GradiantCard>
-                  </div>
-                </GradiantCard>
+                {/* <GradiantCard className="" title="Match Insights"> */}
+                {/* <Info /> */}
+                <div className="mt-0.5 flex gap-x-4">
+                  <GradiantCard title="Ranked Matches">
+                    <p className="my-16 text-right text-xl/[16px] font-semibold sm:mt-7 md:mt-12 md:text-2xl lg:text-3xl">
+                      {matchPlayed && matchPlayed[1]?.total}
+                    </p>
+                    <div className="relative">
+                      <CircularProgressbar
+                        value={
+                          ((winRate?.totalRanked ?? 0) * 100) /
+                          ((matchPlayed && matchPlayed[1]?.total) ?? 1)
+                        }
+                        styles={buildStyles({
+                          textColor: "#FFFF",
+                          trailColor: `#232323`,
+                          pathColor: `#74E092`,
+                        })}
+                      />
+                      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl font-semibold text-white">{`${(
+                        ((winRate?.totalRanked ?? 0) * 100) /
+                        ((matchPlayed && matchPlayed[1]?.total) ?? 1)
+                      ).toFixed(2)}%`}</div>
+                    </div>
+                  </GradiantCard>
+                  <GradiantCard title="Classic Matches">
+                    <p className="my-16 text-right text-xl/[16px] font-semibold sm:mt-7 md:mt-12 md:text-2xl lg:text-3xl">
+                      {matchPlayed && matchPlayed[0].total}
+                    </p>
+                    <div className="relative">
+                      <CircularProgressbar
+                        value={
+                          ((winRate?.totalClassic ?? 0) * 100) /
+                          ((matchPlayed && matchPlayed[0]?.total) ?? 1)
+                        }
+                        styles={buildStyles({
+                          textColor: "#FFFF",
+                          trailColor: `#232323`,
+                          pathColor: `#74E092`,
+                        })}
+                      />
+                      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl font-semibold text-white">{`${(
+                        ((winRate?.totalClassic ?? 0) * 100) /
+                        ((matchPlayed && matchPlayed[0]?.total) ?? 1)
+                      ).toFixed(2)}%`}</div>
+                    </div>
+                  </GradiantCard>
+                </div>
+                {/* </GradiantCard> */}
               </div>
             </div>
 
@@ -217,7 +279,7 @@ const MainApp: React.FC<MainAppProps> = ({
           </TabsContent>
 
           <TabsContent value="posts">
-            <p className="pl-2">User Posts</p>
+            <p className="pl-6">{username} Posts</p>
           </TabsContent>
         </Tabs>
       </div>

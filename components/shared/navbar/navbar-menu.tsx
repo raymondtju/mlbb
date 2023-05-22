@@ -71,6 +71,9 @@ const NavMenu: React.FC<NavMenuProps> = ({ currentUser }) => {
           )}
         >
           {MenuList.map((menu) => {
+            if (menu.name === "Profile" && !currentUser) {
+              return null;
+            }
             return (
               <Link
                 href={
