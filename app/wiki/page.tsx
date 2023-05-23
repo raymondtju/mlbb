@@ -41,6 +41,10 @@ async function WikiPage() {
         <TabsContent value="statistics" className=""></TabsContent>
         <TabsContent value="draft-pick" className=""></TabsContent>
       </Tabs>
+      <p className="mt-4 md:ml-3">
+        We are currently in the process of implementing the wiki feature, and we
+        appreciate your understanding and patience. Thank you.
+      </p>
     </main>
   );
 }
