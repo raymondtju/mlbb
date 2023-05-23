@@ -1,4 +1,4 @@
-import { GradiantCard } from "../shared/gradiant-card";
+import { GradiantCard } from "@/components/shared/gradiant-card";
 
 interface InfoCardProps {
   className?: string;

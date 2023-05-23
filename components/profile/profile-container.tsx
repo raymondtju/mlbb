@@ -65,6 +65,16 @@ const MainApp: React.FC<MainAppProps> = ({
               <TabsTrigger value="statistics">Statistics</TabsTrigger>
               <TabsTrigger value="posts">Posts</TabsTrigger>
             </TabsList>
+            <TabsContent
+              value="statistics"
+              className="flex w-full flex-col gap-4 xl:flex-row"
+            >
+              <Statistics
+                matchPlayed={matchPlayed}
+                winRate={winRate}
+                ownedHero={ownedHero}
+              />
+            </TabsContent>
           </Tabs>
         </div>
       </>
