@@ -53,33 +53,23 @@ const MainApp: React.FC<MainAppProps> = ({
   accId,
   winRate,
 }) => {
-  if (username && !accId) {
-    return (
-      <>
-        <div className="flex flex-col gap-5 md:flex-row">
-          <div className="flex gap-5 text-softGray">
-            <ProfileBio username={username} />
-          </div>
-          <Tabs defaultValue="statistics" className="w-full">
-            <TabsList>
-              <TabsTrigger value="statistics">Statistics</TabsTrigger>
-              <TabsTrigger value="posts">Posts</TabsTrigger>
-            </TabsList>
-            <TabsContent
-              value="statistics"
-              className="flex w-full flex-col gap-4 xl:flex-row"
-            >
-              <Statistics
-                matchPlayed={matchPlayed}
-                winRate={winRate}
-                ownedHero={ownedHero}
-              />
-            </TabsContent>
-          </Tabs>
-        </div>
-      </>
-    );
-  }
+  // if (username && !accId) {
+  //   return (
+  //     <>
+  //       <div className="flex flex-col gap-5 md:flex-row">
+  //         <div className="flex gap-5 text-softGray">
+  //           <ProfileBio username={username} />
+  //         </div>
+  //         <Tabs defaultValue="statistics" className="w-full">
+  //           <TabsList>
+  //             <TabsTrigger value="statistics">Statistics</TabsTrigger>
+  //             <TabsTrigger value="posts">Posts</TabsTrigger>
+  //           </TabsList>
+  //         </Tabs>
+  //       </div>
+  //     </>
+  //   );
+  // }
   return (
     <>
       <div className="flex flex-col gap-5 md:flex-row">
