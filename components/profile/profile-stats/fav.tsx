@@ -1,3 +1,5 @@
+"use client";
+
 import { GradiantCard } from "../../shared/gradiant-card";
 import { Progress } from "../../shared/progress";
 

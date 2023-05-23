@@ -1,3 +1,5 @@
+"use client";
+
 import { GradiantCard } from "@/components/shared/gradiant-card";
 
 interface InfoCardProps {
