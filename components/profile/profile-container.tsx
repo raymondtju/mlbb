@@ -53,23 +53,39 @@ const MainApp: React.FC<MainAppProps> = ({
   accId,
   winRate,
 }) => {
-  // if (username && !accId) {
-  //   return (
-  //     <>
-  //       <div className="flex flex-col gap-5 md:flex-row">
-  //         <div className="flex gap-5 text-softGray">
-  //           <ProfileBio username={username} />
-  //         </div>
-  //         <Tabs defaultValue="statistics" className="w-full">
-  //           <TabsList>
-  //             <TabsTrigger value="statistics">Statistics</TabsTrigger>
-  //             <TabsTrigger value="posts">Posts</TabsTrigger>
-  //           </TabsList>
-  //         </Tabs>
-  //       </div>
-  //     </>
-  //   );
-  // }
+  if (username && !accId) {
+    return (
+      <>
+        <div className="flex flex-col gap-5 md:flex-row">
+          <div className="flex gap-5 text-softGray">
+            <ProfileBio username={username} />
+          </div>
+          <Tabs defaultValue="statistics" className="w-full">
+            <TabsList>
+              <TabsTrigger value="statistics">Statistics</TabsTrigger>
+              <TabsTrigger value="posts">Posts</TabsTrigger>
+            </TabsList>
+            <TabsContent
+              value="statistics"
+              className="flex w-full flex-col gap-4 xl:flex-row"
+            >
+              <div className="flex w-full flex-col gap-4">
+                <p className="pl-1">
+                  This user&apos;s Mobile Legends account hasn&apos;t been
+                  linked yet
+                </p>
+                <Statistics
+                  matchPlayed={matchPlayed}
+                  winRate={winRate}
+                  ownedHero={ownedHero}
+                />
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </>
+    );
+  }
   return (
     <>
       <div className="flex flex-col gap-5 md:flex-row">
