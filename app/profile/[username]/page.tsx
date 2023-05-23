@@ -61,6 +61,7 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
         username={username}
         accId={accId}
         winRate={winRate}
+        currentUser={user}
       />
     </div>
   );
