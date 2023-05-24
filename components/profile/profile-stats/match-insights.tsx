@@ -1,4 +1,6 @@
-import { GradiantCard } from "../shared/gradiant-card";
+"use client";
+
+import { GradiantCard } from "@/components/shared/gradiant-card";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
 interface MatchInsightsProps {
@@ -28,10 +30,10 @@ const MatchInsights: React.FC<MatchInsightsProps> = ({
   matchType,
   totalType,
 }) => {
-  const total = matchPlayed[matchType]?.total;
+  const total = (matchPlayed && matchPlayed[matchType].total) || 0;
   const winRates =
     totalType === "classic" ? winRate?.totalClassic : winRate?.totalRanked;
-  const winRatePercentage = ((winRates ?? 0) * 100) / (total ?? 1);
+  const winRatePercentage = ((winRates ?? 0) * 100) / (total ?? 1) || 0;
 
   return (
     <GradiantCard title={title}>
@@ -42,6 +44,7 @@ const MatchInsights: React.FC<MatchInsightsProps> = ({
         <CircularProgressbar
           value={winRatePercentage}
           styles={buildStyles({
+            strokeLinecap: "round",
             textColor: "#FFFF",
             trailColor: `#232323`,
             pathColor: `#74E092`,

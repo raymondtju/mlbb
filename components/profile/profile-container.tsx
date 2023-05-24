@@ -1,18 +1,11 @@
 "use client";
 
-import { mlbbaccs } from "@prisma/client";
-import { Progress } from "../shared/progress";
-import { useEffect } from "react";
-import { toast } from "sonner";
-import Image from "next/image";
-import { GradiantCard } from "../shared/gradiant-card";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-
+import getCurrentUser from "@/lib/actions/getCurrentUser";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../shared/tabs";
-import Info from "../shared/icons/info";
-import { Button } from "../shared/button";
+
 import ProfileBio from "./bio";
 import Statistics from "./statistics";
+import { SafeUser } from "@/types";
 
 export type MatchPLayedProps = {
   total: number;
@@ -44,6 +37,7 @@ interface MainAppProps {
     totalClassic: number | 0;
     totalRanked: number | 0;
   } | null;
+  currentUser?: SafeUser | null;
 }
 
 const MainApp: React.FC<MainAppProps> = ({
@@ -52,8 +46,12 @@ const MainApp: React.FC<MainAppProps> = ({
   ownedHero,
   accId,
   winRate,
+  currentUser,
 }) => {
+  console.log(currentUser?.username);
+  console.log(username);
   if (username && !accId) {
+    const isOwnProfile = currentUser?.username === username;
     return (
       <>
         <div className="flex flex-col gap-5 md:flex-row">
@@ -65,40 +63,63 @@ const MainApp: React.FC<MainAppProps> = ({
               <TabsTrigger value="statistics">Statistics</TabsTrigger>
               <TabsTrigger value="posts">Posts</TabsTrigger>
             </TabsList>
+            <TabsContent
+              value="statistics"
+              className="flex w-full flex-col gap-4 xl:flex-row"
+            >
+              <div className="flex w-full flex-col gap-4">
+                <p className="pl-1">
+                  {isOwnProfile
+                    ? "To check out your stats, please link your account on the settings page"
+                    : "This user's Mobile Legends account hasn't been linked yet"}
+                </p>
+                <Statistics
+                  matchPlayed={matchPlayed}
+                  winRate={winRate}
+                  ownedHero={ownedHero}
+                />
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </>
+    );
+  } else if (username && accId) {
+    return (
+      <>
+        <div className="flex flex-col gap-5 md:flex-row">
+          {/* Left */}
+
+          <div className="flex gap-5 text-softGray">
+            {/* Profile Head */}
+            <ProfileBio username={username} />
+          </div>
+
+          {/* Right */}
+          <Tabs defaultValue="statistics" className="w-full">
+            <TabsList>
+              <TabsTrigger value="statistics">Statistics</TabsTrigger>
+              <TabsTrigger value="posts">Posts</TabsTrigger>
+            </TabsList>
+            <TabsContent
+              value="statistics"
+              className="flex w-full flex-col gap-4 xl:flex-row"
+            >
+              <Statistics
+                matchPlayed={matchPlayed}
+                winRate={winRate}
+                ownedHero={ownedHero}
+              />
+            </TabsContent>
           </Tabs>
         </div>
       </>
     );
   }
   return (
-    <>
-      <div className="flex flex-col gap-5 md:flex-row">
-        {/* Left */}
-
-        <div className="flex gap-5 text-softGray">
-          {/* Profile Head */}
-          <ProfileBio username={username} />
-        </div>
-
-        {/* Right */}
-        <Tabs defaultValue="statistics" className="w-full">
-          <TabsList>
-            <TabsTrigger value="statistics">Statistics</TabsTrigger>
-            <TabsTrigger value="posts">Posts</TabsTrigger>
-          </TabsList>
-          <TabsContent
-            value="statistics"
-            className="flex w-full flex-col gap-4 xl:flex-row"
-          >
-            <Statistics
-              matchPlayed={matchPlayed}
-              winRate={winRate}
-              ownedHero={ownedHero}
-            />
-          </TabsContent>
-        </Tabs>
-      </div>
-    </>
+    <div className="flex h-screen items-center justify-center">
+      <p className="mb-48 text-2xl md:ml-3">Profile does not exist</p>
+    </div>
   );
 };
 
