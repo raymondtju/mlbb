@@ -12,7 +12,7 @@ async function ExplorePage() {
       </p>
       <p className="md:ml-3">
         For the mean time, you can sign up with us to view at your in-game stats
-        through our website, thank you.
+        through our website. Thank you.
       </p>
     </main>
   );
