@@ -12,10 +12,11 @@ info  - Generating static pages (3/14)
 
 warn  - metadata.metadataBase is not set for resolving social open graph or twitter images, fallbacks to "http://localhost:3000". See https://beta.nextjs.org/docs/api-reference/metadata#metadatabase
 
+
+
 warn  - Entire page /auth/signin deopted into client-side rendering. https://nextjs.org/docs/messages/deopted-into-client-rendering /auth/signin
-
-
-(node:18648) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
+info  - Generating static pages (6/14)
+(node:14628) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 [next-auth][error][CLIENT_FETCH_ERROR] 
 https://next-auth.js.org/errors#client_fetch_error fetch failed {
@@ -29,7 +30,6 @@ https://next-auth.js.org/errors#client_fetch_error fetch failed {
   url: 'http://localhost:3010/api/auth/csrf',
   message: 'fetch failed'
 }
-info  - Generating static pages (6/14)
 info  - Generating static pages (10/14)
 warn  - Entire page /profile/settings deopted into client-side rendering. https://nextjs.org/docs/messages/deopted-into-client-rendering /profile/settings
 info  - Generating static pages (14/14)
