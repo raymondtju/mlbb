@@ -11,7 +11,11 @@ import {
 import HeroesContainer from "@/components/wiki/heroes/heroes-container";
 
 async function getHero() {
+  try {
   return await prisma.hero.findMany({});
+} catch {
+return null;
+}
 }
 
 async function WikiPage() {
