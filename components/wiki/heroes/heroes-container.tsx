@@ -21,7 +21,7 @@ const HeroesContainer = ({ heros }: IHeroesContainer) => {
       const filtered: Hero[] = [];
       heroFilter.type.map((item, i) => {
         heros.filter((hero) => {
-          if (hero.details.heroType === heroFilter.type[i]) filtered.push(hero);
+          // if (hero.details.heroType === heroFilter.type[i]) filtered.push(hero);
         });
       });
       setHero(filtered);

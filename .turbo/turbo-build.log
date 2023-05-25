@@ -12,11 +12,11 @@ info  - Generating static pages (3/14)
 
 warn  - metadata.metadataBase is not set for resolving social open graph or twitter images, fallbacks to "http://localhost:3000". See https://beta.nextjs.org/docs/api-reference/metadata#metadatabase
 
-
-
 warn  - Entire page /auth/signin deopted into client-side rendering. https://nextjs.org/docs/messages/deopted-into-client-rendering /auth/signin
+
+
 info  - Generating static pages (6/14)
-(node:14628) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
+(node:13464) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 [next-auth][error][CLIENT_FETCH_ERROR] 
 https://next-auth.js.org/errors#client_fetch_error fetch failed {
@@ -40,19 +40,19 @@ Route (app)                                Size     First Load JS
 ├ λ /api/code                              0 B                0 B
 ├ λ /api/test                              0 B                0 B
 ├ λ /auth/signin                           1.97 kB         107 kB
-├ λ /explore                               148 B          77.1 kB
+├ λ /explore                               152 B          77.1 kB
 ├ ○ /favicon.ico                           0 B                0 B
-├ λ /profile                               149 B          77.1 kB
-├ λ /profile/[username]                    5.6 kB         99.6 kB
+├ λ /profile                               152 B          77.1 kB
+├ λ /profile/[username]                    9.15 kB        98.9 kB
 ├ λ /profile/[username]/api                0 B                0 B
-├ λ /profile/settings                      3.6 kB           99 kB
+├ λ /profile/settings                      8.86 kB        98.6 kB
 ├ λ /profile/settings/api/bind             0 B                0 B
 ├ λ /profile/settings/api/username         0 B                0 B
-├ λ /profile/settings/bind                 1.71 kB        92.4 kB
-└ λ /wiki                                  4.84 kB        94.1 kB
+├ λ /profile/settings/bind                 7.15 kB        92.2 kB
+└ λ /wiki                                  152 B          77.1 kB
 + First Load JS shared by all              77 kB
-  ├ chunks/139-acfc4b32a423a0ef.js         24.4 kB
-  ├ chunks/2443530c-c2f05af95e964045.js    50.5 kB
+  ├ chunks/139-fb911ce159550173.js         24.4 kB
+  ├ chunks/2443530c-dc6abbbc81d80226.js    50.5 kB
   ├ chunks/main-app-0008d02f0659eba2.js    214 B
   └ chunks/webpack-d15e4c089b5b1aec.js     1.78 kB
 
