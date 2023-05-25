@@ -20,34 +20,32 @@ return null;
 
 async function WikiPage() {
   const heros: Hero[] | null = await getHero();
-  if (getHero) return null;
 
-  return (
-    <main>
-      <h1 className="ml-0 max-w-4xl font-heading text-4xl leading-10 md:ml-3">
-        mlbb.fyi wiki, your latest and greatest Mobile Legends information in
-        one place
-      </h1>
+  return null;
+    //<main>
+    //  <h1 className="ml-0 max-w-4xl font-heading text-4xl leading-10 md:ml-3">
+    //    mlbb.fyi wiki, your latest and greatest Mobile Legends information in
+     //   one place
+    //  </h1>
 
-      <Tabs defaultValue="heroes" className="mt-4 w-full">
-        <TabsList>
-          <TabsTrigger value="heroes">Heroes</TabsTrigger>
-          <TabsTrigger value="statistics">Statistics</TabsTrigger>
-          <TabsTrigger value="draft-pick">Draft Pick</TabsTrigger>
-          <TabsTrigger value="patch">Patch</TabsTrigger>
-          <TabsTrigger value="meta">META</TabsTrigger>
-        </TabsList>
-        <TabsContent
-          value="heroes"
-          className="flex w-full flex-col gap-5 md:flex-row"
-        >
-          <HeroesContainer heros={heros} />
-        </TabsContent>
-        <TabsContent value="statistics" className=""></TabsContent>
-        <TabsContent value="draft-pick" className=""></TabsContent>
-      </Tabs>
-    </main>
-  );
+    //  <Tabs defaultValue="heroes" className="mt-4 w-full">
+    //    <TabsList>
+    //      <TabsTrigger value="heroes">Heroes</TabsTrigger>
+   //       <TabsTrigger value="statistics">Statistics</TabsTrigger>
+    //      <TabsTrigger value="draft-pick">Draft Pick</TabsTrigger>
+    //      <TabsTrigger value="patch">Patch</TabsTrigger>
+     //     <TabsTrigger value="meta">META</TabsTrigger>
+    //    </TabsList>
+   //     <TabsContent
+    //      value="heroes"
+     //     className="flex w-full flex-col gap-5 md:flex-row"
+      //  >
+     //     <HeroesContainer heros={heros} />
+   //     </TabsContent>
+   //     <TabsContent value="statistics" className=""></TabsContent>
+  //      <TabsContent value="draft-pick" className=""></TabsContent>
+   //   </Tabs>
+      //  </main>
 }
 
 export default WikiPage;
