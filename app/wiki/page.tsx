@@ -1,7 +1,7 @@
 import React from "react";
 
 import prisma from "@/lib/prismadb";
-import { heros } from "@prisma/client";
+import { Hero } from "@prisma/client";
 import {
   Tabs,
   TabsContent,
@@ -11,11 +11,11 @@ import {
 import HeroesContainer from "@/components/wiki/heroes/heroes-container";
 
 async function getHero() {
-  return await prisma.heros.findMany({});
+  return await prisma.hero.findMany({});
 }
 
 async function WikiPage() {
-  const heros: heros[] = await getHero();
+  const heros: Hero[] = await getHero();
 
   return (
     <main>
