@@ -19,7 +19,7 @@ return null;
 }
 
 async function WikiPage() {
-  const heros: Hero[] = await getHero();
+  const heros: Hero[] | null = await getHero();
 
   return (
     <main>
