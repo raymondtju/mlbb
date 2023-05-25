@@ -36,35 +36,42 @@ export async function POST(request: Request) {
   try {
     const { accServer, accId, code, email } = await request.json();
     if (!accServer || !accId || !code) {
-      return NextResponse.json({}, { status: 400 });
-    }
-
-    const bind = await bindAcc({ accServer, accId, code });
-    console.log(bind);
-
-    const findAndUpdate = await prisma?.user.update({
-      where: {
-        email: email,
-      },
-      data: {
-        mlbbaccs: {
-          connect: {
-            accId: accId,
-          },
-        },
-      },
-    });
-
-    console.log(findAndUpdate);
-
-    if (bind.status !== 200) {
       return NextResponse.json(
         {
-          message: bind.data.message,
+          message: "Please ensure that all the necessary fields are completed",
         },
         { status: 400 }
       );
     }
+
+    const bind = await bindAcc({ accId, accServer, code });
+    const user = await prisma?.user.findFirst({
+      where: {
+        email,
+      },
+    });
+    await prisma?.mlbbAcc.create({
+      data: {
+        accId: bind.data.id,
+        accServer: bind.data.server,
+        nickname: bind.data.nickname,
+        userId: user?.id || "",
+      },
+    });
+
+    if (!bind.data) {
+      return NextResponse.json(
+        {
+          message: bind.message,
+        },
+        { status: 400 }
+      );
+    }
+    // const save = await prisma?.mlbbAcc.create({
+    //   data: {
+    //     accId: bind.data.id
+    //   }
+    // })
     const upt = await fetch(
       `${process.env.BE_API_URL}/data/sync?accId=${accId}`,
       {
@@ -74,7 +81,7 @@ export async function POST(request: Request) {
     if (upt.ok) {
       return NextResponse.json(
         {
-          message: bind.data.message,
+          message: bind.message,
         },
         { status: 200 }
       );
@@ -86,6 +93,12 @@ export async function POST(request: Request) {
       { status: 400 }
     );
   } catch (error) {
-    return NextResponse.json({}, { status: 400 });
+    return NextResponse.json(
+      {
+        message:
+          "Error, please check that your account has never been bound before",
+      },
+      { status: 400 }
+    );
   }
 }

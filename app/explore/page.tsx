@@ -7,12 +7,12 @@ async function ExplorePage() {
         Your one stop Mobile Legends: Bang Bang community and discussions!
       </h1>
       <p className="mt-4 md:ml-3">
-        We are currently in the process of implementing the explore feature, and
+        We are currently in the process of implementing the explore section, and
         we appreciate your understanding and patience.
       </p>
       <p className="md:ml-3">
-        For the mean time, you can sign up with us to view at your in-game stats
-        through our website, thank you.
+        For the mean time, you can sign up with us to view your in-game stats
+        through our website. Thank you.
       </p>
     </main>
   );

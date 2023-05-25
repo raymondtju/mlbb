@@ -91,9 +91,9 @@ const NavMenu: React.FC<NavMenuProps> = ({ currentUser }) => {
               >
                 <li
                   className={cn(
-                    "cursor-pointer font-medium hover:text-gray-300 hover:transition-all hover:duration-300",
+                    "cursor-pointer font-medium hover:text-navy-300 hover:transition-all hover:duration-300",
                     active === menu.name.toLowerCase() &&
-                      "underline decoration-navy-400 decoration-2 underline-offset-4"
+                      "underline decoration-navy-300 decoration-2 underline-offset-4"
                   )}
                 >
                   {menu.name}
@@ -109,10 +109,10 @@ const NavMenu: React.FC<NavMenuProps> = ({ currentUser }) => {
                   router.push("/auth/signin");
                   setCollapse(!collapse);
                 }}
-                className="flex h-6 w-20 rounded-xl p-2"
+                className="flex h-6 w-[72px] rounded-xl p-2"
                 variant="gradiantNavy"
               >
-                <span className="text-[16px] font-semibold text-softGray">
+                <span className="stroke-[3] text-[16px] text-softGray">
                   Sign In
                 </span>
                 {/* <LogInIcon className="stroke-[3] text-softGray" /> */}

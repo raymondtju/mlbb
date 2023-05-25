@@ -14,7 +14,7 @@ export async function GET(request: Request) {
         { status: 400 }
       );
 
-    const findID = await prisma.mlbbaccs.findFirst({
+    const findID = await prisma.mlbbAcc.findFirst({
       where: {
         accId: id,
       },
@@ -42,7 +42,7 @@ export async function GET(request: Request) {
   } catch (error) {
     return NextResponse.json(
       {
-        msg: "Error",
+        msg: "An error occured",
       },
       { status: 400 }
     );
