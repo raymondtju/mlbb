@@ -20,6 +20,7 @@ return null;
 
 async function WikiPage() {
   const heros: Hero[] | null = await getHero();
+  if (!getHero) return null;
 
   return (
     <main>
