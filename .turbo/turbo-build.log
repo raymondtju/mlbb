@@ -16,7 +16,7 @@ warn  - Entire page /auth/signin deopted into client-side rendering. https://nex
 
 
 info  - Generating static pages (6/14)
-(node:13464) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
+(node:15768) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 [next-auth][error][CLIENT_FETCH_ERROR] 
 https://next-auth.js.org/errors#client_fetch_error fetch failed {
@@ -40,21 +40,21 @@ Route (app)                                Size     First Load JS
 ├ λ /api/code                              0 B                0 B
 ├ λ /api/test                              0 B                0 B
 ├ λ /auth/signin                           1.97 kB         107 kB
-├ λ /explore                               152 B          77.1 kB
+├ λ /explore                               148 B          77.1 kB
 ├ ○ /favicon.ico                           0 B                0 B
-├ λ /profile                               152 B          77.1 kB
-├ λ /profile/[username]                    9.15 kB        98.9 kB
+├ λ /profile                               149 B          77.1 kB
+├ λ /profile/[username]                    5.58 kB        99.5 kB
 ├ λ /profile/[username]/api                0 B                0 B
-├ λ /profile/settings                      8.86 kB        98.6 kB
+├ λ /profile/settings                      3.58 kB          99 kB
 ├ λ /profile/settings/api/bind             0 B                0 B
 ├ λ /profile/settings/api/username         0 B                0 B
-├ λ /profile/settings/bind                 7.15 kB        92.2 kB
-└ λ /wiki                                  152 B          77.1 kB
+├ λ /profile/settings/bind                 1.71 kB        92.5 kB
+└ λ /wiki                                  840 B            90 kB
 + First Load JS shared by all              77 kB
   ├ chunks/139-fb911ce159550173.js         24.4 kB
   ├ chunks/2443530c-dc6abbbc81d80226.js    50.5 kB
   ├ chunks/main-app-0008d02f0659eba2.js    214 B
-  └ chunks/webpack-d15e4c089b5b1aec.js     1.78 kB
+  └ chunks/webpack-1aef95638495d0a1.js     1.78 kB
 
 Route (pages)                              Size     First Load JS
 ┌ ○ /404                                   178 B          86.2 kB
@@ -62,7 +62,7 @@ Route (pages)                              Size     First Load JS
 + First Load JS shared by all              86 kB
   ├ chunks/main-1d0bf55034b64918.js        84 kB
   ├ chunks/pages/_app-c544d6df833bfd4a.js  192 B
-  └ chunks/webpack-d15e4c089b5b1aec.js     1.78 kB
+  └ chunks/webpack-1aef95638495d0a1.js     1.78 kB
 
 ƒ Middleware                               214 kB
 
