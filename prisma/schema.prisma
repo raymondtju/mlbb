@@ -31,7 +31,7 @@ type HerosDetailsSkill {
 model Hero {
   id      String       @id @default(auto()) @map("_id") @db.ObjectId
   v       Int          @map("__v")
-  details HerosDetails
+  //details HerosDetails
   heroId  Int @unique
   img     String
   name    String @unique
