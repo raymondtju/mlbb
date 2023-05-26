@@ -76,6 +76,7 @@ const MainApp: React.FC<MainAppProps> = ({
                   matchPlayed={matchPlayed}
                   winRate={winRate}
                   ownedHero={ownedHero}
+                  isBound={false}
                 />
               </div>
             </TabsContent>
@@ -108,6 +109,7 @@ const MainApp: React.FC<MainAppProps> = ({
                 matchPlayed={matchPlayed}
                 winRate={winRate}
                 ownedHero={ownedHero}
+                isBound={true}
               />
             </TabsContent>
           </Tabs>

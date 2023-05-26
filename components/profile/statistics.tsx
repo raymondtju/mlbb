@@ -29,12 +29,14 @@ interface StatisticsProps {
     totalClassic: number | 0;
     totalRanked: number | 0;
   } | null;
+  isBound: boolean;
 }
 
 const Statistics: React.FC<StatisticsProps> = ({
   matchPlayed,
   ownedHero,
   winRate,
+  isBound,
 }) => {
   const totalMatchPlayed =
     ((matchPlayed && matchPlayed[0]?.total) || 0) +
@@ -65,6 +67,7 @@ const Statistics: React.FC<StatisticsProps> = ({
               winRate={winRate}
               matchType={0}
               totalType="classic"
+              isBound={isBound}
             />
             <MatchInsights
               title="Ranked Matches"
@@ -72,12 +75,13 @@ const Statistics: React.FC<StatisticsProps> = ({
               winRate={winRate}
               matchType={1}
               totalType="ranked"
+              isBound={isBound}
             />
           </div>
         </div>
       </div>
 
-      <div className="flex max-h-2 w-full max-w-lg flex-col gap-4">
+      <div className="flex w-full max-w-lg flex-col gap-4 md:max-h-2">
         <Favourites
           title="Classic Favourites"
           matchPlayed={matchPlayed}

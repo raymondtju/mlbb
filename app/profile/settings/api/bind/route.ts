@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import getMlbbAcc from "@/lib/actions/getMlbbAcc";
 import { bindAcc } from "@/lib/utils";
-import prisma from "@/lib/prismadb"
+import prisma from "@/lib/prismadb";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -49,9 +49,9 @@ export async function POST(request: Request) {
     }
 
     const bind = await bindAcc({ accId, accServer, code });
-    console.log("bind.data.id", bind.data.id);
-    console.log("bind.data.server", bind.data.server);
-    console.log("bind.data.nickname", bind.data.nickname);
+    // console.log("bind.data.id", bind.data.id);
+    // console.log("bind.data.server", bind.data.server);
+    // console.log("bind.data.nickname", bind.data.nickname);
     const create = await prisma?.mlbbAcc.create({
       data: {
         accId: bind.data.id,
@@ -59,40 +59,21 @@ export async function POST(request: Request) {
         nickname: bind?.data?.nickname,
       },
     });
-    console.log(create);
+    // console.log(create);
 
     const update = await prisma?.user.update({
       where: {
-        email
+        email,
       },
       data: {
         mlbbaccs: {
           connect: {
-            accId
-          }
-        }
-      }
-    })
-    console.log(update);
-    // await prisma?.user.update({
-    //   where: {
-    //     email
-    //   },
-    //   data: {
-    //     mlbbaccs: {
-    //       connectOrCreate: {
-    //         create: {
-    //           accId: bind.data.id,
-    //           accServer: bind.data.server,
-    //           nickname: bind.data.nickname,
-    //           id:
-    //         }, where: {
-    //            accId
-    //         }
-    //       }
-    //     }
-    //   }
-    // })
+            accId,
+          },
+        },
+      },
+    });
+    // console.log(update);
 
     if (!bind.data) {
       return NextResponse.json(
@@ -131,6 +112,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         message: "Error, your account might have been bound before",
+        stack: error,
       },
       { status: 400 }
     );
