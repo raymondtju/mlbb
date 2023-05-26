@@ -99,6 +99,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         message: "Error, your account might have been bound before",
+        stack: error,
       },
       { status: 400 }
     );
