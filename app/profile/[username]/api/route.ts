@@ -29,7 +29,7 @@ export async function GET(request: Request) {
 
     const emailAcc = await prisma.user.findFirst({
       where: {
-        id: findID.userId,
+        id: findID.userId as string,
       },
     });
 
