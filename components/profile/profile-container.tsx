@@ -16,6 +16,7 @@ interface MainAppProps {
   matchPlayed: {
     mode: string;
     total: number;
+    winrate: number;
     data: {
       id: string;
       total: number;
@@ -34,10 +35,6 @@ interface MainAppProps {
   };
   username: string;
   accId?: string | null;
-  winRate: {
-    totalClassic: number | 0;
-    totalRanked: number | 0;
-  } | null;
   currentUser?: SafeUser | null;
 }
 
@@ -46,7 +43,6 @@ const MainApp: React.FC<MainAppProps> = ({
   username,
   ownedHero,
   accId,
-  winRate,
   currentUser,
 }) => {
   // console.log(currentUser?.username);
@@ -87,7 +83,6 @@ const MainApp: React.FC<MainAppProps> = ({
                 )}
                 <Statistics
                   matchPlayed={matchPlayed}
-                  winRate={winRate}
                   ownedHero={ownedHero}
                   isBound={false}
                 />
@@ -120,7 +115,6 @@ const MainApp: React.FC<MainAppProps> = ({
             >
               <Statistics
                 matchPlayed={matchPlayed}
-                winRate={winRate}
                 ownedHero={ownedHero}
                 isBound={true}
               />
