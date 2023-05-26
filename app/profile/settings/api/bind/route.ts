@@ -45,15 +45,16 @@ export async function POST(request: Request) {
     }
 
     const bind = await bindAcc({ accId, accServer, code });
-    await prisma?.mlbbAcc.create({
+    const create = await prisma?.mlbbAcc.create({
       data: {
         accId: bind.data.id,
         accServer: bind?.data?.server,
         nickname: bind?.data?.nickname,
       },
     });
+    console.log(create);
 
-    await prisma?.user.update({
+    const update = await prisma?.user.update({
       where: {
         email
       },
@@ -65,6 +66,7 @@ export async function POST(request: Request) {
         }
       }
     })
+    console.log(update);
     // await prisma?.user.update({
     //   where: {
     //     email
