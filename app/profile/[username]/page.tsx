@@ -69,7 +69,7 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
   }
 
   return (
-    <div className="overflow-hidden">
+    <>
       <ProfileContainer
         matchPlayed={dataAcc?.matchPlayed}
         ownedHero={dataAcc?.heroOwned}
@@ -77,7 +77,7 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
         accId={accId}
         currentUser={user}
       />
-    </div>
+    </>
   );
 };
 
