@@ -55,7 +55,11 @@ export async function POST(request: Request) {
         accId: bind.data.id,
         accServer: bind.data.server,
         nickname: bind.data.nickname,
-        userId: user?.id
+        user: {
+          connect: {
+            email
+          }
+        }
       },
     });
     // await prisma?.user.update({
