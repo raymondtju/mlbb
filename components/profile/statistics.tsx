@@ -46,12 +46,12 @@ const Statistics: React.FC<StatisticsProps> = ({
       <div className="flex w-full max-w-lg flex-col gap-y-4 md:w-fit">
         <div className="flex w-full flex-row gap-x-4 md:w-fit">
           <InfoCard
-            className="w-full md:w-60 md:max-w-[240px]"
+            className="w-full md:w-60 md:max-w-[200px]"
             title="Heroes Owned"
             value={heroes}
           />
           <InfoCard
-            className="w-full md:w-60 md:max-w-[240px]"
+            className="w-full md:w-60 md:max-w-[200px]"
             title="Match Played"
             value={totalMatchPlayed}
           />
@@ -77,7 +77,7 @@ const Statistics: React.FC<StatisticsProps> = ({
         </div>
       </div>
 
-      <div className="flex w-full max-w-lg flex-col gap-4">
+      <div className="flex max-h-2 w-full max-w-lg flex-col gap-4">
         <Favourites
           title="Classic Favourites"
           matchPlayed={matchPlayed}
