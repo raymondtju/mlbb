@@ -45,23 +45,26 @@ export async function POST(request: Request) {
     }
 
     const bind = await bindAcc({ accId, accServer, code });
-    const user = await prisma?.user.findFirst({
-      where: {
-        email,
-      },
-    });
     await prisma?.mlbbAcc.create({
       data: {
         accId: bind.data.id,
-        accServer: bind.data.server,
-        nickname: bind.data.nickname,
-        user: {
-          connect: {
-            email
-          }
-        }
+        accServer: bind?.data?.server,
+        nickname: bind?.data?.nickname,
       },
     });
+
+    await prisma?.user.update({
+      where: {
+        email
+      },
+      data: {
+        mlbbaccs: {
+          connect: {
+            accId
+          }
+        }
+      }
+    })
     // await prisma?.user.update({
     //   where: {
     //     email
@@ -120,7 +123,7 @@ export async function POST(request: Request) {
       {
         message:
           "Error, please check that your account has never been bound before",
-          stack: error
+        stack: error,
       },
       { status: 400 }
     );
