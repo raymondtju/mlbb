@@ -5,7 +5,7 @@ export async function GET(request: Request) {
   try {
     const getUrl = request.url.split("profile/")[1];
     const id = getUrl.split("/api")[0];
-    console.log(id);
+    //console.log(id);
     if (!id)
       return NextResponse.json(
         {
