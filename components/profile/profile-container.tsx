@@ -51,7 +51,7 @@ const MainApp: React.FC<MainAppProps> = ({
     const isOwnProfile = currentUser?.username === username;
     return (
       <>
-        <div className="flex flex-col gap-5 md:flex-row flex-1">
+        <div className="flex flex-1 flex-col gap-5 md:flex-row">
           <div className="flex gap-5 text-softGray">
             <ProfileBio username={username} />
           </div>
@@ -111,7 +111,7 @@ const MainApp: React.FC<MainAppProps> = ({
             </TabsList>
             <TabsContent
               value="statistics"
-              className="flex w-full flex-col gap-4 xl:flex-row h-fit"
+              className="flex h-fit w-full flex-col gap-4 xl:flex-row"
             >
               <Statistics
                 matchPlayed={matchPlayed}
