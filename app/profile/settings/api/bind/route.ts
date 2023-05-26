@@ -55,9 +55,28 @@ export async function POST(request: Request) {
         accId: bind.data.id,
         accServer: bind.data.server,
         nickname: bind.data.nickname,
-        userId: user?.id || "",
+        userId: user?.id
       },
     });
+    // await prisma?.user.update({
+    //   where: {
+    //     email
+    //   },
+    //   data: {
+    //     mlbbaccs: {
+    //       connectOrCreate: {
+    //         create: {
+    //           accId: bind.data.id,
+    //           accServer: bind.data.server,
+    //           nickname: bind.data.nickname,
+    //           id:
+    //         }, where: {
+    //            accId
+    //         }
+    //       }
+    //     }
+    //   }
+    // })
 
     if (!bind.data) {
       return NextResponse.json(
