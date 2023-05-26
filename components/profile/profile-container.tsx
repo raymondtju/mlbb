@@ -65,16 +65,14 @@ const MainApp: React.FC<MainAppProps> = ({
                 <TabsTrigger value="statistics">Statistics</TabsTrigger>
                 <TabsTrigger value="posts">Posts</TabsTrigger>
               </TabsList>
-              <div className="md:pr-[444px]">
-                {isOwnProfile && (
-                  <Button
-                    className="rounded-full px-4 py-2"
-                    variant="gradiantNavySec"
-                  >
-                    <Link href="/profile/settings/bind">Bind account</Link>
-                  </Button>
-                )}
-              </div>
+              {isOwnProfile && (
+                <Button
+                  className="rounded-full px-4 py-2"
+                  variant="gradiantNavySec"
+                >
+                  <Link href="/profile/settings/bind">Bind account</Link>
+                </Button>
+              )}
             </div>
             <TabsContent
               value="statistics"
