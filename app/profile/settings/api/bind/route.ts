@@ -10,7 +10,7 @@ export async function GET(req: Request) {
 
   if (!email)
     return NextResponse.json(
-      {},
+      { message: "Please sign in first" },
       {
         status: 400,
       }
@@ -29,7 +29,10 @@ export async function GET(req: Request) {
       }
     );
   } catch (error) {
-    return NextResponse.json({}, { status: 400 });
+    return NextResponse.json(
+      { message: "An error has occured" },
+      { status: 400 }
+    );
   }
 }
 
@@ -127,9 +130,7 @@ export async function POST(request: Request) {
   } catch (error) {
     return NextResponse.json(
       {
-        message:
-          "Error, please check that your account has never been bound before",
-        stack: error,
+        message: "Error, your account might have been bound before",
       },
       { status: 400 }
     );

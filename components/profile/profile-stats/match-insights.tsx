@@ -36,7 +36,7 @@ const MatchInsights: React.FC<MatchInsightsProps> = ({
   const winRatePercentage = ((winRates ?? 0) * 100) / (total ?? 1) || 0;
 
   return (
-    <GradiantCard title={title}>
+    <GradiantCard title={title} className="h-fit">
       <p className="my-16 text-right text-xl/[16px] font-semibold sm:mt-7 md:mt-12 md:text-2xl lg:text-3xl">
         {total}
       </p>
