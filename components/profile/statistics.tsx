@@ -81,7 +81,7 @@ const Statistics: React.FC<StatisticsProps> = ({
         </div>
       </div>
 
-      <div className="flex max-h-2 w-full max-w-lg flex-col gap-4">
+      <div className="flex w-full max-w-lg flex-col gap-4 md:max-h-2">
         <Favourites
           title="Classic Favourites"
           matchPlayed={matchPlayed}
