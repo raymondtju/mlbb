@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import getMlbbAcc from "@/lib/actions/getMlbbAcc";
 import { bindAcc } from "@/lib/utils";
+import prisma from "@/lib/prismadb"
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
