@@ -30,7 +30,7 @@ async function WikiPage() {
 
       <Tabs defaultValue="heroes" className="mt-4 w-full">
         <div className="overflow-y-hidden md:overflow-x-auto">
-          <TabsList className="flex shrink-0 space-x-4">
+          <TabsList className="flex shrink-0 space-x-4 whitespace-nowrap">
             <TabsTrigger value="heroes">Heroes</TabsTrigger>
             <TabsTrigger value="statistics">Statistics</TabsTrigger>
             <TabsTrigger value="draft-pick">Draft Pick</TabsTrigger>
