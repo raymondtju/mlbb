@@ -16,6 +16,7 @@ interface MainAppProps {
   matchPlayed: {
     mode: string;
     total: number;
+    winrate: number;
     data: {
       id: string;
       total: number;
@@ -34,10 +35,6 @@ interface MainAppProps {
   };
   username: string;
   accId?: string | null;
-  winRate: {
-    totalClassic: number | 0;
-    totalRanked: number | 0;
-  } | null;
   currentUser?: SafeUser | null;
 }
 
@@ -46,7 +43,6 @@ const MainApp: React.FC<MainAppProps> = ({
   username,
   ownedHero,
   accId,
-  winRate,
   currentUser,
 }) => {
   // console.log(currentUser?.username);
@@ -55,7 +51,7 @@ const MainApp: React.FC<MainAppProps> = ({
     const isOwnProfile = currentUser?.username === username;
     return (
       <>
-        <div className="flex flex-col gap-5 md:flex-row">
+        <div className="flex flex-col gap-5 md:flex-row flex-1">
           <div className="flex gap-5 text-softGray">
             <ProfileBio username={username} />
           </div>
@@ -87,7 +83,6 @@ const MainApp: React.FC<MainAppProps> = ({
                 )}
                 <Statistics
                   matchPlayed={matchPlayed}
-                  winRate={winRate}
                   ownedHero={ownedHero}
                   isBound={false}
                 />
@@ -116,11 +111,10 @@ const MainApp: React.FC<MainAppProps> = ({
             </TabsList>
             <TabsContent
               value="statistics"
-              className="flex w-full flex-col gap-4 xl:flex-row"
+              className="flex w-full flex-col gap-4 xl:flex-row h-fit"
             >
               <Statistics
                 matchPlayed={matchPlayed}
-                winRate={winRate}
                 ownedHero={ownedHero}
                 isBound={true}
               />
