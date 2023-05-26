@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import getMlbbAcc from "@/lib/actions/getMlbbAcc";
 import { bindAcc } from "@/lib/utils";
+import prisma from "@/lib/prismadb"
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -48,19 +49,50 @@ export async function POST(request: Request) {
     }
 
     const bind = await bindAcc({ accId, accServer, code });
-    const user = await prisma?.user.findFirst({
-      where: {
-        email,
-      },
-    });
-    await prisma?.mlbbAcc.create({
+    console.log("bind.data.id", bind.data.id);
+    console.log("bind.data.server", bind.data.server);
+    console.log("bind.data.nickname", bind.data.nickname);
+    const create = await prisma?.mlbbAcc.create({
       data: {
         accId: bind.data.id,
-        accServer: bind.data.server,
-        nickname: bind.data.nickname,
-        userId: user?.id || "",
+        accServer: bind?.data?.server,
+        nickname: bind?.data?.nickname,
       },
     });
+    console.log(create);
+
+    const update = await prisma?.user.update({
+      where: {
+        email
+      },
+      data: {
+        mlbbaccs: {
+          connect: {
+            accId
+          }
+        }
+      }
+    })
+    console.log(update);
+    // await prisma?.user.update({
+    //   where: {
+    //     email
+    //   },
+    //   data: {
+    //     mlbbaccs: {
+    //       connectOrCreate: {
+    //         create: {
+    //           accId: bind.data.id,
+    //           accServer: bind.data.server,
+    //           nickname: bind.data.nickname,
+    //           id:
+    //         }, where: {
+    //            accId
+    //         }
+    //       }
+    //     }
+    //   }
+    // })
 
     if (!bind.data) {
       return NextResponse.json(
