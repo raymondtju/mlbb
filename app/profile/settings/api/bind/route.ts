@@ -120,6 +120,7 @@ export async function POST(request: Request) {
       {
         message:
           "Error, please check that your account has never been bound before",
+          stack: error
       },
       { status: 400 }
     );
