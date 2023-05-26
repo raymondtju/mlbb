@@ -45,6 +45,9 @@ export async function POST(request: Request) {
     }
 
     const bind = await bindAcc({ accId, accServer, code });
+    console.log("bind.data.id", bind.data.id);
+    console.log("bind.data.server", bind.data.server);
+    console.log("bind.data.nickname", bind.data.nickname);
     const create = await prisma?.mlbbAcc.create({
       data: {
         accId: bind.data.id,
