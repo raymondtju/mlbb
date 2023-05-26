@@ -2,21 +2,17 @@
 > mlbb@0.1.0 build
 > next build
 
-info  - Loaded env from D:\Orbital23\mlbb\.env
+info  - Loaded env from C:\Users\raymo\Documents\Project\mlbb\.env.local
+info  - Loaded env from C:\Users\raymo\Documents\Project\mlbb\.env
 info  - Creating an optimized production build...
 info  - Compiled successfully
 info  - Linting and checking validity of types...
 info  - Collecting page data...
 info  - Generating static pages (0/14)
 info  - Generating static pages (3/14)
-
-warn  - metadata.metadataBase is not set for resolving social open graph or twitter images, fallbacks to "http://localhost:3000". See https://beta.nextjs.org/docs/api-reference/metadata#metadatabase
-
-warn  - Entire page /auth/signin deopted into client-side rendering. https://nextjs.org/docs/messages/deopted-into-client-rendering /auth/signin
-
-
 info  - Generating static pages (6/14)
-(node:15768) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
+warn  - Entire page /auth/signin deopted into client-side rendering. https://nextjs.org/docs/messages/deopted-into-client-rendering /auth/signin
+(node:5360) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 [next-auth][error][CLIENT_FETCH_ERROR] 
 https://next-auth.js.org/errors#client_fetch_error fetch failed {
@@ -32,6 +28,11 @@ https://next-auth.js.org/errors#client_fetch_error fetch failed {
 }
 info  - Generating static pages (10/14)
 warn  - Entire page /profile/settings deopted into client-side rendering. https://nextjs.org/docs/messages/deopted-into-client-rendering /profile/settings
+
+warn  - metadata.metadataBase is not set for resolving social open graph or twitter images, fallbacks to "http://localhost:3000". See https://beta.nextjs.org/docs/api-reference/metadata#metadatabase
+
+
+
 info  - Generating static pages (14/14)
 info  - Finalizing page optimization...
 
@@ -53,8 +54,8 @@ Route (app)                                Size     First Load JS
 + First Load JS shared by all              77 kB
   ├ chunks/139-fb911ce159550173.js         24.4 kB
   ├ chunks/2443530c-dc6abbbc81d80226.js    50.5 kB
-  ├ chunks/main-app-0008d02f0659eba2.js    214 B
-  └ chunks/webpack-1aef95638495d0a1.js     1.78 kB
+  ├ chunks/main-app-fcb2c18be553bd8c.js    215 B
+  └ chunks/webpack-9133cab24a506a95.js     1.78 kB
 
 Route (pages)                              Size     First Load JS
 ┌ ○ /404                                   178 B          86.2 kB
@@ -62,7 +63,7 @@ Route (pages)                              Size     First Load JS
 + First Load JS shared by all              86 kB
   ├ chunks/main-1d0bf55034b64918.js        84 kB
   ├ chunks/pages/_app-c544d6df833bfd4a.js  192 B
-  └ chunks/webpack-1aef95638495d0a1.js     1.78 kB
+  └ chunks/webpack-9133cab24a506a95.js     1.78 kB
 
 ƒ Middleware                               214 kB
 
