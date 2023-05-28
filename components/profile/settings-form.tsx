@@ -42,14 +42,14 @@ const SettingsForm: React.FC<ISettingsForm> = ({ currentUser, mlbbAcc }) => {
           <Button
             className="h-fit w-fit gap-2 rounded-full py-1"
             onClick={() => {
-              router.push("/profile/settings/bind");
+              router.push("/profile/stg/bind");
             }}
             disabled={mlbbAcc ? true : false}
           >
-            MLBB Account
+            Mobile Legends Account
             {mlbbAcc ? (
               <>
-                <span>{`: ${mlbbAcc.accId}(${mlbbAcc.nickname})`}</span>
+                <span>{`: ${mlbbAcc.accId} (${mlbbAcc.nickname})`}</span>
                 <CheckCircle
                   className={cn(
                     "h-4 w-4",
@@ -73,7 +73,7 @@ const SettingsForm: React.FC<ISettingsForm> = ({ currentUser, mlbbAcc }) => {
           onSubmit={async (e) => {
             e.preventDefault();
             setLoading(true);
-            const set = await fetch("/profile/settings/api/username", {
+            const set = await fetch("/profile/stg/api/username", {
               method: "POST",
               body: JSON.stringify({
                 username: username,
@@ -85,7 +85,9 @@ const SettingsForm: React.FC<ISettingsForm> = ({ currentUser, mlbbAcc }) => {
               toast.error(msg.message);
             } else {
               setLoading(false);
-              toast.success("Successfully updated profile");
+              toast.success(
+                "Successfully updated profile, kindly wait for half a minute before making any more updates"
+              );
               router.push(`/profile/${username}`);
             }
           }}
