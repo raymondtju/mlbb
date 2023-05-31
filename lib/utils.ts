@@ -19,6 +19,7 @@ export async function bindAcc(payload: PayloadType) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.BE_API_SECRET}`,
     },
     body: JSON.stringify({
       id: payload.accId,
