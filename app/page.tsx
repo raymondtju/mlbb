@@ -33,9 +33,9 @@ export const metadata = {
 export default async function Home() {
   return (
     <>
-      <main className="mt-36">
+      <main className="mt-24">
         <div className="mx-auto flex max-w-xl flex-col justify-center text-center">
-          <h1 className="font-heading text-[44px] font-bold leading-10 md:text-[64px] md:leading-[60px]">
+          <h1 className="font-heading text-[44px] font-bold leading-10 md:text-[60px] md:leading-[56px]">
             Elevate Your Mobile <br className="hidden md:block" /> Legends Game
           </h1>
           <p className="pt-3 text-[14px] leading-tight text-gray-100 md:text-[18px]">
@@ -51,7 +51,7 @@ export default async function Home() {
             <Link href="/explore">Get Started</Link>
           </Button>
 
-          <div className="flex flex-col items-center justify-center pt-[200px]">
+          <div className="flex flex-col items-center justify-center pt-[100px]">
             <div className="flex items-end justify-center">
               <h1 className="text-center text-[12px] text-neutral-500">
                 mlbb.fyi was made as part of 2023 Orbital project, and is not

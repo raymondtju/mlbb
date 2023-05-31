@@ -12,14 +12,14 @@ async function acc(username: string) {
         username,
       },
     });
-    const mlbbAcc = await getMlbbAcc(get?.email);
-    return mlbbAcc?.accId;
+    const mlbbAcc = await getMlbbAcc(get?.email || "");
+    return mlbbAcc;
   } catch (error) {
     return null;
   }
 }
 
-async function getUsername(username: string) {
+async function getUser(username: string) {
   return await prisma.user.findFirst({
     where: {
       username,
@@ -27,7 +27,7 @@ async function getUsername(username: string) {
   });
 }
 
-async function getDataAcc(accId: string) {
+async function getDataAcc(accId: string | null) {
   try {
     const get = await fetch(`${process.env.BE_API_URL}/data?accId=${accId}`, {
       method: "GET",
@@ -42,9 +42,9 @@ async function getDataAcc(accId: string) {
 
 const ProfilePage = async ({ params }: { params: { username: string } }) => {
   const { username } = params;
-  const existingUser = await getUsername(username);
+  const isExistingProfileUser = await getUser(username);
 
-  if (!existingUser) {
+  if (!isExistingProfileUser) {
     return (
       <div className="flex h-screen items-center justify-center">
         <p className="mb-48 text-2xl md:ml-3">Profile does not exist...</p>
@@ -55,27 +55,26 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
   const user = await getCurrentUser();
   if (!user?.username) {
     NextResponse.redirect(
-      new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/profile/settings`)
+      new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/profile/stg`)
     );
   }
 
-  let accId = await acc(username);
+  let mlbbAccount = await acc(username);
   let dataAcc;
-  let winRate: { totalClassic: number; totalRanked: number } | null = null;
-  if (!accId) {
-    accId = null;
+  if (!mlbbAccount) {
+    mlbbAccount = null;
   } else {
-    dataAcc = await getDataAcc(accId);
+    dataAcc = await getDataAcc(mlbbAccount.accId);
   }
 
   return (
     <>
       <ProfileContainer
-        matchPlayed={dataAcc?.matchPlayed}
-        ownedHero={dataAcc?.heroOwned}
-        username={username}
-        accId={accId}
         currentUser={user}
+        viewMatchPlayed={dataAcc?.matchPlayed}
+        viewOwnedHero={dataAcc?.heroOwned}
+        isProfileUser={isExistingProfileUser}
+        isBoundProfileUser={mlbbAccount}
       />
     </>
   );

@@ -33,12 +33,14 @@ export default function LoginForm({ csrfToken }: { csrfToken?: string }) {
           await signIn("email", {
             email,
             redirect: false,
-            callbackUrl: "/profile/settings?ref=signin",
+            callbackUrl: "/profile/stg?ref=signin",
           })
             .then((res) => {
               //console.log(res);
               if (res?.ok) {
-                toast.success("Kindly check your inbox for the login link");
+                toast.success(
+                  "Kindly check your inbox or spam folders for the login link"
+                );
               }
               setLoading(false);
             })
@@ -58,7 +60,12 @@ export default function LoginForm({ csrfToken }: { csrfToken?: string }) {
           required
           disabled={loading}
         />
-        <Button className="w-full" type="submit" disabled={loading}>
+        <Button
+          className="w-full"
+          type="submit"
+          disabled={loading}
+          variant="gradiantNavy"
+        >
           {loading ? <LoadingDots color="#fafafa" /> : <p>Login</p>}
         </Button>
       </form>
@@ -75,9 +82,10 @@ export default function LoginForm({ csrfToken }: { csrfToken?: string }) {
       <div className="mt-4 flex justify-center gap-2">
         <Button
           className="w-full"
+          variant="gradiantNavy"
           onClick={() => {
             signIn("google", {
-              callbackUrl: "/profile/settings?ref=signin",
+              callbackUrl: "/profile/stg?ref=signin",
             });
           }}
         >
@@ -92,15 +100,16 @@ export default function LoginForm({ csrfToken }: { csrfToken?: string }) {
         </Button>
         <Button
           className="w-full"
+          variant="gradiantNavy"
           onClick={() => {
             signIn("discord", {
-              callbackUrl: "/profile/settings?ref=signin",
+              callbackUrl: "/profile/stg?ref=signin",
             });
           }}
         >
           <Image
             className="mr-1"
-            src={"/discord.svg"}
+            src={"/discord2.svg"}
             alt="Discord"
             width="20"
             height="20"

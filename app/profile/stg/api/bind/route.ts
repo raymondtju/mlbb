@@ -83,21 +83,18 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
-    // const save = await prisma?.mlbbAcc.create({
-    //   data: {
-    //     accId: bind.data.id
-    //   }
-    // })
+
     const upt = await fetch(
       `${process.env.BE_API_URL}/data/sync?accId=${accId}`,
       {
         method: "GET",
       }
     );
+    // console.log(upt.status);
     if (upt.ok) {
       return NextResponse.json(
         {
-          message: bind.message,
+          message: "Successfully sync your Mobile Legends account",
         },
         { status: 200 }
       );
@@ -111,7 +108,7 @@ export async function POST(request: Request) {
   } catch (error) {
     return NextResponse.json(
       {
-        message: "Error, your account might have been bound before",
+        message: "An error occured, please try again later",
         stack: error,
       },
       { status: 400 }

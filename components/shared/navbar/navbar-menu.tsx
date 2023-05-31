@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import { LogInIcon, LogOutIcon, Settings } from "lucide-react";
+import { LogOutIcon, Settings } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { SafeUser } from "@/types";
@@ -59,7 +59,7 @@ const NavMenu: React.FC<NavMenuProps> = ({ currentUser }) => {
         className={cn(
           "md:static md:flex md:h-auto md:bg-transparent",
           collapse
-            ? "fixed inset-0 top-[54px] z-10 h-screen bg-bgblack"
+            ? "fixed inset-0 top-[54px] z-10 h-screen bg-bgblack/80"
             : "hidden"
         )}
       >
@@ -122,7 +122,7 @@ const NavMenu: React.FC<NavMenuProps> = ({ currentUser }) => {
             <li className="flex gap-2">
               <Button
                 onClick={() => {
-                  router.push("/profile/settings");
+                  router.push("/profile/stg");
                   setCollapse(!collapse);
                 }}
                 className="group h-8 w-8 rounded-full p-2"

@@ -41,19 +41,24 @@ const BindForm: React.FC<BindFormProps> = ({ currentUser }) => {
     <form
       onSubmit={async (e) => {
         e.preventDefault();
-        const bind = await fetch("/profile/settings/api/bind", {
+        setLoadingSend(true);
+        const sendCode = await fetch("/api/code", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ ...form, email: currentUser?.email }),
+          body: JSON.stringify(form),
         });
-        const res = await bind.json();
-        if (bind.status != 200) {
+        const res = await sendCode.json();
+        if (sendCode.status != 200) {
           toast(bodyToast(res?.message));
+          setLoadingSend(false);
         } else {
           toast(bodyToast(res?.message));
-          router.push("/profile");
+          setLoadingSend(false);
+          router.push(
+            `/profile/stg/bind/verify?id=${form.accId}&id=${form.accServer}`
+          );
         }
       }}
       className="mx-auto mt-8 flex max-w-md flex-col gap-y-2"
@@ -69,47 +74,16 @@ const BindForm: React.FC<BindFormProps> = ({ currentUser }) => {
         type="number"
         onChange={handleChangeForm}
         name="accServer"
-        placeholder="Server"
+        placeholder="(Server)"
         required
       />
-      <div className="flex w-full items-center space-x-2">
-        <Input
-          type="number"
-          onChange={handleChangeForm}
-          placeholder="Code"
-          name="code"
-          required
-        />
-        <Button
-          type="submit"
-          id="verifCode"
-          variant={"outline"}
-          onClick={async (e) => {
-            e.preventDefault();
-            setLoadingSend(true);
-            const sendCode = await fetch("/api/code", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(form),
-            });
-            const res = await sendCode.json();
-            if (sendCode.status != 200) {
-              toast(bodyToast(res?.message));
-              setLoadingSend(false);
-            } else {
-              toast(bodyToast(res?.message));
-              setLoadingSend(false);
-            }
-          }}
-          disabled={loadingSend}
-        >
-          {loadingSend ? <LoadingDots color="#fafafa" /> : "Send"}
-        </Button>
-      </div>
-      <Button className="mt-4" type="submit">
-        Submit
+      <Button
+        className="mt-4"
+        type="submit"
+        disabled={loadingSend}
+        variant="gradiantNavy"
+      >
+        {loadingSend ? <LoadingDots color="#fafafa" /> : "Send Code"}
       </Button>
     </form>
   );

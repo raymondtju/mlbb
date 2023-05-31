@@ -6,7 +6,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
 interface MatchInsightsProps {
   title: string;
-  matchPlayed: {
+  viewMatchPlayed: {
     mode: string;
     total: number;
     winrate: number;
@@ -24,12 +24,14 @@ interface MatchInsightsProps {
 
 const MatchInsights: React.FC<MatchInsightsProps> = ({
   title,
-  matchPlayed,
+  viewMatchPlayed,
   matchType,
   isBound,
 }) => {
-  const totalMatches = (matchPlayed && matchPlayed[matchType]?.total) || 0;
-  const winRates = (matchPlayed && matchPlayed[matchType]?.winrate * 100) || 0;
+  const totalMatches =
+    (viewMatchPlayed && viewMatchPlayed[matchType]?.total) || 0;
+  const winRates =
+    (viewMatchPlayed && viewMatchPlayed[matchType]?.winrate * 100) || 0;
 
   return (
     <GradiantCard title={title}>
@@ -52,6 +54,7 @@ const MatchInsights: React.FC<MatchInsightsProps> = ({
         />
         <div className="md: absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-semibold text-white sm:text-xl md:text-2xl">
           {`${winRates.toFixed(2)}%`}
+          <p className="text-[10px]">Winrate</p>
         </div>
       </div>
     </GradiantCard>
