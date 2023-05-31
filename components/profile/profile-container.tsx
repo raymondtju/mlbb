@@ -2,13 +2,13 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../shared/tabs";
 import { Button } from "../shared/button";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 import ProfileBio from "./bio";
 import Statistics from "./statistics";
 import { SafeUser } from "@/types";
 import { MlbbAcc } from "@prisma/client";
+import { User } from "@prisma/client";
 
 export type MatchPLayedProps = {
   total: number;
@@ -36,28 +36,29 @@ interface MainAppProps {
       _id: string;
     }[];
   };
-  userDesc: string | null;
-  isUser: string;
-  isBoundUser?: MlbbAcc | null;
+  isProfileUser: User | null;
+  isBoundProfileUser?: MlbbAcc | null;
 }
 
 const MainApp: React.FC<MainAppProps> = ({
   currentUser,
   viewMatchPlayed,
   viewOwnedHero,
-  userDesc,
-  isUser,
-  isBoundUser,
+  isProfileUser,
+  isBoundProfileUser,
 }) => {
-  const isOwnProfile = currentUser?.username === isUser;
-  // console.log(currentUser?.username);
-  // console.log(username);
-  if (isUser && !isBoundUser) {
+  const isOwnProfile = currentUser?.username === isProfileUser?.username;
+
+  if (isProfileUser && !isBoundProfileUser) {
     return (
       <>
         <div className="flex flex-1 flex-col gap-5 md:flex-row">
-          <div className="flex gap-5 text-softGray">
-            <ProfileBio username={isUser} userDesc={userDesc} />
+          <div className="mx-auto flex gap-5 text-softGray">
+            <ProfileBio
+              currentUser={currentUser}
+              user={isProfileUser}
+              isOwnProfile={isOwnProfile}
+            />
           </div>
           <Tabs defaultValue="statistics" className="w-full">
             <div className="flex items-center justify-between">
@@ -98,18 +99,19 @@ const MainApp: React.FC<MainAppProps> = ({
         </div>
       </>
     );
-  } else if (isUser && isBoundUser) {
+  } else if (isProfileUser && isBoundProfileUser) {
     return (
       <>
         <div className="flex flex-col gap-5 md:flex-row">
           {/* Left */}
 
-          <div className="flex gap-5 text-softGray">
+          <div className="mx-auto flex gap-5 text-softGray">
             {/* Profile Head */}
             <ProfileBio
-              username={isUser}
-              mlbbAcc={isBoundUser}
-              userDesc={userDesc}
+              currentUser={currentUser}
+              user={isProfileUser}
+              mlbbAcc={isBoundProfileUser}
+              isOwnProfile={isOwnProfile}
             />
           </div>
 
@@ -123,7 +125,7 @@ const MainApp: React.FC<MainAppProps> = ({
             </div>
             <TabsContent
               value="statistics"
-              className="flex h-fit w-full flex-col gap-4 xl:flex-row"
+              className="flex h-fit w-full flex-col items-center gap-4 xl:flex-row"
             >
               <Statistics
                 viewMatchPlayed={viewMatchPlayed}

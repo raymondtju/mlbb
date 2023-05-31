@@ -19,21 +19,12 @@ async function acc(username: string) {
   }
 }
 
-async function getUsername(username: string) {
+async function getUser(username: string) {
   return await prisma.user.findFirst({
     where: {
       username,
     },
   });
-}
-
-async function getDesc(username: string) {
-  try {
-    const user = await getUsername(username);
-    return user?.desc || null;
-  } catch (error) {
-    return null;
-  }
 }
 
 async function getDataAcc(accId: string | null) {
@@ -51,10 +42,9 @@ async function getDataAcc(accId: string | null) {
 
 const ProfilePage = async ({ params }: { params: { username: string } }) => {
   const { username } = params;
-  const existingUser = await getUsername(username);
-  const userDesc = await getDesc(username);
+  const isExistingProfileUser = await getUser(username);
 
-  if (!existingUser) {
+  if (!isExistingProfileUser) {
     return (
       <div className="flex h-screen items-center justify-center">
         <p className="mb-48 text-2xl md:ml-3">Profile does not exist...</p>
@@ -69,12 +59,12 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
     );
   }
 
-  let account = await acc(username);
+  let mlbbAccount = await acc(username);
   let dataAcc;
-  if (!account) {
-    account = null;
+  if (!mlbbAccount) {
+    mlbbAccount = null;
   } else {
-    dataAcc = await getDataAcc(account.accId);
+    dataAcc = await getDataAcc(mlbbAccount.accId);
   }
 
   return (
@@ -83,9 +73,8 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
         currentUser={user}
         viewMatchPlayed={dataAcc?.matchPlayed}
         viewOwnedHero={dataAcc?.heroOwned}
-        userDesc={userDesc}
-        isUser={username}
-        isBoundUser={account}
+        isProfileUser={isExistingProfileUser}
+        isBoundProfileUser={mlbbAccount}
       />
     </>
   );
