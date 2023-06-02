@@ -5,8 +5,10 @@ export async function GET(req: Request) {
   try {
     const url = req.url as string;
     const type = url.split("?type=")[1].split("&")[0];
+    console.log(type)
     const username = url.split("&username=")[1];
 
+    console.log(username)
     if (type === "following") {
       let data: {
         name: string | undefined
