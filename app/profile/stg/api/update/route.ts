@@ -13,7 +13,6 @@ export async function POST(req: Request) {
   }: { username: string; description: string; links: string[] } =
     await req.json();
   //console.log("username", username);
-  console.log(links);
 
   const findUsername = await prisma.user.findFirst({
     where: {
@@ -84,7 +83,7 @@ export async function POST(req: Request) {
   if (!set)
     return NextResponse.json(
       {
-        message: "Error setting username",
+        message: "Error setting new updates",
       },
       {
         status: 400,
