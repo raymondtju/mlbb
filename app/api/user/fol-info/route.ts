@@ -20,6 +20,7 @@ export async function GET(req: Request) {
           following: true,
         },
       });
+      console.log(user)
 
       for (const x of user?.following as string[]){
         await prisma.user.findFirst({
@@ -36,6 +37,7 @@ export async function GET(req: Request) {
           return data.push(res);
         })
       }
+      console.log(data)
       return NextResponse.json(data, {status: 200})
     }
     else if (type === "followers") {
