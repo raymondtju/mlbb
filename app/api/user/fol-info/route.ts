@@ -3,11 +3,9 @@ import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
   try {
-    const url = req.url as string;
-    console.log(url)
-    const type = url.split("?type=")[1].split("&")[0];
-    console.log(type)
-    const username = url.split("&username=")[1];
+    const { searchParams } = new URL(req.url);
+    const type = searchParams.get(type);
+    const username = searchParams.get(username);
 
     console.log(username)
     if (type === "following") {
