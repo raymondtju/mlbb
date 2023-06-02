@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 export async function GET(req: Request) {
   try {
     const url = req.url as string;
+    console.log(url)
     const type = url.split("?type=")[1].split("&")[0];
     console.log(type)
     const username = url.split("&username=")[1];
@@ -16,7 +17,7 @@ export async function GET(req: Request) {
       }[] = [];
       const user = await prisma.user.findFirst({
         where: {
-          username: username,
+          username,
         },
         select: {
           following: true,
@@ -82,6 +83,7 @@ export async function GET(req: Request) {
     return NextResponse.json(
       {
         message: "User not found!",
+        error
       },
       {
         status: 400,
