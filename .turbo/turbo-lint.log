@@ -1,4 +1,0 @@
-
-> mlbb-fyi@0.1.0 lint
-> eslint ./components ./app ./lib .
-
