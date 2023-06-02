@@ -29,7 +29,6 @@ const SettingsForm: React.FC<ISettingsForm> = ({ currentUser, mlbbAcc }) => {
     currentUser?.desc || ""
   );
   const [loading, setLoading] = useState<boolean>(false);
-  const [disable, setDisable] = useState<boolean>(false);
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
   const [characterCount, setCharacterCount] = useState<number>(
     currentUser?.desc ? currentUser.desc.length : 0
