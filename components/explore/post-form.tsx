@@ -8,6 +8,7 @@ import { SafeUser } from "@/types";
 import { Input } from "../shared/input";
 import { Button } from "../shared/button";
 import { Label } from "../shared/label";
+import LoadingDots from "../shared/icons/loading-dots";
 
 interface newPost {
   currentUser?: SafeUser | null;
@@ -17,11 +18,11 @@ const PostForm: React.FC<newPost> = ({ currentUser }) => {
   const router = useRouter();
 
   const [title, setTitle] = useState<string>("");
-  const [body, setBody] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
   const [titleCharacterCount, setTitleCharacterCount] = useState<number>(0);
-  const [bodyCharacterCount, setBodyCharacterCount] = useState<number>(0);
+  const [messageCharacterCount, setMessageCharacterCount] = useState<number>(0);
 
   return (
     <>
@@ -36,7 +37,7 @@ const PostForm: React.FC<newPost> = ({ currentUser }) => {
             setLoading(true);
             const fields = {
               title: title,
-              body: body,
+              message: message,
             };
 
             const set = await fetch("/explore/stg/api/post", {
@@ -79,13 +80,13 @@ const PostForm: React.FC<newPost> = ({ currentUser }) => {
           </div>
 
           <div className="space-y-1">
-            <Label htmlFor="body">Body</Label>
+            <Label htmlFor="body">Message</Label>
             <Input
               type="Body"
               onChange={(e) => {
                 const inputValue = e.target.value;
-                setBody(inputValue);
-                setBodyCharacterCount(inputValue.length);
+                setMessage(inputValue);
+                setMessageCharacterCount(inputValue.length);
               }}
               onFocus={() => setIsInputFocused(true)}
               onBlur={() => setIsInputFocused(false)}
@@ -94,10 +95,20 @@ const PostForm: React.FC<newPost> = ({ currentUser }) => {
             />
             {isInputFocused && (
               <p className="text-[10px] text-neutral-500">
-                {bodyCharacterCount} / {2000} characters
+                {messageCharacterCount} / {2000} characters
               </p>
             )}
           </div>
+
+          <Button className="mb-8 mt-1 rounded-full" variant="gradiantNavy">
+            {loading ? (
+              <>
+                <LoadingDots color="#FAFAFA" />
+              </>
+            ) : (
+              "Post"
+            )}
+          </Button>
         </form>
       </div>
     </>

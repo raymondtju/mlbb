@@ -1,8 +1,11 @@
 import PostButton from "@/components/explore/post-button";
+import PostList from "@/components/explore/post-list";
 import getCurrentUser from "@/lib/actions/getCurrentUser";
+import getPosts from "@/lib/actions/getPosts";
 
 async function ExplorePage() {
   const currentUser = await getCurrentUser();
+  const posts = await getPosts();
 
   return (
     <>
@@ -10,7 +13,7 @@ async function ExplorePage() {
         <div>Search Bar PlaceHolder </div>
         {currentUser && <PostButton />}
       </div>
-      <div>Post List Placeholder</div>
+      <div>{posts && <PostList items={posts} />}</div>
     </>
   );
 }
