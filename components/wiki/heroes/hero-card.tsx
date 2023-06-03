@@ -17,7 +17,7 @@ const HeroCard = ({ hero }: { hero: Hero }) => {
           height={128}
           quality={1}
           className="absolute inset-0 w-full overflow-hidden  rounded-2xl bg-cover bg-top bg-no-repeat"
-          // loading="lazy"
+          loading="lazy"
           priority={true}
         />
       </div>
