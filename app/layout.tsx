@@ -1,19 +1,14 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
-import { Analytics } from '@vercel/analytics/react';
-
-import Navbar from "@/components/navbar/Navbar";
-import ToasterProvider from "@/components/providers/ToasterProvider";
-import getCurrentUser from "@/lib/actions/getCurrentUser";
+import { Analytics } from "@vercel/analytics/react";
 import { NextRequest, NextResponse } from "next/server";
 
-export const metadata = {
-  title: "mlbb.fyi",
-  description: "MLBB Forum hehehehe",
-};
+import getCurrentUser from "@/lib/actions/getCurrentUser";
+import ToasterProvider from "@/components/providers/toaster-provider";
+import Navbar from "@/components/shared/navbar/navbar";
 
-const inter = Inter({ subsets: ["latin-ext"] });
+const inter = Inter({ subsets: ["latin"] });
 
 const fontHeading = localFont({
   src: "../assets/fonts/cal-sans/CalSans-SemiBold.woff2",
@@ -22,22 +17,21 @@ const fontHeading = localFont({
 
 export default async function RootLayout({
   children,
-  req,
-  res,
 }: {
   children: React.ReactNode;
-  req: NextRequest;
-  res: NextResponse;
 }) {
   const currentUser = await getCurrentUser();
 
   return (
-    <html lang="en" className={`${inter.className} ${fontHeading.variable}`}>
-      <body>
-        <div className="relative mx-auto min-h-screen overflow-hidden bg-bgblack text-pwhite">
-          <div className="max-w-7xl px-4 xl:mx-auto">
-            <Navbar currentUser={currentUser} />
-            <ToasterProvider />
+    <html
+      lang="en"
+      className={`${inter.className} ${fontHeading.variable} text-softGray`}
+    >
+      <body className="relative mx-auto bg-bgblack pt-24 text-pwhite after:fixed after:inset-x-0 after:top-[-1350px] after:z-[-1] after:mx-auto after:h-[1440px] after:w-[1880px] after:rounded-full after:bg-navy-600 after:blur-[150px]">
+        <ToasterProvider />
+        <Navbar currentUser={currentUser} />
+        <div className="">
+          <div className="relative mx-auto max-w-[1080px] px-4 ">
             {children}
           </div>
         </div>
@@ -45,12 +39,4 @@ export default async function RootLayout({
       </body>
     </html>
   );
-}
-
-{
-  /* <div className="absolute inset-0 -top-[400px] -z-10 max-h-[863px] max-w-7xl rounded-full bg-Purple-500/40 blur-[287.5px] "></div>
-
-          <div className="absolute inset-0 left-[calc(50%-898px/2-720px)] top-[800px] -z-10 max-h-[863px] max-w-[898px] rounded-full bg-Cyan-500/40 blur-[287.5px] "></div>
-
-          <div className="absolute inset-0 right-[calc(50%-898px/2-720px)] top-[1400px] -z-10 max-h-[863px] max-w-[898px] rounded-full bg-red-500/40 blur-[287.5px] "></div> */
 }
