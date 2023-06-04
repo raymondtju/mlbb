@@ -80,6 +80,7 @@ const SettingsForm: React.FC<ISettingsForm> = ({ currentUser, mlbbAcc }) => {
           onSubmit={async (e) => {
             e.preventDefault();
             setLoading(true);
+
             const fields = {
               username: username,
               description: description,
@@ -163,6 +164,7 @@ const SettingsForm: React.FC<ISettingsForm> = ({ currentUser, mlbbAcc }) => {
               </p>
             )}
           </div>
+
 
           <Button
             disabled={

@@ -11,6 +11,7 @@ import Close from "../icons/close";
 import Burger from "../icons/burger";
 import { Button } from "../button";
 import { signOut } from "next-auth/react";
+import getCurrentUser from "@/lib/actions/getCurrentUser";
 
 interface NavMenuProps {
   currentUser?: SafeUser | null;
@@ -20,7 +21,7 @@ const MenuList = [
   {
     name: "Wiki",
     active: false,
-    href: "/wiki",
+    href: "/wiki/heroes",
   },
   {
     name: "Explore",
@@ -30,7 +31,7 @@ const MenuList = [
   {
     name: "Profile",
     active: false,
-    href: "/profile",
+    href: `/profile`,
   },
 ];
 
