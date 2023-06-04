@@ -4,19 +4,17 @@
 
 info  - Loaded env from D:\Orbital23\mlbb\.env
 info  - Creating an optimized production build...
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (659kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
 info  - Compiled successfully
 info  - Linting and checking validity of types...
 info  - Collecting page data...
-info  - Generating static pages (0/16)
-info  - Generating static pages (4/16)
+info  - Generating static pages (0/17)
+info  - Generating static pages (4/17)
 
 warn  - metadata.metadataBase is not set for resolving social open graph or twitter images, fallbacks to "http://localhost:3000". See https://beta.nextjs.org/docs/api-reference/metadata#metadatabase
 
-(node:8244) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
+(node:10904) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-
-
-info  - Generating static pages (8/16)
 [next-auth][error][CLIENT_FETCH_ERROR] 
 https://next-auth.js.org/errors#client_fetch_error fetch failed {
   error: {
@@ -30,6 +28,9 @@ https://next-auth.js.org/errors#client_fetch_error fetch failed {
   message: 'fetch failed'
 }
 warn  - Entire page /auth/signin deopted into client-side rendering. https://nextjs.org/docs/messages/deopted-into-client-rendering /auth/signin
+
+
+info  - Generating static pages (8/17)
 [next-auth][error][CLIENT_FETCH_ERROR] 
 https://next-auth.js.org/errors#client_fetch_error fetch failed {
   error: {
@@ -42,9 +43,9 @@ https://next-auth.js.org/errors#client_fetch_error fetch failed {
   url: 'http://localhost:3010/api/auth/csrf',
   message: 'fetch failed'
 }
-info  - Generating static pages (12/16)
+info  - Generating static pages (12/17)
 warn  - Entire page /profile/stg deopted into client-side rendering. https://nextjs.org/docs/messages/deopted-into-client-rendering /profile/stg
-info  - Generating static pages (16/16)
+info  - Generating static pages (17/17)
 info  - Finalizing page optimization...
 
 Route (app)                                Size     First Load JS
@@ -52,33 +53,35 @@ Route (app)                                Size     First Load JS
 ├ λ /api/code                              0 B                0 B
 ├ λ /api/test                              0 B                0 B
 ├ λ /api/user/basic-info                   0 B                0 B
+├ λ /api/user/fol-info                     0 B                0 B
 ├ λ /auth/signin                           2.01 kB         107 kB
-├ λ /explore                               148 B          77.1 kB
+├ λ /explore                               152 B          77.1 kB
 ├ ○ /favicon.ico                           0 B                0 B
-├ λ /profile                               149 B          77.1 kB
+├ λ /profile                               152 B          77.1 kB
+├ λ /profile/[username]                    20.9 kB         127 kB
 ├ λ /profile/[username]/api                0 B                0 B
 ├ λ /profile/[username]/api/follow         0 B                0 B
 ├ λ /profile/[username]/api/unfollow       0 B                0 B
-├ λ /profile/[username]/stats              10.3 kB         117 kB
-├ λ /profile/stg                           4.01 kB        99.5 kB
+├ λ /profile/stg                           4 kB           99.5 kB
 ├ λ /profile/stg/api/bind                  0 B                0 B
 ├ λ /profile/stg/api/update                0 B                0 B
 ├ λ /profile/stg/bind                      1.69 kB        98.1 kB
-├ λ /profile/stg/bind/verify               2.08 kB        98.5 kB
-└ λ /wiki/heroes                           4.46 kB        99.2 kB
+├ λ /profile/stg/bind/verify               2.07 kB        98.5 kB
+├ λ /wiki                                  152 B          77.1 kB
+└ λ /wiki/[subWiki]                        5.01 kB        99.1 kB
 + First Load JS shared by all              77 kB
   ├ chunks/139-acfc4b32a423a0ef.js         24.4 kB
   ├ chunks/2443530c-c2f05af95e964045.js    50.5 kB
   ├ chunks/main-app-0008d02f0659eba2.js    214 B
-  └ chunks/webpack-425b55935a73eb91.js     1.79 kB
+  └ chunks/webpack-3073cbce9b15c632.js     1.8 kB
 
 Route (pages)                              Size     First Load JS
 ┌ ○ /404                                   178 B          86.2 kB
 └ λ /api/auth/[...nextauth]                0 B              86 kB
 + First Load JS shared by all              86 kB
-  ├ chunks/main-f6615e3744ecccee.js        84 kB
+  ├ chunks/main-b24b30db95e1336b.js        84 kB
   ├ chunks/pages/_app-c544d6df833bfd4a.js  192 B
-  └ chunks/webpack-425b55935a73eb91.js     1.79 kB
+  └ chunks/webpack-3073cbce9b15c632.js     1.8 kB
 
 ƒ Middleware                               214 kB
 
