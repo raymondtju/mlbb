@@ -35,7 +35,6 @@ const HeroesContainer = ({ heroes }: IHeroesContainer) => {
       <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
         {hero?.length === undefined
           ? heroes?.map((hero, i) => {
-              if (i) {
                 return (
                   <div key={hero.id}>
                     <HeroCard hero={hero} />
@@ -62,7 +61,7 @@ const HeroesContainer = ({ heroes }: IHeroesContainer) => {
                     /> */}
                   </div>
                 );
-              }
+              
             })
           : hero?.map((hero) => (
               <Fragment key={hero.id}>
