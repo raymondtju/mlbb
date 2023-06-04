@@ -5,7 +5,6 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prismadb";
 import Link from "next/link";
 import { Tabs, TabsList, TabsTrigger } from "@/components/shared/tabs";
-import { Button } from "@/components/shared/button";
 import ProfileBio from "@/components/profile/bio";
 
 export const metadata = {
@@ -75,6 +74,13 @@ export default async function LayoutProfile({
   }
 
   const isOwnProfile = currentUser?.username === isExistingUser?.username;
+  if (!isExistingUser) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <p className="mb-48 text-2xl md:ml-3">Profile does not exist...</p>
+      </div>
+    );
+  }
 
   return (
     <main className="max-w-[1280px] xl:mx-auto">
@@ -90,21 +96,19 @@ export default async function LayoutProfile({
         <Tabs defaultValue="statistics" className="w-full">
           <div className="no-scrollbar h-[52px] overflow-x-scroll">
             <TabsList>
-              {ProfileTabList.map((item, i) => {
-                if (!isOwnProfile && item.name === "Starred") {
-                  return null;
-                }
-
-                return (
+              {ProfileTabList.map((item, i) =>
+                !isOwnProfile && item.name === "Starred" ? null : (
                   <Link
                     href={`/profile/${isExistingUser?.username + item.href}`}
                     key={i}
                     scroll={false}
                   >
-                    <TabsTrigger value={item.name}>{item.name}</TabsTrigger>
+                    <TabsTrigger value={item.name.toLowerCase()}>
+                      {item.name}
+                    </TabsTrigger>
                   </Link>
-                );
-              })}
+                )
+              )}
             </TabsList>
           </div>
           {children}
