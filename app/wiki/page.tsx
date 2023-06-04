@@ -1,7 +1,3 @@
-import React from "react";
-
-function WikiPage() {
-  return <div>WikiPage</div>;
+export default async function WikiPage() {
+  return <></>;
 }
-
-export default WikiPage;

@@ -1,6 +1,6 @@
 import prisma from "@/lib/prismadb";
 
-export default async function getMlbbAcc(email: string) {
+export default async function getMlbbAcc(email?: string) {
   try {
     const findUser = await prisma.user.findUnique({
       where: {
@@ -8,7 +8,7 @@ export default async function getMlbbAcc(email: string) {
       },
     });
 
-    const findMlbbAcc = await prisma.mlbbaccs.findFirst({
+    const findMlbbAcc = await prisma.mlbbAcc.findFirst({
       where: {
         userId: findUser?.id,
       },

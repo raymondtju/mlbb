@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import { heros } from "@prisma/client";
+import { Hero } from "@prisma/client";
 import Image from "next/image";
 
 interface HeroesProps {
-  heroes: heros[];
+  heroes: Hero[];
 }
 
 const HeroList: React.FC<HeroesProps> = ({ heroes }) => {
@@ -19,7 +19,7 @@ const HeroList: React.FC<HeroesProps> = ({ heroes }) => {
                 {/* <div className="absolute inset-0 z-10 opacity-60 bg-gradient-to-t from-Purple-200"></div> */}
 
                 <Image
-                  src={`https://${hero.img}`}
+                  src={hero.img}
                   alt={hero.name}
                   width={150}
                   height={150}

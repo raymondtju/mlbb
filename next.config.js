@@ -23,7 +23,26 @@ const nextConfig = {
         port: "",
         pathname: "/web/madmin/**",
       },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        port: "",
+        pathname: "/a/**",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.discordapp.com",
+        port: "",
+        pathname: "/embed/avatars/**",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+        pathname: "/dvm5vog2j/image/upload/**/mlbb.fyi/hero/**",
+      },
     ],
+    formats: ["image/webp"],
   },
 };
 
