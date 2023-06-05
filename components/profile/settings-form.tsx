@@ -158,12 +158,14 @@ const SettingsForm: React.FC<ISettingsForm> = ({ currentUser, mlbbAcc }) => {
             />
           </div>
           <div className="">
-            <div className="" {...getRootProps()}>
+            <Label htmlFor="picture">Set profile picture</Label>
+            <div className="cursor-pointer text-sm" {...getRootProps()}>
               <input {...getInputProps()} />
+
               {isDragActive ? (
                 <p>Drop file(s) here ...</p>
               ) : (
-                <p>Drag and drop file(s) here, or click to select files</p>
+                <p>Drag and drop file(s) here, or click to select files </p>
               )}
             </div>
             <div className="">
@@ -179,7 +181,13 @@ const SettingsForm: React.FC<ISettingsForm> = ({ currentUser, mlbbAcc }) => {
                   />
                 ))}
             </div>
-            <button onClick={(e) => handleUpload(e)}>asd</button>
+            <Button
+              onClick={(e) => handleUpload(e)}
+              variant="gradiantNavy"
+              className="mt-4"
+            >
+              Done
+            </Button>
           </div>
 
           <div className="space-y-1">
@@ -277,7 +285,7 @@ const SettingsForm: React.FC<ISettingsForm> = ({ currentUser, mlbbAcc }) => {
                 link3 === currentUser?.links[2]) ||
               buttonDisabled
             }
-            className="mb-8 mt-1 rounded-full"
+            className="mb-8 mt-1"
             variant="gradiantNavy"
             onClick={async (e) => {
               e.preventDefault();
