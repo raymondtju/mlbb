@@ -17,7 +17,7 @@ import { fetcher } from "@/lib/utils";
 import { GradiantCard } from "../shared/gradiant-card";
 import { Button } from "../shared/button";
 import LoadingDots from "../shared/icons/loading-dots";
-import FolDialog from "../folDialog";
+import FolDialog from "../fol-dialog";
 
 interface ProfileBioProps {
   currentUser?: SafeUser | null;
