@@ -50,7 +50,7 @@ const PostForm: React.FC<newPost> = ({ currentUser }) => {
               toast.error(msg.message);
             } else {
               setLoading(false);
-              toast.success("Successfully posted! Please refresh");
+              toast.success("Successfully posted! Please wait.");
               router.push(`/explore`);
             }
           }}
