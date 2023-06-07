@@ -7,7 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./shared/dialog";
+} from "../shared/dialog";
 
 interface FolDialogProps {
   children: React.ReactNode;
@@ -25,11 +25,10 @@ const FolDialog = ({
   return (
     <Dialog>
       <DialogTrigger asChild>{triggerChild}</DialogTrigger>
-      <DialogContent className="h-96">
+      <DialogContent className="w-100000 h-960">
         <DialogTitle>{title}</DialogTitle>
         <DialogHeader>
           <DialogDescription>{description}</DialogDescription>
-          {/* <div className="overflow-auto h-fit">{children}</div> */}
           {children}
         </DialogHeader>
       </DialogContent>
