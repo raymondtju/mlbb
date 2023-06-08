@@ -37,6 +37,7 @@ const DeleteButton: React.FC<DeletePostProps> = ({ postId }) => {
             "Successfully delete post! Please wait to be redirected."
           );
           router.push(`/explore`);
+          window.location.reload();
         }
       }}
       className="mb-8 mt-1 rounded-full"
