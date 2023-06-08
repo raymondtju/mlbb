@@ -3,11 +3,9 @@ import PostForm from "@/components/explore/post-form";
 import PostList from "@/components/explore/post-list";
 import { Button } from "@/components/shared/button";
 import getCurrentUser from "@/lib/actions/getCurrentUser";
-import getPosts from "@/lib/actions/getPosts";
 
 async function ExplorePage() {
   const currentUser = await getCurrentUser();
-  const posts = await getPosts();
 
   return (
     <>
@@ -22,7 +20,9 @@ async function ExplorePage() {
           </ExploreDialog>
         )}
       </div>
-      <div>{posts && <PostList posts={posts} />}</div>
+      <div>
+        <PostList />
+      </div>
     </>
   );
 }
