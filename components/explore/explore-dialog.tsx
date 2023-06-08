@@ -16,7 +16,7 @@ interface FolDialogProps {
   description?: string;
 }
 
-const EditDialog = ({
+const ExploreDialog = ({
   children,
   triggerChild,
   title,
@@ -37,4 +37,4 @@ const EditDialog = ({
   );
 };
 
-export default EditDialog;
+export default ExploreDialog;
