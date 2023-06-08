@@ -10,11 +10,7 @@ import { Button } from "../shared/button";
 import { Label } from "../shared/label";
 import LoadingDots from "../shared/icons/loading-dots";
 
-interface newPost {
-  currentUser?: SafeUser | null;
-}
-
-const PostForm: React.FC<newPost> = ({ currentUser }) => {
+const PostForm = () => {
   const router = useRouter();
 
   const [title, setTitle] = useState<string>("");
@@ -51,7 +47,11 @@ const PostForm: React.FC<newPost> = ({ currentUser }) => {
             } else {
               setLoading(false);
               toast.success("Successfully posted! Please wait.");
+<<<<<<< HEAD
               router.push(`/explore`);
+=======
+              window.location.reload();
+>>>>>>> a911706eeb329c8fb6c09eef1bf2def4148cb046
             }
           }}
         >
