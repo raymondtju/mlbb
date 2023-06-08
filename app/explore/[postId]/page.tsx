@@ -2,12 +2,15 @@ import getCurrentUser from "@/lib/actions/getCurrentUser";
 import Image from "next/image";
 import getUser from "@/lib/actions/getUser";
 import Link from "next/link";
+
 import getCurrentPost from "@/lib/actions/getCurrentPost";
 import { Edit3, Trash2 } from "lucide-react";
 import DelDialog from "@/components/explore/del-dialog";
 import DeleteButton from "@/components/explore/del-button";
+
 import EditForm from "@/components/explore/edit-form";
 import ExploreDialog from "@/components/explore/explore-dialog";
+
 
 export default async function PostPage({
   params,
