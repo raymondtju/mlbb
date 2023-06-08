@@ -23,6 +23,7 @@ async function ExplorePage() {
       <div>
         <PostList />
       </div>
+      <div>{posts && <PostList posts={posts} />}</div>
     </>
   );
 }

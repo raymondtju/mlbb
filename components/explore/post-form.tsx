@@ -47,7 +47,11 @@ const PostForm = () => {
             } else {
               setLoading(false);
               toast.success("Successfully posted! Please wait.");
+<<<<<<< HEAD
+              router.push(`/explore`);
+=======
               window.location.reload();
+>>>>>>> a911706eeb329c8fb6c09eef1bf2def4148cb046
             }
           }}
         >
