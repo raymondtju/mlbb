@@ -8,21 +8,47 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// type Build {
-//   items Item[]
+// model Spell {
+//   id      String   @id @default(auto()) @map("_id") @db.ObjectId
+//   name    String
+//   desc    String
+//   img     String
+//   cd      String
+//   details String[]
+//   variant String[]
+//   hero    Hero     @relation(fields: [heroId], references: [id])
+//   heroId  String   @db.ObjectId
 // }
 
-model Item {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  desc      String
-  img       String
-  category  String
-  attribute String[]
-  details   String[]
+// model Item {
+//   id            String       @id @default(auto()) @map("_id") @db.ObjectId
+//   heroDetailsId String       @db.ObjectId
+//   name          String
+//   desc          String
+//   img           String
+//   category      String
+//   attribute     String[]
+//   details       String
+//   heroDetails   HerosDetails @relation(fields: [heroDetailsId], references: [id])
+// }
+
+// model Build {
+//   id            String       @id @default(auto()) @map("_id") @db.ObjectId
+//   Item          Item[]
+//   heroDetails   HerosDetails @relation(fields: [heroDetailsId], references: [id])
+//   heroDetailsId String       @db.ObjectId
+// }
+
+type HeroDetailsSkills {
+  name        String
+  icon        String
+  description String
+  tips        String
 }
 
-type HerosDetails {
+model HeroDetails {
+  id             String              @id @default(auto()) @map("_id") @db.ObjectId
+  heroId         String              @unique @db.ObjectId
   heroType       String
   heroName       String
   coverPicture   String
@@ -31,15 +57,8 @@ type HerosDetails {
   offense        String
   durability     String
   difficulty     String
-  // builds         Build[]
-  skill          HerosDetailsSkill[]
-}
-
-type HerosDetailsSkill {
-  name        String
-  icon        String
-  description String
-  tips        String
+  skill          HeroDetailsSkills[]
+  hero           Hero                @relation(fields: [heroId], references: [id])
 }
 
 model Hero {
@@ -51,7 +70,7 @@ model Hero {
   win     String
   ban     String
   role    String[]
-  details HerosDetails
+  details HeroDetails?
 }
 
 model MlbbAcc {
