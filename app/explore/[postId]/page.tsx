@@ -10,9 +10,6 @@ import EditForm from "@/components/explore/edit-form";
 import ExploreDialog from "@/components/explore/explore-dialog";
 import CommentForm from "@/components/explore/comment-form";
 import CommentList from "@/components/explore/comment-list";
-import getComments from "@/lib/actions/getComments";
-import useSWR from "swr";
-import { fetcher } from "@/lib/fetcher-utils";
 
 export default async function PostPage({
   params,
