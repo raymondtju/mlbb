@@ -7,26 +7,26 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./shared/dialog";
+} from "@/components/shared/dialog";
 
-interface FolDialogProps {
+interface SettingsDialogProps {
   children: React.ReactNode;
   triggerChild: React.ReactNode;
   title: string;
   description?: string;
 }
 
-const FolDialog = ({
+const SettingsDialog = ({
   children,
   triggerChild,
   title,
   description,
-}: FolDialogProps) => {
+}: SettingsDialogProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>{triggerChild}</DialogTrigger>
-      <DialogContent className="h-96">
-          <DialogTitle>{title}</DialogTitle>
+      <DialogContent className="h-fit">
+        <DialogTitle className="flex justify-center">{title}</DialogTitle>
         <DialogHeader>
           <DialogDescription>{description}</DialogDescription>
           {/* <div className="overflow-auto h-fit">{children}</div> */}
@@ -37,4 +37,4 @@ const FolDialog = ({
   );
 };
 
-export default FolDialog;
+export default SettingsDialog;
