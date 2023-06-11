@@ -1,0 +1,52 @@
+
+> mlbb@0.1.0 build
+> next build
+
+info  - Loaded env from C:\Users\raymo\Documents\Project\mlbb\.env.local
+info  - Loaded env from C:\Users\raymo\Documents\Project\mlbb\.env
+info  - Creating an optimized production build...
+Failed to compile.
+
+./components/profile/profile-settings/edit-picture.tsx
+Module not found: Can't resolve 'react-dropzone'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./components/profile/settings.tsx
+
+./components/profile/profile-settings/edit-picture.tsx
+Module not found: Can't resolve '@mui/material'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./components/profile/settings.tsx
+
+./components/profile/profile-settings/edit-picture.tsx
+Module not found: Can't resolve 'react-avatar-editor'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./components/profile/settings.tsx
+
+./app/profile/stg/api/cdn-sign/route.ts
+Module not found: Can't resolve 'cloudinary'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./lib/cloudinary.ts
+Module not found: Can't resolve 'cloudinary'
+Did you mean './cloudinary'?
+Requests that should resolve in the current directory need to start with './'.
+Requests that start with a name are treated as module requests and resolve within module directories (node_modules, C:\Users\raymo\Documents\Project\mlbb).
+If changing the source code is not an option there is also a resolve options called 'preferRelative' which tries to resolve these kind of requests in the current directory too.
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/profile/stg/api/cdn-sign/route.ts
+
+
+> Build failed because of webpack errors
