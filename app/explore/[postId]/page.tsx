@@ -2,6 +2,7 @@ import getCurrentUser from "@/lib/actions/getCurrentUser";
 import Image from "next/image";
 import getUser from "@/lib/actions/getUser";
 import Link from "next/link";
+
 import getCurrentPost from "@/lib/actions/getCurrentPost";
 import { Edit3, Trash2 } from "lucide-react";
 import DelDialog from "@/components/explore/del-dialog";
@@ -50,12 +51,9 @@ export default async function PostPage({
           </div>
           {currUser?.username === user?.username && (
             <div className="flex flex-row">
-              <ExploreDialog
-                title="Edit"
-                triggerChild={<Edit3 className="mr-5" />}
-              >
-                <EditForm post={post} />
-              </ExploreDialog>
+              <FolDialog title="Edit" triggerChild={<Edit3 className="mr-5" />}>
+                Test
+              </FolDialog>
               <DelDialog title="Delete" triggerChild={<Trash2 />}>
                 <p className="flex justify-center">
                   Click the button below to confirm deletion
