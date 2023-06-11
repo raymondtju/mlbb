@@ -93,7 +93,7 @@ export default async function PostPage({
             <CommentForm postId={params.postId} />
           </div>
         )}
-        <CommentList postId={params.postId} />
+        <CommentList postId={params.postId} userId={currUser?.id} />
       </div>
     );
   }
