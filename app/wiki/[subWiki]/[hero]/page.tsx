@@ -8,6 +8,9 @@ async function getHero(name: string) {
       where: {
         name: name,
       },
+      include: {
+        details: true,
+      },
     });
     return hero;
   } catch (error) {
@@ -20,11 +23,13 @@ export default async function HeroPage({
 }: {
   params: { subWiki: string; hero: string };
 }) {
-  const hero = decodeURIComponent(params.hero.replace(/\+/g, " "));
-  const isExistingHero = await getHero(hero);
+  const decodedString = decodeURIComponent(params?.hero.replace(/\+/g, " "));
+  const parseHero = decodedString.replace(/\b\w/g, (c) => c.toUpperCase());
+  const isExistingHero = await getHero(parseHero);
   if (params.subWiki !== "heroes" || !isExistingHero) {
     notFound();
   }
+
   return (
     <>
       <HeroFyi hero={isExistingHero}></HeroFyi>
