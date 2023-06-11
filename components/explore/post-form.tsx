@@ -4,19 +4,12 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-import { SafeUser } from "@/types";
 import { Input } from "../shared/input";
 import { Button } from "../shared/button";
 import { Label } from "../shared/label";
 import LoadingDots from "../shared/icons/loading-dots";
 
-interface newPost {
-  currentUser?: SafeUser | null;
-}
-
-const PostForm: React.FC<newPost> = ({ currentUser }) => {
-  const router = useRouter();
-
+const PostForm = () => {
   const [title, setTitle] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -50,8 +43,12 @@ const PostForm: React.FC<newPost> = ({ currentUser }) => {
               toast.error(msg.message);
             } else {
               setLoading(false);
-              toast.success("Successfully posted! Please refresh");
+              toast.success("Successfully posted! Please wait.");
+<<<<<<< HEAD
               router.push(`/explore`);
+=======
+              window.location.reload();
+>>>>>>> a911706eeb329c8fb6c09eef1bf2def4148cb046
             }
           }}
         >

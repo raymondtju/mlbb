@@ -1,26 +1,29 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
 import { toast } from "sonner";
+import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { CheckCircle, UserCog, XCircle } from "lucide-react";
+
+import Image from "next/image";
 
 import { SafeUser } from "@/types";
 import { Input } from "../shared/input";
 import { Button } from "../shared/button";
 import { Label } from "../shared/label";
 import LoadingDots from "../shared/icons/loading-dots";
-import { CheckCircle, XCircle } from "lucide-react";
 import { MlbbAcc } from "@prisma/client";
 import { cn } from "@/lib/utils";
-import { useSearchParams } from "next/navigation";
+import SettingsDialog from "./profile-settings/settings-dialog";
+import EditPicture from "./profile-settings/edit-picture";
 
-interface ISettingsForm {
+interface ISettings {
   currentUser?: SafeUser | null;
   mlbbAcc?: MlbbAcc | null;
 }
 
-const SettingsForm: React.FC<ISettingsForm> = ({ currentUser, mlbbAcc }) => {
+const Settings: React.FC<ISettings> = ({ currentUser, mlbbAcc }) => {
   const params = useSearchParams();
   const router = useRouter();
 
@@ -41,81 +44,81 @@ const SettingsForm: React.FC<ISettingsForm> = ({ currentUser, mlbbAcc }) => {
     router.push("/explore");
     return null;
   }
+
   return (
     <>
       <h1 className="text-center font-heading text-3xl font-bold">
         Profile Settings
       </h1>
       <div className="mx-auto max-w-md">
-        <div className="mb-8 flex justify-center">
-          <Button
-            className="h-fit w-fit gap-2 rounded-full py-1"
-            onClick={() => {
-              router.push("/profile/stg/bind");
-            }}
-            disabled={mlbbAcc ? true : false}
-          >
-            Mobile Legends Account
-            {mlbbAcc ? (
-              <>
-                <span>{`: ${mlbbAcc.accId} (${mlbbAcc.nickname})`}</span>
-                <CheckCircle
+        <form className="flex w-full flex-col gap-3">
+          <div className="mb-4 flex justify-center">
+            <Button
+              className="h-fit w-fit gap-2 rounded-full py-1"
+              onClick={() => {
+                router.push("/profile/stg/bind");
+              }}
+              disabled={mlbbAcc ? true : false}
+            >
+              Mobile Legends Account
+              {mlbbAcc ? (
+                <>
+                  <span>{`: ${mlbbAcc.accId} (${mlbbAcc.nickname})`}</span>
+                  <CheckCircle
+                    className={cn(
+                      "h-4 w-4",
+                      mlbbAcc ? "text-green-500" : "text-red-500"
+                    )}
+                  />
+                </>
+              ) : (
+                <XCircle
                   className={cn(
                     "h-4 w-4",
                     mlbbAcc ? "text-green-500" : "text-red-500"
                   )}
                 />
-              </>
-            ) : (
-              <XCircle
-                className={cn(
-                  "h-4 w-4",
-                  mlbbAcc ? "text-green-500" : "text-red-500"
-                )}
-              />
-            )}
-          </Button>
-        </div>
-
-        <form
-          className="flex w-full flex-col gap-3"
-          onSubmit={async (e) => {
-            e.preventDefault();
-            setLoading(true);
-            setButtonDisabled(true);
-            const fields = {
-              username: username,
-              description: description,
-              links: [link1, link2, link3],
-            };
-
-            const set = await fetch("/profile/stg/api/update", {
-              method: "POST",
-              body: JSON.stringify(fields),
-            });
-            const msg = await set.json();
-            if (!set.ok) {
-              setLoading(false);
-              toast.error(msg.message);
-              setButtonDisabled(false);
-            } else {
-              setLoading(false);
-              toast.success(
-                "Successfully updated profile, kindly wait before making any more updates"
-              );
-              router.push(`/profile/${username}`);
-            }
-          }}
-        >
-          <div className="relative z-20 mx-auto h-[150px] w-[150px] rounded-full hover:fill-white">
+              )}
+            </Button>
+          </div>
+          <div className="relative mx-auto h-[150px] w-[150px] overflow-hidden rounded-full">
             <Image
-              src={(currentUser?.image as string) || "/nana.jpg"}
-              alt="Profile Picture"
+              src={
+                currentUser?.image === ""
+                  ? "/nana.jpg"
+                  : currentUser?.image?.split("/image/upload/")[0] +
+                    "/image/upload/c_fill,h_150,w_150/" +
+                    currentUser?.image?.split("/image/upload/")[1]
+              }
+              alt=""
               width={150}
               height={150}
-              className="absolute inset-0 z-[-2] mx-auto rounded-full"
+              className="mx-auto mb-4 h-[150px] w-[150px] items-center bg-contain bg-center"
+              placeholder="blur"
+              blurDataURL={
+                currentUser?.image?.split("/image/upload/")[0] +
+                "/image/upload/e_blur:400,h_100,w_100/" +
+                currentUser?.image?.split("/image/upload/")[1]
+              }
             />
           </div>
+
+          <SettingsDialog
+            title="Choose profile picture (Max 5 MB)"
+            triggerChild={
+              <div className="flex cursor-pointer flex-row items-center justify-center gap-2">
+                <UserCog
+                  width={16}
+                  height={16}
+                  className="h-4 w-4"
+                  color="#3652ba"
+                />
+                <p className="text-bold mt-1 text-sm ">Edit profile picture</p>
+              </div>
+            }
+          >
+            <EditPicture currentUser={currentUser} />
+          </SettingsDialog>
 
           <div className="space-y-1">
             <Label htmlFor="email">Email</Label>
@@ -212,8 +215,35 @@ const SettingsForm: React.FC<ISettingsForm> = ({ currentUser, mlbbAcc }) => {
                 link3 === currentUser?.links[2]) ||
               buttonDisabled
             }
-            className="mb-8 mt-1 rounded-full"
+            className="mb-8 mt-1"
             variant="gradiantNavy"
+            onClick={async (e) => {
+              e.preventDefault();
+              setLoading(true);
+              setButtonDisabled(true);
+              const fields = {
+                username: username,
+                description: description,
+                links: [link1, link2, link3],
+              };
+
+              const set = await fetch("/profile/stg/api/update", {
+                method: "POST",
+                body: JSON.stringify(fields),
+              });
+              const msg = await set.json();
+              if (!set.ok) {
+                setLoading(false);
+                toast.error(msg.message);
+                setButtonDisabled(false);
+              } else {
+                setLoading(false);
+                toast.success(
+                  "Successfully updated profile, kindly wait before making any more updates"
+                );
+                router.push(`/profile/${username}`);
+              }
+            }}
           >
             {loading ? (
               <>
@@ -229,4 +259,4 @@ const SettingsForm: React.FC<ISettingsForm> = ({ currentUser, mlbbAcc }) => {
   );
 };
 
-export default SettingsForm;
+export default Settings;
