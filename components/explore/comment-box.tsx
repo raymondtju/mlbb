@@ -54,7 +54,7 @@ const CommentBox: React.FC<CommentBoxProps> = ({ comment, userId }) => {
           </div>
         )}
       </div>
-      <div className="mb-8 ml-14">
+      <div className="mb-8 ml-14 whitespace-pre-line">
         <p>{comment?.body}</p>
       </div>
     </div>
