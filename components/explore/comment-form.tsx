@@ -20,7 +20,7 @@ const NewCommentForm: React.FC<CommentProps> = ({ postId }) => {
 
   return (
     <>
-      <div className="App">
+      <div>
         <form
           onSubmit={async (e) => {
             e.preventDefault();
