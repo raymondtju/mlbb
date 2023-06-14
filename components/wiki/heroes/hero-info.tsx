@@ -1,7 +1,7 @@
 // @ts-nocheck
 "use client";
 
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { GradiantCard } from "@/components/shared/gradiant-card";
 import { Hero } from "@prisma/client";
 import { Progress } from "@/components/shared/progress";
@@ -13,6 +13,8 @@ interface HeroFyiContainer {
   heroBuild: Object[] | null;
   heroSpell: Object[] | null;
   heroEmblem: Object[] | null;
+  heroWeakAgainst?: Object[] | null;
+  heroStrongAgainst?: Object[] | null;
   matches: {
     mode: string;
     total: number;
@@ -35,18 +37,27 @@ export default function HeroFyi({
   heroBuild,
   heroSpell,
   heroEmblem,
+  heroWeakAgainst,
+  heroStrongAgainst,
   matches,
   classicIndex,
   rankedIndex,
   showWR,
 }: HeroFyiContainer) {
-  const heroDetails = hero?.details;
+  const router = useRouter();
   const uniqueSpells = Array.from(
     new Set(heroSpell?.map((spell) => spell.name))
   );
+
   const uniqueEmblems = Array.from(
     new Set(heroEmblem?.map((emblem) => emblem.name))
   );
+
+  const uniqueCounters = Array.from(
+    new Set(heroWeakAgainst?.map((hero) => hero))
+  );
+
+  const heroDetails = hero?.details;
   const data = [
     {
       name: "Ability",
@@ -150,7 +161,7 @@ export default function HeroFyi({
           </div>
         </GradiantCard>
 
-        <GradiantCard className="mt-4 h-fit w-full">
+        <GradiantCard className="mt-4 h-[340px] w-full">
           <p className="font-heading text-xl md:text-3xl">Equipments</p>
           <div className="flex flex-col gap-y-2">
             <p className="text-sm text-gray-500">Recommended spell/s</p>
@@ -193,7 +204,7 @@ export default function HeroFyi({
                       className="h-[45px] w-[45px] sm:h-[50px] sm:w-[50px] "
                     />
                     <div className=" bg-opacity/75 absolute bottom-0 left-0 h-full w-full items-center justify-center rounded-full bg-black/80 py-1 text-center text-[10px] font-medium text-white opacity-0 transition-opacity duration-200">
-                      <p className="mt-3">{emblemName}</p>
+                      <p className="mt-2">{emblemName}</p>
                     </div>
                   </div>
                   <style jsx>{`
@@ -222,6 +233,7 @@ export default function HeroFyi({
                       alt={""}
                       width={50}
                       height={50}
+                      className="flex"
                     />
                     <div className="bg-opacity/75 absolute bottom-0 left-0 h-full w-full items-center justify-center rounded-full bg-black/80 py-1 text-center text-[10px] font-medium text-white opacity-0 transition-opacity duration-200">
                       <p className="mt-2">{item?.name}</p>
@@ -240,9 +252,9 @@ export default function HeroFyi({
       </div>
 
       {showWR && (
-        <div className="mt-4 flex flex-col  gap-x-4 sm:flex-row">
+        <div className="mt-4 flex flex-col gap-y-4 sm:flex-row sm:gap-x-4">
           <MatchInsights
-            title={`Your clasic ${heroDetails?.heroName} stats`}
+            title={`Your clasic ${heroDetails?.heroName} matches`}
             totalMatches={matches[0]?.data?.[classicIndex]?.total ?? 0}
             winrate={
               (matches?.[0]?.data?.[classicIndex]?.win /
@@ -252,7 +264,7 @@ export default function HeroFyi({
             isHorizontal={true}
           />
           <MatchInsights
-            title={`Your ranked ${heroDetails?.heroName} stats`}
+            title={`Your ranked ${heroDetails?.heroName} matches`}
             totalMatches={matches?.[1]?.data?.[rankedIndex]?.total ?? 0}
             winrate={
               (matches?.[1]?.data?.[rankedIndex]?.win /
@@ -316,6 +328,87 @@ export default function HeroFyi({
               </div>
             );
           })}
+        </div>
+      </GradiantCard>
+
+      <GradiantCard className="mt-4 h-fit w-full">
+        <p className="font-heading text-xl md:text-3xl">Strong against</p>
+        <div className="my-4">
+          <div className="grid grid-cols-3 flex-row gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
+            {heroStrongAgainst.map((hero, i) => (
+              <div
+                key={i}
+                onClick={() => {
+                  router.push(`/wiki/heroes/${hero.name.toLowerCase()}`);
+                }}
+                className="cursor-pointer"
+              >
+                <div className="relative">
+                  <Image
+                    src={
+                      hero?.img?.split("/image/upload/")[0] +
+                      "/image/upload/c_fill,h_192,w_192,g_north/" +
+                      hero?.img?.split("/image/upload/")[1]
+                    }
+                    alt={hero.name}
+                    width={96}
+                    height={96}
+                    className="h-[96px] w-[96px] rounded-full"
+                    loading="lazy"
+                  />
+                  <div className="bg-opacity/75 absolute bottom-0 left-0 h-[96px] w-[96px] items-center rounded-full bg-black/80 py-1 text-center text-sm font-medium text-white opacity-0 transition-opacity duration-200">
+                    <p className="mt-3 justify-center text-[10px] md:mt-8 md:text-[14px]">
+                      {hero?.name}
+                    </p>
+                  </div>
+                </div>
+                <style jsx>{`
+                  .relative:hover .absolute {
+                    opacity: 1;
+                  }
+                `}</style>
+              </div>
+            ))}
+          </div>
+        </div>
+        <p className="font-heading text-xl md:text-3xl">Weak against</p>
+        <div className="my-4">
+          <div className="grid grid-cols-3 flex-row gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
+            {uniqueCounters.map((counter, i) => (
+              <div
+                key={i}
+                onClick={() => {
+                  router.push(`/wiki/heroes/${counter.name.toLowerCase()}`);
+                }}
+                className="cursor-pointer"
+              >
+                <div className="relative">
+                  <Image
+                    src={
+                      counter?.img?.split("/image/upload/")[0] +
+                      "/image/upload/c_fill,h_192,w_192,g_north/" +
+                      counter?.img?.split("/image/upload/")[1]
+                    }
+                    alt={counter.name}
+                    width={96}
+                    height={96}
+                    className="h-[48px] w-[48px] rounded-full md:h-[96px] md:w-[96px]"
+                    loading="lazy"
+                  />
+                  <div className="bg-opacity/75 absolute bottom-0 left-0 h-[96px] w-[96px] items-center rounded-full bg-black/80 py-1 text-center text-sm font-medium text-white opacity-0 transition-opacity duration-200">
+                    <p className="mt-3 justify-center text-[10px] md:mt-8 md:text-[14px]">
+                      {counter?.name}
+                    </p>
+                  </div>
+                </div>
+                <style jsx>{`
+                  .relative:hover .absolute {
+                    opacity: 1;
+                  }
+                `}</style>
+              </div>
+            ))}
+          </div>
         </div>
       </GradiantCard>
     </div>
