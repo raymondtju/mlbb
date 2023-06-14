@@ -3,13 +3,21 @@ import useSWR from "swr";
 import Image from "next/image";
 import Link from "next/link";
 import { fetcher } from "@/lib/fetcher-utils";
+import { Edit3, Trash2 } from "lucide-react";
+import DelDialog from "./del-dialog";
+import DelCommentButton from "./del-comment-button";
+import { useState } from "react";
+import EditCommentForm from "./edit-comment-form";
 
 interface CommentBoxProps {
   comment: Comment;
+  postId: string;
+  userId?: string;
 }
 
-const CommentBox: React.FC<CommentBoxProps> = ({ comment }) => {
+const CommentBox: React.FC<CommentBoxProps> = ({ comment, postId, userId }) => {
   const { data: image } = useSWR(["/api/comment/pic", comment.userId], fetcher);
+  const [editActive, setEditActive] = useState<boolean>(false);
 
   return (
     <div>
@@ -38,10 +46,33 @@ const CommentBox: React.FC<CommentBoxProps> = ({ comment }) => {
             <p className="font-semibold">{comment?.createdBy}</p>
           </Link>
         </div>
+        {userId === comment.userId && (
+          <div className="flex flex-row">
+            <button onClick={() => setEditActive(!editActive)}>
+              {editActive ? (
+                <Edit3 color="#00ff40" strokeWidth={3} className="mr-5" />
+              ) : (
+                <Edit3 className="mr-5" />
+              )}
+            </button>
+            <DelDialog title="Delete" triggerChild={<Trash2 />}>
+              <p className="flex justify-center">
+                Click the button below to confirm deletion
+              </p>
+              <DelCommentButton commentId={comment.id} />
+            </DelDialog>
+          </div>
+        )}
       </div>
-      <div className="mb-8 ml-14">
-        <p>{comment?.body}</p>
-      </div>
+      {editActive ? (
+        <div className="mb-8 ml-14 grow">
+          <EditCommentForm commentId={comment.id} commentBody={comment?.body} />
+        </div>
+      ) : (
+        <div className="mb-8 ml-14 whitespace-pre-line">
+          <p>{comment?.body}</p>
+        </div>
+      )}
     </div>
   );
 };

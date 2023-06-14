@@ -2,26 +2,27 @@
 
 import { Fragment, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Hero, HeroDetails } from "@prisma/client";
+import { Hero } from "@prisma/client";
 import useHeroFilter from "@/lib/state/useHeroFilter";
 import HeroesFilter from "./heroes-filter";
 import HeroCard from "./hero-card";
 
 interface IHeroesContainer {
-  heroes: HeroDetails[] | null;
+  heroes: Hero[] | null;
 }
 
 const HeroesContainer = ({ heroes }: IHeroesContainer) => {
   const router = useRouter();
   const heroFilter = useHeroFilter();
-  const [hero, setHero] = useState<HeroDetails[]>();
+  const [hero, setHero] = useState<Hero[]>();
 
   useEffect(() => {
     if (heroes !== null && heroFilter.type.length > 0) {
-      const filtered: HeroDetails[] = [];
+      const filtered: Hero[] = [];
       heroFilter.type.map((item, i) => {
         heroes.filter((hero) => {
-          if (hero.heroType === heroFilter.type[i]) filtered.push(hero);
+          // @ts-ignore
+          if (hero.details.heroType === heroFilter.type[i]) filtered.push(hero);
         });
       });
       setHero(filtered);
@@ -41,9 +42,7 @@ const HeroesContainer = ({ heroes }: IHeroesContainer) => {
                   <HeroCard
                     hero={hero}
                     onClick={() => {
-                      router.push(
-                        `/wiki/heroes/${hero.heroName.toLowerCase()}`
-                      );
+                      router.push(`/wiki/heroes/${hero.name.toLowerCase()}`);
                     }}
                   />
                 </div>
@@ -54,7 +53,7 @@ const HeroesContainer = ({ heroes }: IHeroesContainer) => {
                 <HeroCard
                   hero={hero}
                   onClick={() => {
-                    router.push(`/wiki/heroes/${hero.heroName.toLowerCase()}`);
+                    router.push(`/wiki/heroes/${hero.name.toLowerCase()}`);
                   }}
                 />
               </Fragment>

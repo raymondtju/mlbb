@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { BuildModel, ItemModel } from "lib/model/build.model";
+import { EmblemsModel } from "@/lib/model/emblem.model";
 import { HeroModel } from "lib/model/hero.model";
 import clientPromise from "lib/mongoose";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -14,7 +14,7 @@ export default async function get(
   // console.log(heroId);
 
   await clientPromise;
-  await BuildModel.init();
+  await EmblemsModel.init();
 
   // switch (method) {
   //   case "GET":
@@ -23,14 +23,14 @@ export default async function get(
       res.setHeader("Access-Control-Allow-Origin", "*");
       return res.status(200).json({
         message: "success",
-        data: await BuildModel.findOne({ heroId }).populate({
-          path: "items",
+        data: await EmblemsModel.findOne({ heroId }).populate({
+          path: "emblems",
           select: "-_id",
         }),
       });
     }
-    const get = await BuildModel.find().populate({
-      path: "items",
+    const get = await EmblemsModel.find().populate({
+      path: "emblems",
       select: "-_id",
     });
 
