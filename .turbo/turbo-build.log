@@ -28,7 +28,8 @@ info  - Linting and checking validity of types...
 info  - Collecting page data...
 info  - Generating static pages (0/32)
 info  - Generating static pages (8/32)
-(node:20508) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
+info  - Generating static pages (16/32)
+(node:17148) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 [next-auth][error][CLIENT_FETCH_ERROR] 
 https://next-auth.js.org/errors#client_fetch_error fetch failed {
@@ -43,7 +44,6 @@ https://next-auth.js.org/errors#client_fetch_error fetch failed {
   message: 'fetch failed'
 }
 warn  - Entire page /auth/signin deopted into client-side rendering. https://nextjs.org/docs/messages/deopted-into-client-rendering /auth/signin
-info  - Generating static pages (16/32)
 [next-auth][error][CLIENT_FETCH_ERROR] 
 https://next-auth.js.org/errors#client_fetch_error fetch failed {
   error: {
@@ -56,12 +56,12 @@ https://next-auth.js.org/errors#client_fetch_error fetch failed {
   url: 'http://localhost:3010/api/auth/csrf',
   message: 'fetch failed'
 }
+info  - Generating static pages (24/32)
 
 
 warn  - metadata.metadataBase is not set for resolving social open graph or twitter images, fallbacks to "http://localhost:3000". See https://beta.nextjs.org/docs/api-reference/metadata#metadatabase
 
 
-info  - Generating static pages (24/32)
 warn  - Entire page /profile/stg deopted into client-side rendering. https://nextjs.org/docs/messages/deopted-into-client-rendering /profile/stg
 info  - Generating static pages (32/32)
 info  - Finalizing page optimization...
@@ -81,7 +81,7 @@ Route (app)                                Size     First Load JS
 ├ λ /cms/emblem                            914 B          90.1 kB
 ├ λ /cms/spell                             913 B          90.1 kB
 ├ λ /explore                               2.97 kB         114 kB
-├ λ /explore/[postId]                      4.66 kB         121 kB
+├ λ /explore/[postId]                      4.73 kB         121 kB
 ├ λ /explore/stg/api/comDelete             0 B                0 B
 ├ λ /explore/stg/api/comEdit               0 B                0 B
 ├ λ /explore/stg/api/delete                0 B                0 B
@@ -103,7 +103,7 @@ Route (app)                                Size     First Load JS
 ├ λ /profile/stg/bind                      1.92 kB        98.3 kB
 ├ λ /profile/stg/bind/verify               2.18 kB        98.6 kB
 ├ λ /wiki                                  149 B          77.1 kB
-├ λ /wiki/[subWiki]                        6 kB           99.3 kB
+├ λ /wiki/[subWiki]                        6.01 kB        99.4 kB
 └ λ /wiki/[subWiki]/[hero]                 6.46 kB        98.8 kB
 + First Load JS shared by all              77 kB
   ├ chunks/139-acfc4b32a423a0ef.js         24.4 kB
