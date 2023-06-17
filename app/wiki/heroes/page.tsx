@@ -9,14 +9,14 @@ import PatchContainer from "@/components/wiki/patch/patch-container";
 
 async function SubWikiPage({ params }: { params: { subWiki: string } }) {
   const heroes: Hero[] | null = await getHeroes();
-  if (
-    params.subWiki !== "heroes" &&
-    params.subWiki !== "statistics" &&
-    params.subWiki !== "draft-pick" &&
-    params.subWiki !== "patch"
-  ) {
-    notFound();
-  }
+  // if (
+  //   params.subWiki !== "heroes" &&
+  //   params.subWiki !== "statistics" &&
+  //   params.subWiki !== "draft-pick" &&
+  //   params.subWiki !== "patch"
+  // ) {
+  //   notFound();
+  // }
 
   const tabs = [
     {
@@ -40,10 +40,11 @@ async function SubWikiPage({ params }: { params: { subWiki: string } }) {
   const selectedTab = tabs.find((tab) => tab.key === params.subWiki);
   return (
     <TabsContent
-      value={params.subWiki}
+      value="heroes"
       className="flex w-full flex-col gap-5 md:flex-row"
     >
-      {selectedTab ? selectedTab.component : notFound()}
+      {/* {selectedTab ? selectedTab.component : notFound()} */}
+      <HeroesContainer heroes={heroes} />
     </TabsContent>
   );
 }

@@ -54,7 +54,7 @@ export default async function HeroPage({
   const parseHero = decodedString.replace(/\b\w/g, (c) => c.toUpperCase());
   const isExistingHero = await getHero(parseHero);
 
-  if (params.subWiki !== "heroes" || !isExistingHero) {
+  if (!isExistingHero) {
     notFound();
   }
 
