@@ -1,7 +1,8 @@
 "use client";
 
 import { GradiantCard } from "@/components/shared/gradiant-card";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import { Progress } from "@/components/shared/progress";
+import { cn } from "@/lib/utils";
 
 interface MatchInsightsProps {
   title: string;
@@ -19,9 +20,32 @@ const MatchInsights: React.FC<MatchInsightsProps> = ({
   isHorizontal,
 }) => {
   return (
-    <GradiantCard title={title}>
-      <div className={isHorizontal ? "flex flex-row justify-between" : ""}>
-        <div
+    <GradiantCard variant="clean">
+      <p className="font-light">{title}</p>
+      <p className="mt-1 font-sat text-3xl font-bold">
+        {winrate}{" "}
+        <span className="text-base/[0px]">/ {totalMatches} match</span>
+      </p>
+
+      <div className="mb-1 mt-2 flex items-center justify-between gap-1">
+        <Progress
+          pos="left"
+          value={(winrate / totalMatches) * 100}
+          max={100}
+          className="h-4"
+        />
+        <p className="text-sm font-medium">
+          {((winrate / totalMatches) * 100).toFixed(0) + "%"}
+        </p>
+      </div>
+      {/* <div className="mt-2 w-full rounded-xl bg-navy-500 py-1 text-center font-bold shadow-inner">
+        {((winrate / totalMatches) * 100).toFixed(1)} %
+      </div> */}
+      {/* <h1 className="text-sm/[10px] font-bold tracking-[-3%] md:text-base/[16px]">
+        {title}
+      </h1> */}
+      {/* <div className={isHorizontal ? "flex flex-row justify-between" : ""}> */}
+      {/* <div
           className={`${
             isHorizontal ? "" : "pl-20"
           }flex flex-row items-center gap-2`}
@@ -33,25 +57,25 @@ const MatchInsights: React.FC<MatchInsightsProps> = ({
           >
             {totalMatches}
           </p>
+        </div> */}
+      {/* <div className="relative mt-5">
+        <CircularProgressbar
+          value={winrate}
+          styles={buildStyles({
+            strokeLinecap: "round",
+            textColor: "#FFFF",
+            trailColor: `#232323`,
+            pathColor: `#74E092`,
+          })}
+          className={isHorizontal ? "mt-4 h-40 w-40" : ""}
+        />
+        <div className="md: absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-semibold text-white sm:text-xl md:text-2xl">
+          {`${winrate.toFixed(2)}%`}
+          <p className="text-[10px]">Winrate</p>
         </div>
-        <div className="relative">
-          <CircularProgressbar
-            value={winrate}
-            styles={buildStyles({
-              strokeLinecap: "round",
-              textColor: "#FFFF",
-              trailColor: `#232323`,
-              pathColor: `#74E092`,
-            })}
-            className={isHorizontal ? "mt-4 h-40 w-40" : ""}
-          />
-          <div className="md: absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-semibold text-white sm:text-xl md:text-2xl">
-            {`${winrate.toFixed(2)}%`}
-            <p className="text-[10px]">Winrate</p>
-          </div>
-        </div>
-      </div>
+      </div> */}
     </GradiantCard>
+    // </div>
   );
 };
 

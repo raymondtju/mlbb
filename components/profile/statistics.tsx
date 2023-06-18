@@ -42,36 +42,36 @@ const Statistics: React.FC<StatisticsProps> = ({
   const heroes = (viewOwnedHero && viewOwnedHero?.total) || 0;
 
   return (
-    <div className="flex w-full flex-col gap-4 xl:flex-row">
-      <div className="flex w-full max-w-lg flex-col gap-y-4 md:w-fit">
-        <div className="flex w-full flex-row gap-x-4 md:w-fit">
+    <div className="flex w-full flex-col gap-1.5 xl:flex-row">
+      <div className="flex w-full max-w-lg flex-col gap-y-1.5 md:w-fit">
+        <div className="flex w-full flex-row gap-x-1.5 md:w-fit">
           <InfoCard
             className="w-full md:w-60 md:max-w-[200px]"
-            title="Heroes Owned"
+            title="Heroes"
             value={heroes}
           />
           <InfoCard
             className="w-full md:w-60 md:max-w-[200px]"
-            title="Match Played"
+            title="Played"
             value={totalMatchPlayed}
           />
         </div>
 
         <div className="w-full">
-          <div className="mt-0.5 flex gap-x-4">
+          <div className="flex flex-col gap-y-1.5">
             <MatchInsights
-              title="Classic Matches"
+              title="Classic Win Statistic"
               totalMatches={(viewMatchPlayed && viewMatchPlayed[0]?.total) || 0}
               winrate={
-                (viewMatchPlayed && viewMatchPlayed[0]?.winrate * 100) || 0
+                (viewMatchPlayed && viewMatchPlayed[0]?.winrate * viewMatchPlayed[0]?.total) || 0
               }
               isBound={isBound}
             />
             <MatchInsights
-              title="Ranked Matches"
+              title="Ranked Win Statistic"
               totalMatches={(viewMatchPlayed && viewMatchPlayed[1]?.total) || 0}
               winrate={
-                (viewMatchPlayed && viewMatchPlayed[1]?.winrate * 100) || 0
+                (viewMatchPlayed && viewMatchPlayed[1]?.winrate * viewMatchPlayed[1]?.total) || 0
               }
               isBound={isBound}
             />
@@ -79,7 +79,7 @@ const Statistics: React.FC<StatisticsProps> = ({
         </div>
       </div>
 
-      <div className="flex w-full max-w-lg flex-col gap-4 md:max-h-2">
+      <div className="flex w-full max-w-lg flex-col gap-1.5 md:max-h-2">
         <Favourites
           title="Classic Favourites"
           viewMatchPlayed={viewMatchPlayed}

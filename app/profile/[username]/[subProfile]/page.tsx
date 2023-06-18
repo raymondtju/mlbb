@@ -36,10 +36,10 @@ async function SubProfilePage({
   return (
     <TabsContent
       value={params.subProfile}
-      className="flex w-full flex-col gap-4 md:flex-row"
+      className="flex w-full flex-col gap-1.5 md:flex-row"
     >
       {params.subProfile === "statistics" ? (
-        <div className="flex w-full flex-col gap-4">
+        <div className="flex w-full flex-col gap-1.5">
           {!isOwnProfile && !isBoundProfile && (
             <p className="pl-2 text-sm">
               This user&apos;s Mobile Legends account hasn&apos;t been bound yet
