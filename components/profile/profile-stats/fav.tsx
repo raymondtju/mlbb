@@ -3,17 +3,6 @@
 import { Star, Trophy } from "lucide-react";
 import { GradiantCard } from "../../shared/gradiant-card";
 import { Progress } from "../../shared/progress";
-import {
-  ResponsiveContainer,
-  BarChart,
-  XAxis,
-  YAxis,
-  Bar,
-  RadialBarChart,
-  RadialBar,
-  Legend,
-  Tooltip,
-} from "recharts";
 import Image from "next/image";
 
 interface FavouritesProps {
