@@ -5,7 +5,9 @@ import isUserBound from "@/lib/actions/isUserBound";
 
 import { TabsContent } from "@/components/shared/tabs";
 import Statistics from "@/components/profile/statistics";
-import { notFound } from "next/navigation";
+import PostList from "@/components/profile/profile-bio/post-list";
+import Redirect from "@/components/redirect";
+import FavouriteList from "@/components/profile/profile-bio/favourite-list";
 
 async function SubProfilePage({
   params,
@@ -30,7 +32,7 @@ async function SubProfilePage({
     params.subProfile !== "posts" &&
     params.subProfile !== "starred"
   ) {
-    notFound();
+    return <Redirect destination="not-found" />;
   }
 
   return (
@@ -38,7 +40,7 @@ async function SubProfilePage({
       value={params.subProfile}
       className="flex w-full flex-col gap-4 md:flex-row"
     >
-      {params.subProfile === "statistics" ? (
+      {params.subProfile === "statistics" && (
         <div className="flex w-full flex-col gap-4">
           {!isOwnProfile && !isBoundProfile && (
             <p className="pl-2 text-sm">
@@ -51,8 +53,16 @@ async function SubProfilePage({
             isBound={isBoundProfile ? true : false}
           />
         </div>
-      ) : (
-        <></>
+      )}
+      {params.subProfile === "posts" && (
+        <div className="grow">
+          <PostList username={params.username} />
+        </div>
+      )}
+      {params.subProfile === "starred" && (
+        <div className="grow">
+          <FavouriteList username={params.username} />
+        </div>
       )}
     </TabsContent>
   );
