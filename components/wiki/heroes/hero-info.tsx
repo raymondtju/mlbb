@@ -49,6 +49,10 @@ export default function HeroFyi({
   const [strongAgainstData, setStrongAgainstData] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await heroStrongAgainst;
@@ -275,7 +279,7 @@ export default function HeroFyi({
       {showWR && (
         <div className="mt-4 flex flex-col gap-y-4 sm:flex-row sm:gap-x-4">
           <MatchInsights
-            title={`Your clasic ${heroDetails?.heroName} matches`}
+            title={`Your classic ${heroDetails?.heroName} matches`}
             totalMatches={matches[0]?.data?.[classicIndex]?.total ?? 0}
             winrate={
               (matches?.[0]?.data?.[classicIndex]?.win /

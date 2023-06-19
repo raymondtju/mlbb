@@ -41,6 +41,9 @@ const Statistics: React.FC<StatisticsProps> = ({
     ((viewMatchPlayed && viewMatchPlayed[1]?.total) || 0);
   const heroes = (viewOwnedHero && viewOwnedHero?.total) || 0;
 
+  console.log(viewMatchPlayed[1]?.winrate);
+  console.log(viewMatchPlayed[1]?.total);
+
   return (
     <div className="flex w-full flex-col gap-1.5 xl:flex-row">
       <div className="flex w-full max-w-lg flex-col gap-y-1.5 md:w-fit">

@@ -1,33 +1,86 @@
 "use client";
 
+import { useEffect } from "react";
+
 import { GradiantCard } from "@/components/shared/gradiant-card";
 import { Patch } from "@prisma/client";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface IPatch {
   patch: Patch | null;
+  patches: Patch[] | null;
 }
 
-export default function PatchFyi({ patch }: IPatch) {
+export default function PatchFyi({ patch, patches }: IPatch) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const patchIndex: number = patch
+    ? patches?.findIndex((item) => item.id === patch.id) || 0
+    : -1;
+
+  const previousPatch =
+    patchIndex > 0 && patches ? patches[patchIndex - 1] : null;
+  const nextPatch =
+    patchIndex >= 0 && patches && patchIndex < patches.length - 1
+      ? patches[patchIndex + 1]
+      : null;
+
+  const router = useRouter();
   const dateFormat = /^\d{2}\/\d{2}\/\d{4}/;
   return (
     <div className="mb-8  flex flex-col">
-      <div className="mx-auto px-4">
-        <div className="mt-8 flex flex-row items-center">
-          <p className=" font-sat text-5xl font-semibold">{patch?.version}</p>
-          <div className="text-md ml-3 flex flex-col font-medium text-gray-500">
-            <p>released on</p>
-            <p>{patch?.release}</p>
+      <div className="mx-auto w-full max-w-screen-lg px-4">
+        <div className="my-8">
+          <div className="flex w-full items-center justify-between">
+            {previousPatch && (
+              <div
+                className="flex cursor-pointer flex-row items-center"
+                onClick={() =>
+                  router.push(`wiki/patches/${previousPatch?.version}`)
+                }
+              >
+                <ArrowLeft className="hover:text-navy-200 hover:duration-300" />
+                <p className="text-lg ml-2 font-sat font-semibold sm:text-xl">
+                  {previousPatch?.version}
+                </p>
+              </div>
+            )}
+            <div className="flex flex-col items-center justify-center">
+              <p className="font-sat text-3xl font-semibold md:text-5xl">
+                {patch?.version}
+              </p>
+              <p className="sm:text-md text-center text-sm font-medium text-gray-500">
+                {patch?.release}
+              </p>
+            </div>
+            {nextPatch && (
+              <div
+                className="flex cursor-pointer flex-row items-center justify-end"
+                onClick={() =>
+                  router.push(`wiki/patches/${nextPatch?.version}`)
+                }
+              >
+                <p className="text-lg ml-2 font-sat font-semibold sm:text-xl ">
+                  {nextPatch?.version}
+                </p>
+                <ArrowRight className="hover:text-navy-200 hover:duration-300" />
+              </div>
+            )}
           </div>
         </div>
-        {patch?.intro.map((paragraph, i) => (
-          <div key={i} className="mt-4">
-            <p className="text-justify text-gray-400">{paragraph}</p>
-          </div>
-        ))}
+        {patch?.intro.length !== 0 &&
+          patch?.intro.map((paragraph, i) => (
+            <div key={i} className="mt-4">
+              <p className="text-justify text-gray-400">{paragraph}</p>
+            </div>
+          ))}
       </div>
       {patch?.headings.map((heading, i) => (
         <div key={i}>
-          <GradiantCard variant="clean" className="mt-8 pb-12">
+          <GradiantCard variant="clean" className="mt-8 w-full pb-12">
             <p className="font-heading text-3xl">{heading.name}</p>
             <div className="mb-8 flex flex-col">
               {heading.fields.map((field, i) => (
@@ -51,8 +104,14 @@ export default function PatchFyi({ patch }: IPatch) {
                           update === "Skill 1" ||
                           update === "Skill 2" ||
                           update === "Skill 3" ||
-                          update.startsWith("Passive") ||
-                          update.startsWith("Ultimate") ||
+                          update === "Passive" ||
+                          update === "Ultimate" ||
+                          update === "Attributes" ||
+                          update.startsWith("Skill 1 -") ||
+                          update.startsWith("Skill 2 -") ||
+                          update.startsWith("Skill 3 -") ||
+                          update.startsWith("Passive -") ||
+                          update.startsWith("Ultimate -") ||
                           update.startsWith("Unique Passive")
                             ? "mt-4 font-bold text-green-500"
                             : ""
