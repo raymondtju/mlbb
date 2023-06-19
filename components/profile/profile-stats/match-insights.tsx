@@ -20,9 +20,6 @@ const MatchInsights: React.FC<MatchInsightsProps> = ({
   isHorizontal,
 }) => {
   return (
-    <GradiantCard title={title} variant="clean">
-      <div className={isHorizontal ? "flex flex-row justify-between" : ""}>
-        <div
     <GradiantCard variant="clean">
       <p className="font-light">{title}</p>
       <p className="mt-1 font-sat text-3xl font-bold">
