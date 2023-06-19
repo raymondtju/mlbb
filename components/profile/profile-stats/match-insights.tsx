@@ -26,7 +26,7 @@ const MatchInsights: React.FC<MatchInsightsProps> = ({
       </p>
 
       <div className="mb-1 mt-2 flex items-center justify-between gap-1">
-        <Progress pos="left" value={winrate} max={100} className="h-4" />
+        <Progress pos="left" value={winrate * 100} max={100} className="h-4" />
         <p className="text-sm font-medium">{winrate.toFixed(0) + "%"}</p>
       </div>
       {/* <div className="mt-2 w-full rounded-xl bg-navy-500 py-1 text-center font-bold shadow-inner">

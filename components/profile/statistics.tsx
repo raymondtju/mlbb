@@ -66,7 +66,7 @@ const Statistics: React.FC<StatisticsProps> = ({
               title="Classic Win Statistic"
               totalMatches={(viewMatchPlayed && viewMatchPlayed[0]?.total) || 0}
               winrate={
-                (viewMatchPlayed && viewMatchPlayed[0]?.winrate * viewMatchPlayed[0]?.total) || 0
+                (viewMatchPlayed && viewMatchPlayed[0]?.winrate * 100) || 0
               }
               isBound={isBound}
             />
@@ -74,7 +74,7 @@ const Statistics: React.FC<StatisticsProps> = ({
               title="Ranked Win Statistic"
               totalMatches={(viewMatchPlayed && viewMatchPlayed[1]?.total) || 0}
               winrate={
-                (viewMatchPlayed && viewMatchPlayed[1]?.winrate * viewMatchPlayed[1]?.total) || 0
+                (viewMatchPlayed && viewMatchPlayed[1]?.winrate * 100) || 0
               }
               isBound={isBound}
             />
