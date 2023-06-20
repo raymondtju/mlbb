@@ -4,8 +4,8 @@ import Link from "next/link";
 import prisma from "@/lib/prismadb";
 import { GradiantCard } from "@/components/shared/gradiant-card";
 import { PanelTopClose } from "lucide-react";
-import PostList from "@/components/explore/post-list";
-import PostTopBar from "@/components/explore/post-top-bar";
+import PostList from "@/components/explore/post/post-list";
+import PostContainer from "@/components/explore/post/post-container";
 
 async function getRandomUser() {
   const currentUser = await getCurrentUser();
@@ -31,7 +31,6 @@ async function getRandomUser() {
 async function ExplorePage() {
   const currentUser = await getCurrentUser();
   const randomUser = await getRandomUser();
-  if (!currentUser) return null;
 
   return (
     <div className="relative flex w-full gap-1.5">
@@ -42,7 +41,7 @@ async function ExplorePage() {
         <PanelTopClose className="h-4 w-4" />
       </GradiantCard>
       <div className="no-scrollbar max-h-[90vh] w-full overflow-scroll md:w-[2000px]">
-        <PostTopBar currUser={currentUser} />
+        {currentUser && <PostContainer currUser={currentUser} />}
         <PostList />
       </div>
       <GradiantCard

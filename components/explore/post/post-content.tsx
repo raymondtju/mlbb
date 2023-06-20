@@ -8,23 +8,30 @@ import { SafeUser } from "@/types";
 import { Post, User } from "@prisma/client";
 
 import { Edit3, Star, Trash2 } from "lucide-react";
-import { GradiantCard } from "../shared/gradiant-card";
+
 import DeletePost from "./del-post";
 import EditForm from "./edit-form";
-import LoadingDots from "../shared/icons/loading-dots";
-import DialogFit from "../shared/dialog-fit";
+import { GradiantCard } from "@/components/shared/gradiant-card";
+import LoadingDots from "@/components/shared/icons/loading-dots";
+import DialogFit from "@/components/shared/dialog-fit";
 
-interface PostPageProp {
+interface PostContentProp {
   post: Post;
   user: User | null;
   currUser?: SafeUser | null;
+  comments: any;
 }
 
-const PostPageBox: React.FC<PostPageProp> = ({ post, user, currUser }) => {
-  const isCurrUserFollowing = currUser?.favourite.includes(post.id as string);
+const PostContent: React.FC<PostContentProp> = ({
+  post,
+  user,
+  currUser,
+  comments,
+}) => {
+  const isStarred = currUser?.favourite.includes(post.id as string);
 
   const [editActive, setEditActive] = useState<boolean>(false);
-  const [favourite, setFavourite] = useState(isCurrUserFollowing);
+  const [favourite, setFavourite] = useState(isStarred);
   const [loading, setLoading] = useState(false);
 
   const [expanded, setExpanded] = useState(false);
@@ -33,9 +40,7 @@ const PostPageBox: React.FC<PostPageProp> = ({ post, user, currUser }) => {
   const paragraphRef = useRef<HTMLParagraphElement>(null);
 
   function isExpandable(): boolean | undefined {
-    console.log(1111);
     if (containerRef.current && paragraphRef.current) {
-      console.log(12);
       const conth = containerRef.current.clientHeight;
       const parah = parseInt(getComputedStyle(paragraphRef.current).lineHeight);
 
@@ -145,7 +150,11 @@ const PostPageBox: React.FC<PostPageProp> = ({ post, user, currUser }) => {
                     {loading ? (
                       <LoadingDots color="#FAFAFA" />
                     ) : (
-                      <Star color="#FACC18" strokeWidth={2} className="fill-yellow-300" />
+                      <Star
+                        color="#FACC18"
+                        strokeWidth={2}
+                        className="fill-yellow-300"
+                      />
                     )}
                   </button>
                 )}
@@ -178,10 +187,18 @@ const PostPageBox: React.FC<PostPageProp> = ({ post, user, currUser }) => {
               )}
             </span>
           </div>
+          <div className="my-4 flex flex-row gap-x-1">
+            <p className="text-lg font-sat font-semibold">
+              {comments && comments.length ? comments.length : 0}
+            </p>
+            <p className="text-lg mt-[2px] font-heading">
+              {comments && comments.length < 2 ? "Comment" : "Comments"}
+            </p>
+          </div>
         </>
       )}
     </GradiantCard>
   );
 };
 
-export default PostPageBox;
+export default PostContent;

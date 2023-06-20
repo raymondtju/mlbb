@@ -5,9 +5,9 @@ import { useRef, useState } from "react";
 import { toast } from "sonner";
 import Image from "next/image";
 
-import { GradiantCard } from "../shared/gradiant-card";
+import { GradiantCard } from "@/components/shared/gradiant-card";
 import { SendIcon } from "lucide-react";
-import LoadingDots from "../shared/icons/loading-dots";
+import LoadingDots from "@/components/shared/icons/loading-dots";
 import useMutCom from "@/lib/state/useMutCom";
 
 interface CommentProps {
@@ -65,12 +65,12 @@ const NewCommentForm: React.FC<CommentProps> = ({ postId, img }) => {
               toast.error(msg.message);
             } else {
               setLoading(false);
+              setValue("");
               toast.success(msg.message);
               togMut.togMut();
               setTimeout(() => {
                 togMut.clamMut();
               }, 1000);
-              // window.location.reload();
             }
           }}
         >
