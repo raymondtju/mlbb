@@ -1,8 +1,7 @@
 "use client";
 
-import { User } from "@prisma/client";
-import PostForm from "./post-form";
 import { SafeUser } from "@/types";
+import PostForm from "./post-form";
 
 interface PostTopBarProps {
   currUser?: SafeUser;
@@ -11,7 +10,7 @@ interface PostTopBarProps {
 const PostTopBar: React.FC<PostTopBarProps> = ({ currUser }) => {
   return (
     <>
-      <div className="flex flex-row gap-6">
+      <div className="mb-1.5 flex flex-row gap-6">
         {currUser && <PostForm currUser={currUser} />}
       </div>
     </>

@@ -1,16 +1,16 @@
 "use client";
 
+import useAutosizeTextArea from "@/lib/useAutosizeTextArea";
+
 import { useRef, useState } from "react";
 import { toast } from "sonner";
+import Image from "next/image";
+
+import { SafeUser } from "@/types";
 
 import { Button } from "../shared/button";
-import { Label } from "../shared/label";
-import LoadingDots from "../shared/icons/loading-dots";
-import useAutosizeTextArea from "@/lib/useAutosizeTextArea";
 import { GradiantCard } from "../shared/gradiant-card";
-import { User } from "@prisma/client";
-import { SafeUser } from "@/types";
-import Image from "next/image";
+import LoadingDots from "../shared/icons/loading-dots";
 
 const PostForm = ({ currUser }: { currUser?: SafeUser }) => {
   const [title, setTitle] = useState<string>("");
@@ -32,7 +32,7 @@ const PostForm = ({ currUser }: { currUser?: SafeUser }) => {
     <>
       <GradiantCard variant="clean">
         <h1 className="font-heading text-xl font-bold tracking-wide">
-          Create a new topic!
+          Start a new discussion!
         </h1>
         <form
           className="mt-3 flex w-full flex-col gap-3"
@@ -64,10 +64,10 @@ const PostForm = ({ currUser }: { currUser?: SafeUser }) => {
             </Label> */}
           <div className="flex h-fit items-center gap-2.5 rounded-lg p-2 pt-0">
             <Image
-              src={currUser?.image as string}
+              src={(currUser?.image as string) || "/nana.jpg"}
               alt="image"
-              width={32}
-              height={32}
+              width={48}
+              height={48}
               className="h-auto w-auto rounded-full object-cover"
             />
             <textarea
