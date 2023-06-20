@@ -9,7 +9,6 @@ interface MatchInsightsProps {
   totalMatches: number;
   winrate: number;
   isBound: boolean;
-  isHorizontal?: boolean;
 }
 
 const MatchInsights: React.FC<MatchInsightsProps> = ({
@@ -17,26 +16,18 @@ const MatchInsights: React.FC<MatchInsightsProps> = ({
   totalMatches,
   winrate,
   isBound,
-  isHorizontal,
 }) => {
   return (
     <GradiantCard variant="clean">
       <p className="font-light">{title}</p>
       <p className="mt-1 font-sat text-3xl font-bold">
-        {winrate}{" "}
+        {((winrate * totalMatches) / 100).toFixed(0)}{" "}
         <span className="text-base/[0px]">/ {totalMatches} match</span>
       </p>
 
       <div className="mb-1 mt-2 flex items-center justify-between gap-1">
-        <Progress
-          pos="left"
-          value={(winrate / totalMatches) * 100}
-          max={100}
-          className="h-4"
-        />
-        <p className="text-sm font-medium">
-          {((winrate / totalMatches) * 100).toFixed(0) + "%"}
-        </p>
+        <Progress pos="left" value={winrate * 100} max={100} className="h-4" />
+        <p className="text-sm font-medium">{winrate.toFixed(0) + "%"}</p>
       </div>
       {/* <div className="mt-2 w-full rounded-xl bg-navy-500 py-1 text-center font-bold shadow-inner">
         {((winrate / totalMatches) * 100).toFixed(1)} %

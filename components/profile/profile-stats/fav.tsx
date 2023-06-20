@@ -46,8 +46,10 @@ const Favourites: React.FC<FavouritesProps> = ({
               <div className="flex items-center gap-1">
                 <Trophy className="h-4 w-4" />
                 <p className="text-[12px]">
-                  <span className="text-xl font-sat font-semibold">{item.win}</span> / {item.total}{" "}
-                  matches
+                  <span className="font-sat text-xl font-semibold">
+                    {item.win}
+                  </span>{" "}
+                  / {item.total} matches
                   {/* {((item.win * 100) / item.total).toFixed(2)}% */}
                 </p>
               </div>

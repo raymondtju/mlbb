@@ -9,7 +9,7 @@
     "start-loc": "next start -p 3010",
     "lint": "eslint ./components ./app ./lib .",
     "lint:debug": "eslint ./app --debug",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . ./components ./app ./lib --fix"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
