@@ -5,6 +5,8 @@ import CommentBox from "./comment-box";
 import useSWR from "swr";
 import { fetcher } from "@/lib/fetcher-utils";
 import Loading from "../shared/loading";
+import useMutCom from "@/lib/state/useMutCom";
+import { useEffect } from "react";
 
 interface CommentListProps {
   postId: string;
@@ -12,7 +14,14 @@ interface CommentListProps {
 }
 
 const CommentList: React.FC<CommentListProps> = ({ postId, userId }) => {
-  const { data: comments } = useSWR(["/api/comment/list", postId], fetcher);
+  const togMut = useMutCom();
+  const { data: comments, mutate } = useSWR(
+    ["/api/comment/list", postId],
+    fetcher
+  );
+  useEffect(() => {
+    togMut.toogleMutate && mutate();
+  }, [mutate, togMut]);
 
   if (comments) {
     return (
