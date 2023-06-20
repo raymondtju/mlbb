@@ -28,20 +28,26 @@ const PostPageBox: React.FC<PostPageProp> = ({ post, user, currUser }) => {
   const [loading, setLoading] = useState(false);
 
   const [expanded, setExpanded] = useState(false);
+  const [expandedable, setExpandedable] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const paragraphRef = useRef<HTMLParagraphElement>(null);
 
   function isExpandable(): boolean | undefined {
+    console.log(1111);
     if (containerRef.current && paragraphRef.current) {
+      console.log(12);
       const conth = containerRef.current.clientHeight;
       const parah = parseInt(getComputedStyle(paragraphRef.current).lineHeight);
 
       const lineCount = conth / parah;
       console.log(lineCount);
-      if (lineCount > 3) return true;
+      if (lineCount >= 3) return true;
       else false;
     }
   }
+  useEffect(() => {
+    isExpandable() === true ? setExpandedable(true) : setExpandedable(false);
+  }, []);
 
   const toggleExpand = () => {
     setExpanded(!expanded);
@@ -107,7 +113,7 @@ const PostPageBox: React.FC<PostPageProp> = ({ post, user, currUser }) => {
                     {loading ? (
                       <LoadingDots color="#FAFAFA" />
                     ) : (
-                      <Star className="transition-all duration-300 ease-in-out hover:text-yellow-300" />
+                      <Star className="transition-all duration-300 ease-in-out hover:fill-yellow-300 hover:text-yellow-300" />
                     )}
                   </button>
                 )}
@@ -139,7 +145,7 @@ const PostPageBox: React.FC<PostPageProp> = ({ post, user, currUser }) => {
                     {loading ? (
                       <LoadingDots color="#FAFAFA" />
                     ) : (
-                      <Star color="#FACC18" strokeWidth={2} />
+                      <Star color="#FACC18" strokeWidth={2} className="fill-yellow-300" />
                     )}
                   </button>
                 )}
@@ -162,7 +168,7 @@ const PostPageBox: React.FC<PostPageProp> = ({ post, user, currUser }) => {
               {post.body}
             </p>
             <span>
-              {isExpandable() && (
+              {expandedable && (
                 <button
                   onClick={toggleExpand}
                   className="font-bold text-navy-300 transition-all ease-in-out hover:underline hover:duration-300"
