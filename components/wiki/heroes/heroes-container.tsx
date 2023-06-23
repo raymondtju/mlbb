@@ -17,6 +17,11 @@ const HeroesContainer = ({ heroes }: IHeroesContainer) => {
   const [hero, setHero] = useState<Hero[]>();
 
   useEffect(() => {
+    setHero(undefined);
+    heroFilter.type = [];
+  }, []);
+
+  useEffect(() => {
     if (heroes !== null && heroFilter.type.length > 0) {
       const filtered: Hero[] = [];
       heroFilter.type.map((item, i) => {
