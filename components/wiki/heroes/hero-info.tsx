@@ -11,6 +11,7 @@ import MatchInsights from "@/components/profile/profile-stats/match-insights";
 
 interface HeroFyiContainer {
   hero: Hero | null;
+  heroStats: { name: string; use: string; ban: string; win: string };
   heroBuild: Object[] | null;
   heroSpell: Object[] | null;
   heroEmblem: Object[] | null;
@@ -35,6 +36,7 @@ interface HeroFyiContainer {
 
 export default function HeroFyi({
   hero,
+  heroStats,
   heroBuild,
   heroSpell,
   heroEmblem,
@@ -152,7 +154,7 @@ export default function HeroFyi({
                     Winrate
                   </p>
                   <p className="font-sat text-[12px] font-semibold sm:text-[20px]">
-                    {hero?.win}
+                    {heroStats.win}
                   </p>
                 </div>
                 <div className="flex flex-col">
@@ -160,13 +162,13 @@ export default function HeroFyi({
                     Pick
                   </p>
                   <p className="font-sat text-[12px] font-semibold sm:text-[20px]">
-                    {hero?.use}
+                    {heroStats.use}
                   </p>
                 </div>
                 <div className="flex flex-col">
                   <p className="font-heading text-[12px] sm:text-[16px]">Ban</p>
                   <p className="font-sat text-[12px] font-semibold sm:text-[20px]">
-                    {hero?.ban}
+                    {heroStats.ban}
                   </p>
                 </div>
               </div>
@@ -375,7 +377,7 @@ export default function HeroFyi({
                     alt={counter.name}
                     width={96}
                     height={96}
-                    className="h-[48px] w-[48px] rounded-full md:h-[96px] md:w-[96px]"
+                    className="h-[96px] w-[96px] rounded-full"
                     loading="lazy"
                   />
                   <div className="bg-opacity/75 absolute bottom-0 left-0 h-[96px] w-[96px] items-center rounded-full bg-black/80 py-1 text-center text-sm font-medium text-white opacity-0 transition-opacity duration-200">
