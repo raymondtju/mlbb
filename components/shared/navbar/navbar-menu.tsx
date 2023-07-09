@@ -40,8 +40,16 @@ const NavMenu: React.FC<NavMenuProps> = ({ currentUser }) => {
   const pathname = usePathname();
 
   const [collapse, setCollapse] = useState(false);
-
-  const active = pathname?.split("/")[1];
+  const isOwnProfile =
+    pathname?.split("/")[1] === "profile" &&
+    pathname?.split("/")[2] === currentUser?.username;
+  const pathArray = pathname?.split("/");
+  const active =
+    pathArray?.[1] === "" || pathArray?.[1] === "wiki"
+      ? pathArray?.[1]
+      : isOwnProfile
+      ? pathArray?.[1]
+      : "explore";
 
   return (
     <>
@@ -86,6 +94,7 @@ const NavMenu: React.FC<NavMenuProps> = ({ currentUser }) => {
                 }
                 onClick={() => {
                   setCollapse(false);
+                  sessionStorage.clear();
                 }}
                 key={menu.name}
                 prefetch={false}
@@ -110,13 +119,12 @@ const NavMenu: React.FC<NavMenuProps> = ({ currentUser }) => {
                   router.push("/auth/signin");
                   setCollapse(!collapse);
                 }}
-                className="flex h-6 w-[72px] rounded-xl p-2"
+                className="flex h-6 w-[72px] rounded-2xl p-2"
                 variant="gradiantNavy"
               >
                 <span className="stroke-[3] text-[16px] text-softGray">
                   Sign In
                 </span>
-                {/* <LogInIcon className="stroke-[3] text-softGray" /> */}
               </Button>
             </li>
           ) : (

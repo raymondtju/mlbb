@@ -1,38 +1,14 @@
 import getCurrentUser from "@/lib/actions/getCurrentUser";
-import getMlbbAcc from "@/lib/actions/getMlbbAcc";
-
+import getUser from "@/lib/actions/getUser";
+import isUserBound from "@/lib/actions/isUserBound";
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prismadb";
-import Link from "next/link";
-import { Tabs, TabsList, TabsTrigger } from "@/components/shared/tabs";
 import ProfileBio from "@/components/profile/bio";
+import ProfileTab from "@/components/profile/profile-tab";
 
 export const metadata = {
   title: "Profile - mlbb.fyi",
   description: "Your mlbb.fyi profile",
 };
-
-async function acc(username: string) {
-  try {
-    const get = await prisma.user.findFirst({
-      where: {
-        username,
-      },
-    });
-    const mlbbAcc = await getMlbbAcc(get?.email || "");
-    return mlbbAcc;
-  } catch (error) {
-    return null;
-  }
-}
-
-async function getUser(username: string) {
-  return await prisma.user.findFirst({
-    where: {
-      username,
-    },
-  });
-}
 
 const ProfileTabList = [
   {
@@ -44,8 +20,8 @@ const ProfileTabList = [
     href: "/posts",
   },
   {
-    name: "Starred",
-    href: "/starred",
+    name: "Favourites",
+    href: "/favourites",
   },
 ];
 
@@ -58,17 +34,19 @@ export default async function LayoutProfile({
   params,
   children,
 }: LayoutProfileProps) {
+  const { username } = params;
+
   const currentUser = await getCurrentUser();
-  if (!currentUser?.username) {
-    NextResponse.redirect(
+
+  if (currentUser && !currentUser.username) {
+    return NextResponse.redirect(
       new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/profile/stg`)
     );
   }
 
-  const profileUsername = params.username;
-  const isExistingUser = await getUser(profileUsername);
+  const isExistingUser = await getUser(username);
 
-  let isBoundProfile = await acc(profileUsername);
+  let isBoundProfile = await isUserBound(username);
   if (!isBoundProfile) {
     isBoundProfile = null;
   }
@@ -77,15 +55,17 @@ export default async function LayoutProfile({
   if (!isExistingUser) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <p className="mb-48 text-2xl md:ml-3">Profile does not exist...</p>
+        <p className="mb-48 font-heading text-2xl md:ml-3">
+          Profile does not exist...
+        </p>
       </div>
     );
   }
 
   return (
     <main className="max-w-[1280px] xl:mx-auto">
-      <div className="flex flex-1 flex-col gap-5 md:flex-row">
-        <div className="mx-auto flex gap-5 text-softGray">
+      <div className="flex flex-1 flex-col gap-1.5 md:flex-row">
+        <div className="mx-auto flex gap-1.5 text-softGray">
           <ProfileBio
             currentUser={currentUser}
             user={isExistingUser}
@@ -93,26 +73,12 @@ export default async function LayoutProfile({
             isOwnProfile={isOwnProfile}
           />
         </div>
-        <Tabs defaultValue="statistics" className="w-full">
-          <div className="no-scrollbar h-[52px] overflow-x-scroll">
-            <TabsList>
-              {ProfileTabList.map((item, i) =>
-                !isOwnProfile && item.name === "Starred" ? null : (
-                  <Link
-                    href={`/profile/${isExistingUser?.username + item.href}`}
-                    key={i}
-                    scroll={false}
-                  >
-                    <TabsTrigger value={item.name.toLowerCase()}>
-                      {item.name}
-                    </TabsTrigger>
-                  </Link>
-                )
-              )}
-            </TabsList>
-          </div>
+        <ProfileTab
+          ProfileTabList={ProfileTabList}
+          isExistingUser={isExistingUser}
+        >
           {children}
-        </Tabs>
+        </ProfileTab>
       </div>
     </main>
   );

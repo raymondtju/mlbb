@@ -1,7 +1,9 @@
 "use client";
 
+import { Star, Trophy } from "lucide-react";
 import { GradiantCard } from "../../shared/gradiant-card";
 import { Progress } from "../../shared/progress";
+import Image from "next/image";
 
 interface FavouritesProps {
   title: string;
@@ -16,7 +18,6 @@ interface FavouritesProps {
     }[];
   }[];
   matchType: number;
-  isBound: boolean;
 }
 
 const Favourites: React.FC<FavouritesProps> = ({
@@ -24,18 +25,21 @@ const Favourites: React.FC<FavouritesProps> = ({
   viewMatchPlayed,
   matchType,
 }) => {
-  const data = (viewMatchPlayed && viewMatchPlayed[matchType]?.data) || [];
+  const data =
+    (viewMatchPlayed && viewMatchPlayed[matchType]?.data.slice(0, 5)) || [];
   return (
-    <GradiantCard title={title} className="md:h-[234px]">
-      {data.map((item, i) => (
-        <div key={i} className="mt-2">
+    <GradiantCard className="overflow-visible" variant="clean">
+      <div className="flex items-center gap-1">
+        <p className=" font-light">{title}</p>
+      </div>
+
+      {data.slice(0, 5).map((item, i) => (
+        <div key={i} className="mt-2 font-sat text-[12px] font-semibold">
           <div className="flex justify-between">
-            <p className="text-[12px]">
+            <p>
               {item.name} - {item.total}
             </p>
-            <p className="text-[12px]">
-              {((item.win * 100) / item.total).toFixed(2)}%
-            </p>
+            <p>{((item.win * 100) / item.total).toFixed(2)}%</p>
           </div>
           <Progress
             value={(item.win * 100) / item.total}
