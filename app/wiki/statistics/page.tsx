@@ -1,19 +1,19 @@
 import getHeroStats from "@/lib/actions/getHeroStats";
-
-import { Hero } from "@prisma/client";
+import getTournamentStats from "@/lib/actions/getTournamentStats";
 
 import { TabsContent } from "@/components/shared/tabs";
 import StatsContainer from "@/components/wiki/statistics/stats-container";
 
 async function StatisticsPage() {
-  const heroes = await getHeroStats();
+  const allStats = await getHeroStats();
+  const tourneyStats = await getTournamentStats();
 
   return (
     <TabsContent
       value="statistics"
       className="flex w-full flex-col gap-5 md:flex-row"
     >
-      <StatsContainer heroes={heroes} />
+      <StatsContainer serverStats={allStats} tourneyStats={tourneyStats} />
     </TabsContent>
   );
 }
