@@ -1,54 +1,28 @@
 import getCurrentUser from "@/lib/actions/getCurrentUser";
-import Image from "next/image";
 import getUser from "@/lib/actions/getUser";
 import getCurrentPost from "@/lib/actions/getCurrentPost";
-import CommentForm from "@/components/explore/comment-form";
-import CommentList from "@/components/explore/comment-list";
-import PostPageBox from "@/components/explore/post-page-box";
+
+import Post from "@/components/explore/post";
 
 export default async function PostPage({
   params,
 }: {
   params: { postId: string };
 }) {
-  const post = await getCurrentPost(params.postId);
-  const currUser = await getCurrentUser();
+  const postId = params.postId;
+  const post = await getCurrentPost(postId);
+  const currentUser = await getCurrentUser();
 
   if (post) {
     const user = await getUser(post.createdBy);
-    return (
-      <div>
-        <PostPageBox post={post} user={user} currUser={currUser} />
-        {currUser && (
-          <div className="mb-3 mt-8 flex flex-row">
-            <div>
-              <Image
-                src={
-                  currUser?.image?.split("/image/upload/")[0] +
-                    "/image/upload/c_fill,h_150,w_150/" +
-                    currUser?.image?.split("/image/upload/")[1] || "/nana.jpg"
-                }
-                alt=""
-                width={40}
-                height={40}
-                className="mr-4 items-start object-none object-left"
-                placeholder="blur"
-                blurDataURL={
-                  currUser?.image?.split("/image/upload/")[0] +
-                  "/image/upload/e_blur:400,h_100,w_100/" +
-                  currUser?.image?.split("/image/upload/")[1]
-                }
-              />
-            </div>
-            <div className="mt-4 grow">
-              <CommentForm postId={params.postId} />
-            </div>
-          </div>
-        )}
-        <CommentList postId={params.postId} userId={currUser?.id} />
-      </div>
-    );
+    return <Post currentUser={currentUser} post={post} user={user} />;
   }
 
-  return <div>Post does not exist</div>;
+  return (
+    <div className="flex h-screen items-center justify-center">
+      <p className="mb-48 font-heading text-2xl md:ml-3">
+        Post does not exist...
+      </p>
+    </div>
+  );
 }

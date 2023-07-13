@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import useTabStore from "@/lib/state/useTabStore";
 import { GradiantCard } from "@/components/shared/gradiant-card";
 import { Hero } from "@prisma/client";
 import { Progress } from "@/components/shared/progress";
@@ -11,11 +12,12 @@ import MatchInsights from "@/components/profile/profile-stats/match-insights";
 
 interface HeroFyiContainer {
   hero: Hero | null;
+  heroStats: { name: string; use: string; ban: string; win: string };
   heroBuild: Object[] | null;
   heroSpell: Object[] | null;
   heroEmblem: Object[] | null;
   heroWeakAgainst?: Object[] | null;
-  heroStrongAgainst?: Promise<Object[]> | never[];
+  heroStrongAgainst?: Object[] | null;
   matches?: {
     mode: string;
     total: number;
@@ -35,6 +37,7 @@ interface HeroFyiContainer {
 
 export default function HeroFyi({
   hero,
+  heroStats,
   heroBuild,
   heroSpell,
   heroEmblem,
@@ -46,23 +49,15 @@ export default function HeroFyi({
   showWR,
 }: HeroFyiContainer) {
   const router = useRouter();
-  const [strongAgainstData, setStrongAgainstData] = useState([]);
+  const { selectedTab, setSelectedTab } = useTabStore();
+
+  useEffect(() => {
+    setSelectedTab("heroes");
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await heroStrongAgainst;
-        setStrongAgainstData(data);
-      } catch (error) {
-        // Handle error if needed
-      }
-    };
-    fetchData();
-  }, [heroStrongAgainst]);
 
   const uniqueSpells = Array.from(
     new Set(heroSpell?.map((spell) => spell.name))
@@ -97,8 +92,8 @@ export default function HeroFyi({
   ];
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col sm:flex-row sm:gap-x-4">
-        <GradiantCard className="mt-4 h-fit w-full" variant="clean">
+      <div className="flex flex-col sm:flex-row sm:gap-x-1.5">
+        <GradiantCard className="mt-1.5 h-fit w-full" variant="clean">
           <div className="flex flex-row gap-x-4">
             <Image
               src={hero?.img || ""}
@@ -109,7 +104,7 @@ export default function HeroFyi({
               priority
             />
 
-            <div className="flex w-full flex-col gap-x-4 ">
+            <div className="flex w-full flex-col gap-x-1.5 ">
               <div className="flex flex-row items-center gap-2">
                 <p className="font-heading text-xl md:text-3xl">
                   {heroDetails.heroName}
@@ -133,7 +128,9 @@ export default function HeroFyi({
               </div>
               <div className="mb-1 flex flex-row items-center">
                 <Image
-                  src={`https://res.cloudinary.com/dvm5vog2j/image/upload/v1685987710/mlbb.fyi/heroType/${heroDetails.heroType}.webp`}
+                  src={`https://res.cloudinary.com/dvm5vog2j/image/upload/v1685987710/mlbb.fyi/heroType/${
+                    heroDetails.heroType.split("/")[0]
+                  }.webp`}
                   alt={heroDetails.heroType || ""}
                   width={20}
                   height={20}
@@ -152,7 +149,7 @@ export default function HeroFyi({
                     Winrate
                   </p>
                   <p className="font-sat text-[12px] font-semibold sm:text-[20px]">
-                    {hero?.win}
+                    {heroStats.win}
                   </p>
                 </div>
                 <div className="flex flex-col">
@@ -160,13 +157,13 @@ export default function HeroFyi({
                     Pick
                   </p>
                   <p className="font-sat text-[12px] font-semibold sm:text-[20px]">
-                    {hero?.use}
+                    {heroStats.use}
                   </p>
                 </div>
                 <div className="flex flex-col">
                   <p className="font-heading text-[12px] sm:text-[16px]">Ban</p>
                   <p className="font-sat text-[12px] font-semibold sm:text-[20px]">
-                    {hero?.ban}
+                    {heroStats.ban}
                   </p>
                 </div>
               </div>
@@ -186,10 +183,14 @@ export default function HeroFyi({
           </div>
         </GradiantCard>
 
-        <GradiantCard className="mt-4 h-[340px] w-full" variant="clean">
+        <GradiantCard className="mt-1.5 h-[340px] w-full" variant="clean">
           <p className="font-heading text-xl md:text-3xl">Equipments</p>
           <div className="flex flex-col gap-y-2">
-            <p className="text-sm text-gray-500">Recommended spell/s</p>
+            <p className="text-sm text-gray-500">
+              {uniqueSpells.length < 2
+                ? "Recommended spell"
+                : "Recommended spells"}
+            </p>
             <div className="flex flex-row">
               {uniqueSpells.map((spellName, i) => (
                 <div key={i} className="mr-2 sm:mr-4">
@@ -213,7 +214,11 @@ export default function HeroFyi({
                 </div>
               ))}
             </div>
-            <p className="text-sm text-gray-500">Recommended emblem/s</p>
+            <p className="text-sm text-gray-500">
+              {uniqueEmblems.length < 2
+                ? "Recommended emblem"
+                : "Recommended emblems"}
+            </p>
             <div className="flex flex-row">
               {uniqueEmblems.map((emblemName, i) => (
                 <div key={i} className="mr-2 sm:mr-4">
@@ -277,7 +282,7 @@ export default function HeroFyi({
       </div>
 
       {showWR && (
-        <div className="mt-4 flex flex-col gap-y-4 sm:flex-row sm:gap-x-4">
+        <div className="mt-1.5 flex flex-col gap-y-1.5 sm:flex-row sm:gap-x-1.5">
           <MatchInsights
             title={`Your classic ${heroDetails?.heroName} matches`}
             totalMatches={matches[0]?.data?.[classicIndex]?.total ?? 0}
@@ -301,13 +306,13 @@ export default function HeroFyi({
         </div>
       )}
 
-      <GradiantCard className="mt-4 h-fit w-full" variant="clean">
-        {strongAgainstData.length !== 0 && (
+      <GradiantCard className="mt-1.5 h-fit w-full" variant="clean">
+        {heroStrongAgainst.length !== 0 && (
           <>
             <p className="font-heading text-xl md:text-3xl">Strong against</p>
             <div className="my-4">
               <div className="grid grid-cols-3 flex-row gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
-                {strongAgainstData.map((hero, i) => (
+                {heroStrongAgainst.map((hero, i) => (
                   <div
                     key={i}
                     onClick={() => {
@@ -367,7 +372,7 @@ export default function HeroFyi({
                     alt={counter.name}
                     width={96}
                     height={96}
-                    className="h-[48px] w-[48px] rounded-full md:h-[96px] md:w-[96px]"
+                    className="h-[96px] w-[96px] rounded-full"
                     loading="lazy"
                   />
                   <div className="bg-opacity/75 absolute bottom-0 left-0 h-[96px] w-[96px] items-center rounded-full bg-black/80 py-1 text-center text-sm font-medium text-white opacity-0 transition-opacity duration-200">
@@ -387,7 +392,7 @@ export default function HeroFyi({
         </div>
       </GradiantCard>
 
-      <GradiantCard className="mb-8 mt-4 h-fit w-full" variant="clean">
+      <GradiantCard className="mb-8 mt-1.5 h-fit w-full" variant="clean">
         <p className="font-heading text-xl md:text-3xl">Passive</p>
         <div className="my-4">
           <div className="flex flex-row gap-2">
