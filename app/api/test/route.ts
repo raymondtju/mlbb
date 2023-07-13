@@ -1,32 +1,17 @@
 import { NextResponse } from "next/server";
+import prisma from "@/lib/prismadb";
 
 export async function GET(request: Request) {
   try {
-    const find = await prisma?.mlbbaccs.findFirst({
+    const find = await prisma?.mlbbAcc.findFirst({
       where: {
         userId: "642e7c810f3e7647f4ba3596",
       },
     });
-    console.log(find);
-
-    // const findAndUpdate = await prisma?.user.update({
-    //   where: {
-    //     email: "raymond.rtju@gmail.com",
-    //   },
-    //   data: {
-    //     mlbbaccs: {
-    //       connect: {
-    //         accId: "171689343",
-    //       },
-    //     },
-    //   },
-    // });
-
-    // console.log(findAndUpdate);
   } catch (error) {
     return NextResponse.json(
       {
-        msg: "err",
+        msg: "An error occured",
       },
       { status: 400 }
     );

@@ -1,4 +1,11 @@
 
-> mlbb-fyi@0.1.0 lint
+> mlbb@0.1.0 lint
 > eslint ./components ./app ./lib .
+
+
+C:\Users\raymo\Documents\Project\mlbb\components\profile\profile-stats\fav.tsx
+  49:25  warning  Invalid Tailwind CSS classnames order  tailwindcss/classnames-order
+
+✖ 1 problem (0 errors, 1 warning)
+  0 errors and 1 warning potentially fixable with the `--fix` option.
 

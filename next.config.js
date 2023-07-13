@@ -7,23 +7,28 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "akmwebstatic.yuanzhanapp.com",
+        hostname: "lh3.googleusercontent.com",
         port: "",
-        pathname: "/web/madmin/**",
+        pathname: "/a/**",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.discordapp.com",
+        port: "",
+        pathname: "/embed/avatars/**",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+        pathname: "/dvm5vog2j/image/upload/**",
       },
       {
         protocol: "https",
         hostname: "akmweb.youngjoygame.com",
-        port: "",
-        pathname: "/web/madmin/image/**",
-      },
-      {
-        protocol: "https",
-        hostname: "indoch.s3.ml.moonlian.com",
-        port: "",
-        pathname: "/web/madmin/**",
       },
     ],
+    formats: ["image/webp"],
   },
 };
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 import { signIn } from "next-auth/react";
@@ -8,10 +8,21 @@ import LoadingDots from "./shared/icons/loading-dots";
 import { Button } from "./shared/button";
 import { Input } from "./shared/input";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 
 export default function LoginForm({ csrfToken }: { csrfToken?: string }) {
+  const params = useSearchParams();
+
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (params?.get("error") === "OAuthAccountNotLinked") {
+      toast.error(
+        "Your email has been registered with a different sign-in method"
+      );
+    }
+  }, [params]);
 
   return (
     <div className="mx-auto mt-14 max-w-md">
@@ -22,17 +33,19 @@ export default function LoginForm({ csrfToken }: { csrfToken?: string }) {
           await signIn("email", {
             email,
             redirect: false,
-            callbackUrl: "/",
+            callbackUrl: "/profile/stg?ref=signin",
           })
             .then((res) => {
-              console.log(res);
+              //console.log(res);
               if (res?.ok) {
-                toast.success("Kindly check login link in your inbox");
+                toast.success(
+                  "Kindly check your inbox or spam folders for the login link"
+                );
               }
               setLoading(false);
             })
             .catch((err) => {
-              toast.error("something went wrong");
+              toast.error("Something went wrong");
               setLoading(false);
             });
         }}
@@ -47,7 +60,7 @@ export default function LoginForm({ csrfToken }: { csrfToken?: string }) {
           required
           disabled={loading}
         />
-        <Button className="w-full" type="submit" disabled={loading}>
+        <Button className="w-full rounded-lg" type="submit" disabled={loading}>
           {loading ? <LoadingDots color="#fafafa" /> : <p>Login</p>}
         </Button>
       </form>
@@ -63,10 +76,10 @@ export default function LoginForm({ csrfToken }: { csrfToken?: string }) {
       </div>
       <div className="mt-4 flex justify-center gap-2">
         <Button
-          className="w-full"
+          className="w-full rounded-lg"
           onClick={() => {
             signIn("google", {
-              callbackUrl: "/",
+              callbackUrl: "/profile/stg?ref=signin",
             });
           }}
         >
@@ -80,10 +93,10 @@ export default function LoginForm({ csrfToken }: { csrfToken?: string }) {
           Google
         </Button>
         <Button
-          className="w-full"
+          className="w-full rounded-lg"
           onClick={() => {
             signIn("discord", {
-              callbackUrl: "/",
+              callbackUrl: "/profile/stg?ref=signin",
             });
           }}
         >
