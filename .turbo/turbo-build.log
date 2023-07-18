@@ -4,42 +4,34 @@
 
 info  - Loaded env from D:\Orbital23\mlbb\.env
 info  - Creating an optimized production build...
-warn  - Compiled with warnings
-
-./node_modules/cloudinary/lib-es5/utils/index.js
-Critical dependency: the request of a dependency is an expression
-
-Import trace for requested module:
-./node_modules/cloudinary/lib-es5/utils/index.js
-./node_modules/cloudinary/lib-es5/utils/srcsetUtils.js
-./node_modules/cloudinary/lib-es5/cloudinary.js
-./node_modules/cloudinary/cloudinary.js
-./app/profile/stg/api/cdn-sign/route.ts
-
-./node_modules/cloudinary/lib/utils/index.js
-Critical dependency: the request of a dependency is an expression
-
-Import trace for requested module:
-./node_modules/cloudinary/lib/utils/index.js
-./node_modules/cloudinary/lib/utils/srcsetUtils.js
-./node_modules/cloudinary/lib/cloudinary.js
-./node_modules/cloudinary/cloudinary.js
-./app/profile/stg/api/cdn-sign/route.ts
-
+info  - Compiled successfully
 info  - Linting and checking validity of types...
 
 ./components/wiki/heroes/hero-info.tsx
-56:6  Warning: React Hook useEffect has a missing dependency: 'setSelectedTab'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+55:6  Warning: React Hook useEffect has a missing dependency: 'setSelectedTab'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
 
 ./components/wiki/heroes/heroes-container.tsx
 32:6  Warning: React Hook useEffect has a missing dependency: 'heroFilter'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
 
 info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
 info  - Collecting page data...
-info  - Generating static pages (0/48)
-info  - Generating static pages (12/48)
-info  - Generating static pages (24/48)
-(node:12512) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
+info  - Generating static pages (0/51)
+Error:  DynamicServerError: Dynamic server usage: request.url
+    at Object.staticGenerationBailout (D:\Orbital23\mlbb\.next\server\chunks\5159.js:276:21)
+    at handleReqBailout (D:\Orbital23\mlbb\.next\server\chunks\8601.js:2365:23)
+    at Object.get (D:\Orbital23\mlbb\.next\server\chunks\8601.js:2373:13)
+    at GET (D:\Orbital23\mlbb\.next\server\app\api\post\info\route.js:81:25)
+    at D:\Orbital23\mlbb\.next\server\chunks\8601.js:2661:43
+    at D:\Orbital23\mlbb\.next\server\chunks\8601.js:3497:36
+    at NoopContextManager.with (D:\Orbital23\mlbb\.next\server\chunks\8601.js:531:30)
+    at ContextAPI.with (D:\Orbital23\mlbb\.next\server\chunks\8601.js:201:58)
+    at NoopTracer.startActiveSpan (D:\Orbital23\mlbb\.next\server\chunks\8601.js:1124:34)
+    at ProxyTracer.startActiveSpan (D:\Orbital23\mlbb\.next\server\chunks\8601.js:1164:36) {
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+info  - Generating static pages (12/51)
+info  - Generating static pages (25/51)
+(node:2508) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 [next-auth][error][CLIENT_FETCH_ERROR] 
 https://next-auth.js.org/errors#client_fetch_error fetch failed {
@@ -66,81 +58,83 @@ https://next-auth.js.org/errors#client_fetch_error fetch failed {
   url: 'http://localhost:3010/api/auth/csrf',
   message: 'fetch failed'
 }
-info  - Generating static pages (36/48)
+info  - Generating static pages (38/51)
+warn  - Entire page /profile/stg deopted into client-side rendering. https://nextjs.org/docs/messages/deopted-into-client-rendering /profile/stg
+
 
 warn  - metadata.metadataBase is not set for resolving social open graph or twitter images, fallbacks to "http://localhost:3000". See https://beta.nextjs.org/docs/api-reference/metadata#metadatabase
 
 
 
-warn  - Entire page /profile/stg deopted into client-side rendering. https://nextjs.org/docs/messages/deopted-into-client-rendering /profile/stg
-(node:7460) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
-(Use `node --trace-warnings ...` to show where the warning was created)
-info  - Generating static pages (48/48)
+info  - Generating static pages (51/51)
 info  - Finalizing page optimization...
 
 Route (app)                                Size     First Load JS
-┌ λ /                                      176 B          82.8 kB
+┌ λ /                                      175 B          82.8 kB
 ├ λ /api/code                              0 B                0 B
 ├ λ /api/comment/list                      0 B                0 B
 ├ λ /api/comment/pic                       0 B                0 B
-├ λ /api/post                              0 B                0 B
+├ λ /api/post/filter                       0 B                0 B
+├ λ /api/post/info                         0 B                0 B
 ├ λ /api/reply/list                        0 B                0 B
-├ λ /api/test                              0 B                0 B
+├ λ /api/scrape-rank-stat                  0 B                0 B
+├ λ /api/search-users                      0 B                0 B
 ├ λ /api/tier-script                       0 B                0 B
 ├ λ /api/user/basic-info                   0 B                0 B
 ├ λ /api/user/favourite                    0 B                0 B
 ├ λ /api/user/fol-info                     0 B                0 B
 ├ λ /api/user/post                         0 B                0 B
-├ λ /api/users                             0 B                0 B
-├ λ /auth/signin                           2.03 kB         107 kB
-├ λ /cms/build                             989 B          90.2 kB
-├ λ /cms/counter                           1.08 kB        78.1 kB
-├ λ /cms/emblem                            919 B          90.1 kB
-├ λ /cms/spell                             917 B          90.1 kB
-├ λ /explore                               7.9 kB          135 kB
-├ λ /explore/[postId]                      8.2 kB          124 kB
+├ λ /auth/signin                           2.09 kB         107 kB
+├ λ /explore                               5.91 kB         138 kB
+├ λ /explore/[postId]                      10.7 kB         127 kB
 ├ λ /explore/stg/api/comDelete             0 B                0 B
+├ λ /explore/stg/api/comDislike            0 B                0 B
 ├ λ /explore/stg/api/comEdit               0 B                0 B
+├ λ /explore/stg/api/comLike               0 B                0 B
 ├ λ /explore/stg/api/delete                0 B                0 B
 ├ λ /explore/stg/api/dislike               0 B                0 B
 ├ λ /explore/stg/api/edit                  0 B                0 B
 ├ λ /explore/stg/api/favourite             0 B                0 B
-├ ○ /explore/stg/api/getRandomUser         0 B                0 B
 ├ λ /explore/stg/api/like                  0 B                0 B
 ├ λ /explore/stg/api/post                  0 B                0 B
 ├ λ /explore/stg/api/postComment           0 B                0 B
 ├ λ /explore/stg/api/postReply             0 B                0 B
+├ λ /explore/stg/api/repDelete             0 B                0 B
+├ λ /explore/stg/api/repDislike            0 B                0 B
+├ λ /explore/stg/api/repEdit               0 B                0 B
+├ λ /explore/stg/api/repLike               0 B                0 B
 ├ λ /explore/stg/api/unfavourite           0 B                0 B
 ├ ○ /favicon.ico                           0 B                0 B
-├ λ /not-found                             1.48 kB        91.8 kB
-├ λ /profile                               171 B          77.2 kB
-├ λ /profile/[username]                    309 B          77.3 kB
-├ λ /profile/[username]/[subProfile]       4.63 kB         109 kB
+├ ○ /icon.png                              0 B                0 B
+├ λ /not-found                             1.53 kB        91.9 kB
+├ λ /profile                               162 B          77.1 kB
+├ λ /profile/[username]                    306 B          77.3 kB
+├ λ /profile/[username]/[subProfile]       3.56 kB         118 kB
 ├ λ /profile/[username]/api                0 B                0 B
 ├ λ /profile/[username]/api/follow         0 B                0 B
 ├ λ /profile/[username]/api/unfollow       0 B                0 B
-├ λ /profile/stg                           35.3 kB         148 kB
+├ λ /profile/stg                           35.2 kB         148 kB
 ├ λ /profile/stg/api/bind                  0 B                0 B
 ├ ○ /profile/stg/api/cdn-sign              0 B                0 B
 ├ λ /profile/stg/api/edit-picture          0 B                0 B
 ├ λ /profile/stg/api/update                0 B                0 B
-├ λ /profile/stg/bind                      1.83 kB        98.3 kB
-├ λ /profile/stg/bind/verify               2.15 kB        98.6 kB
-├ λ /wiki                                  171 B          77.2 kB
-├ λ /wiki/heroes                           5.77 kB         100 kB
-├ λ /wiki/heroes/[hero]                    9.24 kB          99 kB
-├ λ /wiki/patches                          2.1 kB         91.5 kB
-├ λ /wiki/patches/[patch]                  2.92 kB        79.9 kB
-├ λ /wiki/statistics                       2.86 kB        97.3 kB
-└ λ /wiki/tier-list                        926 B          90.3 kB
+├ λ /profile/stg/bind                      1.89 kB        98.3 kB
+├ λ /profile/stg/bind/verify               2.2 kB         98.6 kB
+├ λ /wiki                                  162 B          77.1 kB
+├ λ /wiki/heroes                           6.2 kB          100 kB
+├ λ /wiki/heroes/[hero]                    9.18 kB        98.6 kB
+├ λ /wiki/patches                          2.15 kB        91.5 kB
+├ λ /wiki/patches/[patch]                  2.91 kB        79.9 kB
+├ λ /wiki/statistics                       3.37 kB        97.4 kB
+└ λ /wiki/tier-list                        4.29 kB        98.3 kB
 + First Load JS shared by all              77 kB
-  ├ chunks/2443530c-ea3be2629419fdf0.js    50.5 kB
-  ├ chunks/8139-4854361d949ffce7.js        24.4 kB
-  ├ chunks/main-app-2e89d0f02ae4d937.js    217 B
-  └ chunks/webpack-192733997b9ebc21.js     1.82 kB
+  ├ chunks/139-234d5cd1a6980f36.js         24.4 kB
+  ├ chunks/2443530c-f0ae597f67f7c78e.js    50.5 kB
+  ├ chunks/main-app-0008d02f0659eba2.js    214 B
+  └ chunks/webpack-7ee7953e908b3b4a.js     1.81 kB
 
 Route (pages)                              Size     First Load JS
-┌ ○ /404                                   181 B          86.3 kB
+┌ ○ /404                                   179 B          86.3 kB
 ├ λ /api/auth/[...nextauth]                0 B            86.1 kB
 ├ λ /api/build                             0 B            86.1 kB
 ├ λ /api/build/create                      0 B            86.1 kB
@@ -149,12 +143,13 @@ Route (pages)                              Size     First Load JS
 ├ λ /api/counter/create                    0 B            86.1 kB
 ├ λ /api/emblem                            0 B            86.1 kB
 ├ λ /api/emblem/create                     0 B            86.1 kB
+├ λ /api/explore/getRandomUser             0 B            86.1 kB
 ├ λ /api/spell                             0 B            86.1 kB
 └ λ /api/spell/create                      0 B            86.1 kB
 + First Load JS shared by all              86.1 kB
-  ├ chunks/main-10ee1c2105c63c59.js        84.1 kB
-  ├ chunks/pages/_app-749d53c4cd4de805.js  193 B
-  └ chunks/webpack-192733997b9ebc21.js     1.82 kB
+  ├ chunks/main-0685cfe333d212c0.js        84.1 kB
+  ├ chunks/pages/_app-41eecff5619c9bfb.js  192 B
+  └ chunks/webpack-7ee7953e908b3b4a.js     1.81 kB
 
 ƒ Middleware                               214 kB
 

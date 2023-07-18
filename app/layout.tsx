@@ -2,11 +2,17 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
-import { NextRequest, NextResponse } from "next/server";
 
 import getCurrentUser from "@/lib/actions/getCurrentUser";
 import ToasterProvider from "@/components/providers/toaster-provider";
 import Navbar from "@/components/shared/navbar/navbar";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  icons: {
+    icon: `${process.env.NEXTAUTH_URL}/icon.png}`,
+  },
+};
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,7 +37,7 @@ export default async function RootLayout({
       lang="en"
       className={`${inter.className} ${fontHeading.variable} ${fontSatoshi.variable} text-softGray`}
     >
-      <body className="relative mx-auto bg-bgblack pt-24 text-pwhite selection:bg-navy-400 after:fixed after:inset-x-0 after:top-[-1450px] after:z-[-1] after:mx-auto after:h-[1280px] after:w-[1880px] after:rounded-full after:bg-navy-600 after:blur-[400px]">
+      <body className="relative mx-auto mb-8 bg-bgblack pt-24 text-pwhite selection:bg-navy-400 after:fixed after:inset-x-0 after:top-[-1450px] after:z-[-1] after:mx-auto after:h-[1280px] after:w-[1880px] after:rounded-full after:bg-navy-600 after:blur-[400px]">
         <ToasterProvider />
         <Navbar currentUser={currentUser} />
         <div className="">

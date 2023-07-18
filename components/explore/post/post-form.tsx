@@ -5,6 +5,7 @@ import useAutosizeTextArea from "@/lib/state/useAutosizeTextArea";
 import { useCallback, useRef, useState } from "react";
 import { toast } from "sonner";
 import Image from "next/image";
+import { Input } from "@/components/shared/input";
 
 import { SafeUser } from "@/types";
 
@@ -13,31 +14,27 @@ import { GradiantCard } from "@/components/shared/gradiant-card";
 import LoadingDots from "@/components/shared/icons/loading-dots";
 import { Paperclip } from "lucide-react";
 import DialogFit from "@/components/shared/dialog-fit";
-import { useRouter } from "next/navigation";
 import { FileRejection, useDropzone } from "react-dropzone";
-import AvatarEditor from "react-avatar-editor";
+import { Label } from "@/components/shared/label";
 
 const PostForm = ({ currUser }: { currUser?: SafeUser }) => {
   const [title, setTitle] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
   const [isMessageInputFocused, setIsMessageInputFocused] =
     useState<boolean>(false);
   const [titleCharacterCount, setTitleCharacterCount] = useState<number>(0);
   const [messageCharacterCount, setMessageCharacterCount] = useState<number>(0);
   useState<boolean>(false);
 
-  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const [tags, setTags] = useState("");
 
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
   useAutosizeTextArea(textAreaRef.current, message);
 
-  const editorRef = useRef(null);
-  const router = useRouter();
-  const [picLoading, setPicLoading] = useState(false);
-  const [buttonDisabled, setButtonDisabled] = useState(false);
-
-  const [slideValue, setSlideValue] = useState(10);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState("");
 
   const onDrop = useCallback(
     (acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
@@ -56,27 +53,8 @@ const PostForm = ({ currUser }: { currUser?: SafeUser }) => {
     isDragReject,
   } = useDropzone({ onDrop, maxFiles: 1, maxSize: 5242880, multiple: false });
 
-  const updateImage = async (imageUrl: string) => {
-    const set = await fetch("/profile/stg/api/edit-picture", {
-      method: "POST",
-      body: JSON.stringify({ img: imageUrl }),
-    });
-    const msg = await set.json();
-    if (!set.ok) {
-      setLoading(false);
-      toast.error(msg.message);
-      setButtonDisabled(false);
-    } else {
-      toast.success(
-        "Successfully updated profile picture, kindly wait before making any more updates"
-      );
-      router.push(
-        `/profile/${currUser?.username ? currUser?.username : "stg"}`
-      );
-    }
-  };
-
-  const handleUpload = async (dataUrl: string) => {
+  const handleUpload = async (e: any) => {
+    e.preventDefault();
     const sign = await fetch("/profile/stg/api/cdn-sign");
     const data = await sign.json();
     const url =
@@ -84,7 +62,7 @@ const PostForm = ({ currUser }: { currUser?: SafeUser }) => {
     try {
       const formData = new FormData();
       if (selectedImage) {
-        formData.append("file", dataUrl);
+        formData.append("file", selectedImage);
         formData.append("api_key", data.apikey);
         formData.append("timestamp", data.timestamp.toString());
         formData.append("signature", data.signature);
@@ -96,8 +74,12 @@ const PostForm = ({ currUser }: { currUser?: SafeUser }) => {
           body: formData,
         });
         const result = await response.json();
-        toast.success("Profile picture uploaded");
-        updateImage(result.secure_url);
+
+        toast.success("Picture uploaded, please close this window");
+        setImageUrl(result.secure_url);
+        setLoading(false);
+        setButtonDisabled(false);
+        setSelectedImage(null);
       } else {
         setLoading(false);
         setButtonDisabled(false);
@@ -106,20 +88,9 @@ const PostForm = ({ currUser }: { currUser?: SafeUser }) => {
     } catch (error) {
       setLoading(false);
       setButtonDisabled(false);
-      toast.error("Failed to change profile picture, please try again");
+      toast.error("Failed to upload picture, please try again");
     }
   };
-
-  // const handleSave = async (e: any) => {
-  //   e.preventDefault();
-  //   if (editorRef) {
-  //     const dataUrl = editorRef.current.getImageScaledToCanvas().toDataURL();
-  //     setSelectedImage(dataUrl);
-  //     handleUpload(dataUrl);
-  //   } else {
-  //     toast.error("Error saving your picture");
-  //   }
-  // };
 
   return (
     <>
@@ -131,10 +102,20 @@ const PostForm = ({ currUser }: { currUser?: SafeUser }) => {
           className="mt-3 flex w-full flex-col gap-3"
           onSubmit={async (e) => {
             e.preventDefault();
+            let array: string[] = [];
+            if (tags !== "") {
+              const wordsInsideQuotes = tags.replace(/'/g, "");
+              const elements = wordsInsideQuotes.split(",");
+
+              array = elements.map((element) => element.trim().toLowerCase());
+            }
+
             setLoading(true);
             const fields = {
               title: title,
               message: message,
+              image: imageUrl,
+              tags: array.slice(0, 3),
             };
 
             const set = await fetch("/explore/stg/api/post", {
@@ -196,30 +177,40 @@ const PostForm = ({ currUser }: { currUser?: SafeUser }) => {
               </p>
             )}
           </div>
+          <div className="space-y-1">
+            <Label htmlFor="tags">Tags (Optional)</Label>
+            <input
+              type="text"
+              placeholder={"Enter up to 3 tags (e.g. 'heroes', 'meta')"}
+              value={tags}
+              onChange={(e) => {
+                const inputValue = e.target.value;
+                setTags(inputValue);
+              }}
+              className="w-full resize-none overflow-hidden rounded-lg border border-slate-700 bg-transparent p-3 text-sm text-slate-200 outline-none transition-all duration-100 focus:outline-none focus:ring"
+            />
+          </div>
+
           <div className="flex items-center justify-end gap-2">
             <DialogFit
-              title="Choose profile picture (Max 5 MB)"
-              triggerChild={<Paperclip />}
+              title="Choose image (Max 5 MB)"
+              triggerChild={
+                <Paperclip className="mr-2 mt-1 cursor-pointer transition-all ease-in-out hover:text-navy-300 hover:duration-300" />
+              }
             >
-              {/* <div>
+              <div>
                 <div className="flex flex-col items-center justify-center">
                   {selectedImage && (
-                    <>
-                      <AvatarEditor
-                        ref={editorRef}
-                        image={selectedImage}
-                        width={150}
-                        height={150}
-                        border={0}
-                        borderRadius={150}
-                        color={[0, 0, 0, 0.72]}
-                        scale={slideValue / 10}
-                        rotate={0}
-                      />
-                    </>
+                    <Image
+                      src={`${URL.createObjectURL(selectedImage)}`}
+                      alt=""
+                      width={0}
+                      height={0}
+                      sizes="100vw"
+                      className="h-auto w-auto"
+                    />
                   )}
                 </div>
-
                 <div className="cursor-pointer text-sm" {...getRootProps()}>
                   <input {...getInputProps()} />
                   {isDragActive ? (
@@ -243,7 +234,7 @@ const PostForm = ({ currUser }: { currUser?: SafeUser }) => {
                 <Button
                   disabled={!selectedImage}
                   onClick={(e) => {
-                    handleSave(e);
+                    handleUpload(e);
                     setLoading(true);
                     setButtonDisabled(true);
                   }}
@@ -258,7 +249,7 @@ const PostForm = ({ currUser }: { currUser?: SafeUser }) => {
                     "Done"
                   )}
                 </Button>
-              </div> */}
+              </div>
             </DialogFit>
             <Button
               className="mt-1 w-full rounded-2xl"
