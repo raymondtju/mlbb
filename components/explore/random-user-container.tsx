@@ -33,14 +33,14 @@ const RandomUser: React.FC<RandomUserProps> = ({ randomUsers }) => {
 
   return (
     <GradiantCard
-      className="sticky top-14 hidden h-full max-h-[90vh] rounded-3xl md:block"
+      className="sticky top-14 hidden h-full max-h-[90vh] w-[750px] rounded-3xl md:block"
       variant="clean"
     >
       <div className="flex items-center justify-between">
         <h2 className="font-heading text-xl font-bold tracking-wide">
           Connect with others
         </h2>
-        <button>
+        <button disabled={loading}>
           {loading ? (
             <>
               <LoadingDots color="#FAFAFA" />
@@ -74,7 +74,7 @@ const RandomUser: React.FC<RandomUserProps> = ({ randomUsers }) => {
                 >
                   {user.username}
                 </Link>
-                <p className="text-gray-500">{user.name}</p>
+                <p className="text-sm text-gray-500">{user.name}</p>
               </div>
             </li>
           ))

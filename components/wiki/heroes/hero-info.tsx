@@ -12,27 +12,26 @@ import MatchInsights from "@/components/profile/profile-stats/match-insights";
 
 interface HeroFyiContainer {
   hero: Hero | null;
-  heroStats: { name: string; use: string; ban: string; win: string };
   heroBuild: Object[] | null;
   heroSpell: Object[] | null;
   heroEmblem: Object[] | null;
   heroWeakAgainst?: Object[] | null;
   heroStrongAgainst?: Object[] | null;
-  matches?: {
-    mode: string;
-    total: number;
-    winrate: number;
-    data: {
-      id: string;
-      total: number;
-      win: number;
-      name: string;
-      _id: string;
-    }[];
-  }[];
-  classicIndex?: number;
-  rankedIndex?: number;
-  showWR: boolean;
+  // matches?: {
+  //   mode: string;
+  //   total: number;
+  //   winrate: number;
+  //   data: {
+  //     id: string;
+  //     total: number;
+  //     win: number;
+  //     name: string;
+  //     _id: string;
+  //   }[];
+  // }[];
+  // classicIndex?: number;
+  // rankedIndex?: number;
+  // showWR: boolean;
 }
 
 export default function HeroFyi({
@@ -58,6 +57,17 @@ export default function HeroFyi({
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const tier = () => {
+    for (let i = 0; i < tiers.length; i++) {
+      if (hero?.tiers === tiers[i].tier) {
+        return i;
+      } else if (hero?.tiers === "SS") {
+        return 0;
+      }
+    }
+    return -1;
+  };
 
   const uniqueSpells = Array.from(
     new Set(heroSpell?.map((spell) => spell.name))
@@ -105,26 +115,31 @@ export default function HeroFyi({
             />
 
             <div className="flex w-full flex-col gap-x-1.5 ">
-              <div className="flex flex-row items-center gap-2">
-                <p className="font-heading text-xl md:text-3xl">
-                  {heroDetails.heroName}
-                </p>
-                <Image
-                  src={`https://res.cloudinary.com/dvm5vog2j/image/upload/v1686042255/mlbb.fyi/heroRole/${hero?.role[0]}.webp`}
-                  alt={hero?.role[0] || ""}
-                  width={25}
-                  height={25}
-                  className="mb-[5px] h-[25px] w-[25px]"
-                />
-                {hero?.role[1] && (
+              <div className="flex items-center justify-between">
+                <div className="flex flex-row items-center gap-2">
+                  <p className="font-heading text-xl md:text-3xl">
+                    {heroDetails.heroName}
+                  </p>
                   <Image
-                    src={`https://res.cloudinary.com/dvm5vog2j/image/upload/v1686042255/mlbb.fyi/heroRole/${hero?.role[1]}.webp`}
-                    alt={hero?.role[1] || ""}
+                    src={`https://res.cloudinary.com/dvm5vog2j/image/upload/v1686042255/mlbb.fyi/heroRole/${hero?.role[0]}.webp`}
+                    alt={hero?.role[0] || ""}
                     width={25}
-                    height={20}
-                    className="mb-[5px] h-[25px] w-[25px]"
+                    height={25}
+                    className="mb-1 h-[18px] w-[18px] md:h-[25px] md:w-[25px]"
                   />
-                )}
+                  {hero?.role[1] && (
+                    <Image
+                      src={`https://res.cloudinary.com/dvm5vog2j/image/upload/v1686042255/mlbb.fyi/heroRole/${hero?.role[1]}.webp`}
+                      alt={hero?.role[1] || ""}
+                      width={25}
+                      height={25}
+                      className="mb-1 h-[18px] w-[18px] md:h-[25px] md:w-[25px]"
+                    />
+                  )}
+                </div>
+                <div className="text-md mb-1 rounded-full bg-navy-600 px-2 font-semibold ">
+                  <p>{hero?.tier}</p>
+                </div>
               </div>
               <div className="mb-1 flex flex-row items-center">
                 <Image
@@ -149,7 +164,7 @@ export default function HeroFyi({
                     Winrate
                   </p>
                   <p className="font-sat text-[12px] font-semibold sm:text-[20px]">
-                    {heroStats.win}
+                    {hero?.stats.all.win || "0.00%"}
                   </p>
                 </div>
                 <div className="flex flex-col">
@@ -157,13 +172,13 @@ export default function HeroFyi({
                     Pick
                   </p>
                   <p className="font-sat text-[12px] font-semibold sm:text-[20px]">
-                    {heroStats.use}
+                    {hero?.stats.all.use || "0.00%"}
                   </p>
                 </div>
                 <div className="flex flex-col">
                   <p className="font-heading text-[12px] sm:text-[16px]">Ban</p>
                   <p className="font-sat text-[12px] font-semibold sm:text-[20px]">
-                    {heroStats.ban}
+                    {hero?.stats.all.ban || "0.00%"}
                   </p>
                 </div>
               </div>
@@ -281,7 +296,7 @@ export default function HeroFyi({
         </GradiantCard>
       </div>
 
-      {showWR && (
+      {/* {showWR && (
         <div className="mt-1.5 flex flex-col gap-y-1.5 sm:flex-row sm:gap-x-1.5">
           <MatchInsights
             title={`Your classic ${heroDetails?.heroName} matches`}
@@ -304,7 +319,7 @@ export default function HeroFyi({
             isHorizontal={true}
           />
         </div>
-      )}
+      )} */}
 
       <GradiantCard className="mt-1.5 h-fit w-full" variant="clean">
         {heroStrongAgainst.length !== 0 && (
@@ -318,25 +333,26 @@ export default function HeroFyi({
                     onClick={() => {
                       router.push(`/wiki/heroes/${hero.name.toLowerCase()}`);
                     }}
-                    className="cursor-pointer"
+                    className="mx-auto cursor-pointer"
                   >
                     <div className="relative">
                       <Image
                         src={
                           hero?.img?.split("/image/upload/")[0] +
-                          "/image/upload/c_fill,h_192,w_192,g_north/" +
+                          "/image/upload/c_fill,h_220,w_220,g_north/" +
                           hero?.img?.split("/image/upload/")[1]
                         }
                         alt={hero.name}
-                        width={96}
-                        height={96}
-                        className="h-[96px] w-[96px] rounded-full"
+                        width={110}
+                        height={110}
+                        className="h-[55px] w-[55px] rounded-full sm:h-[110px] sm:w-[110px]"
                         loading="lazy"
                       />
-                      <div className="bg-opacity/75 absolute bottom-0 left-0 h-[96px] w-[96px] items-center rounded-full bg-black/80 py-1 text-center text-sm font-medium text-white opacity-0 transition-opacity duration-200">
-                        <p className="mt-3 justify-center text-[10px] md:mt-8 md:text-[14px]">
-                          {hero?.name}
-                        </p>
+
+                      <div className="bg-opacity/75 absolute bottom-0 left-0 h-[55px] w-[55px] items-center rounded-full bg-black/80 py-1 text-center text-sm font-medium text-white opacity-0 transition-opacity duration-200 sm:h-[110px] sm:w-[110px]">
+                        {/* <p className="mt-3 justify-center text-[10px] md:mt-11 md:text-[14px]">
+                            {hero?.name}
+                          </p> */}
                       </div>
                     </div>
                     <style jsx>{`
@@ -344,6 +360,9 @@ export default function HeroFyi({
                         opacity: 1;
                       }
                     `}</style>
+                    <p className="mt-2 text-center text-[10px]  md:text-[14px]">
+                      {hero?.name}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -360,25 +379,26 @@ export default function HeroFyi({
                 onClick={() => {
                   router.push(`/wiki/heroes/${counter.name.toLowerCase()}`);
                 }}
-                className="cursor-pointer"
+                className="mx-auto cursor-pointer"
               >
                 <div className="relative">
                   <Image
                     src={
                       counter?.img?.split("/image/upload/")[0] +
-                      "/image/upload/c_fill,h_192,w_192,g_north/" +
+                      "/image/upload/c_fill,h_220,w_220,g_north/" +
                       counter?.img?.split("/image/upload/")[1]
                     }
                     alt={counter.name}
-                    width={96}
-                    height={96}
-                    className="h-[96px] w-[96px] rounded-full"
+                    width={110}
+                    height={110}
+                    className="h-[55px] w-[55px] rounded-full sm:h-[110px] sm:w-[110px]"
                     loading="lazy"
                   />
-                  <div className="bg-opacity/75 absolute bottom-0 left-0 h-[96px] w-[96px] items-center rounded-full bg-black/80 py-1 text-center text-sm font-medium text-white opacity-0 transition-opacity duration-200">
-                    <p className="mt-3 justify-center text-[10px] md:mt-8 md:text-[14px]">
-                      {counter?.name}
-                    </p>
+
+                  <div className="bg-opacity/75 absolute bottom-0 left-0 h-[55px] w-[55px] items-center rounded-full bg-black/80 py-1 text-center text-sm font-medium text-white opacity-0 transition-opacity duration-200 sm:h-[110px] sm:w-[110px]">
+                    {/* <p className="mt-3 justify-center text-[10px] md:mt-11 md:text-[14px]">
+                            {counter?.name}
+                          </p> */}
                   </div>
                 </div>
                 <style jsx>{`
@@ -386,13 +406,16 @@ export default function HeroFyi({
                     opacity: 1;
                   }
                 `}</style>
+                <p className="mt-2 text-center text-[10px]  md:text-[14px]">
+                  {counter?.name}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </GradiantCard>
 
-      <GradiantCard className="mb-8 mt-1.5 h-fit w-full" variant="clean">
+      <GradiantCard className="mt-1.5 h-fit w-full" variant="clean">
         <p className="font-heading text-xl md:text-3xl">Passive</p>
         <div className="my-4">
           <div className="flex flex-row gap-2">
