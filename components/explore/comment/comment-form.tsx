@@ -8,7 +8,7 @@ import Image from "next/image";
 import { GradiantCard } from "@/components/shared/gradiant-card";
 import { SendIcon } from "lucide-react";
 import LoadingDots from "@/components/shared/icons/loading-dots";
-import useMut from "@/lib/state/useMut";
+import { revalPath } from "@/lib/revalidate";
 
 interface CommentProps {
   postId: string;
@@ -16,9 +16,9 @@ interface CommentProps {
 }
 
 const NewCommentForm: React.FC<CommentProps> = ({ postId, img }) => {
-  const togMut = useMut();
   const [value, setValue] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
+  console.log(postId);
 
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -67,13 +67,14 @@ const NewCommentForm: React.FC<CommentProps> = ({ postId, img }) => {
               setLoading(false);
               toast.error(msg.message);
             } else {
+              revalPath("/explore/" + postId);
               setLoading(false);
               setValue("");
               toast.success(msg.message);
-              togMut.togMut();
-              setTimeout(() => {
-                togMut.clamMut();
-              }, 1000);
+              // togMut.togMut();
+              // setTimeout(() => {
+              //   togMut.clamMut();
+              // }, 1000);
             }
           }}
         >

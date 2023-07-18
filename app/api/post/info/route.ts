@@ -20,12 +20,23 @@ export async function GET(req: Request) {
       where: {
         id: postId,
       },
-      select: {
-        likes: true,
-        dislikes: true,
-        favourites: true,
-        comments: true,
+      include: {
+        comments: {
+          orderBy: {
+            createdAt: "desc",
+          },
+        },
       },
+      // select: {
+      //   likes: true,
+      //   dislikes: true,
+      //   favourites: true,
+      //   comments: {
+      //     orderBy: {
+      //       createdAt: "desc",
+      //     },
+      //   },
+      // },
     });
 
     if (!postInfo) {
@@ -38,6 +49,7 @@ export async function GET(req: Request) {
         }
       );
     }
+
     return NextResponse.json(postInfo);
   } catch (error) {
     console.log("Error: ", error);
