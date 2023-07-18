@@ -6,7 +6,7 @@ import { IFullPost } from "@/types";
 
 async function getPost(postId: string) {
   const get = await fetch(
-    `http://localhost:3000/api/post/info?postId=${postId}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/post/info?postId=${postId}`,
     {
       method: "GET",
       cache: "no-store",
