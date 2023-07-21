@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "../../shared/button";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+
+import { Button } from "../../shared/button";
 import LoadingDots from "../../shared/icons/loading-dots";
 
 interface DeletePostProps {
@@ -27,7 +28,7 @@ const DeletePost: React.FC<DeletePostProps> = ({ postId }) => {
           const set = await fetch("/explore/stg/api/delete", {
             method: "POST",
             body: JSON.stringify({
-              postId
+              postId,
             }),
           });
           const msg = await set.json();

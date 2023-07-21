@@ -1,14 +1,15 @@
 "use client";
 
-import useAutosizeTextArea from "@/lib/state/useAutosizeTextArea";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
 import Image from "next/image";
 
+import { revalPath } from "@/lib/revalidate";
+import useAutosizeTextArea from "@/lib/state/useAutosizeTextArea";
+
 import { GradiantCard } from "@/components/shared/gradiant-card";
 import { SendIcon } from "lucide-react";
 import LoadingDots from "@/components/shared/icons/loading-dots";
-import { revalPath } from "@/lib/revalidate";
 
 interface CommentProps {
   postId: string;
@@ -18,7 +19,6 @@ interface CommentProps {
 const NewCommentForm: React.FC<CommentProps> = ({ postId, img }) => {
   const [value, setValue] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
-  console.log(postId);
 
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 

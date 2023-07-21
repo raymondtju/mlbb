@@ -1,21 +1,19 @@
 "use client";
 
-import useAutosizeTextArea from "@/lib/state/useAutosizeTextArea";
-
 import { useCallback, useRef, useState } from "react";
+import { FileRejection, useDropzone } from "react-dropzone";
 import { toast } from "sonner";
 import Image from "next/image";
 
 import { SafeUser } from "@/types";
+import useAutosizeTextArea from "@/lib/state/useAutosizeTextArea";
 
 import { Button } from "@/components/shared/button";
 import { GradiantCard } from "@/components/shared/gradiant-card";
-import LoadingDots from "@/components/shared/icons/loading-dots";
 import { Paperclip } from "lucide-react";
-import DialogFit from "@/components/shared/dialog-fit";
-import { FileRejection, useDropzone } from "react-dropzone";
 import { Label } from "@/components/shared/label";
-import { revalPath } from "@/lib/revalidate";
+import DialogFit from "@/components/shared/dialog-fit";
+import LoadingDots from "@/components/shared/icons/loading-dots";
 
 const PostForm = ({ currUser }: { currUser?: SafeUser }) => {
   const [title, setTitle] = useState<string>("");
@@ -72,6 +70,7 @@ const PostForm = ({ currUser }: { currUser?: SafeUser }) => {
         const response = await fetch(url, {
           method: "POST",
           body: formData,
+          cache: "no-store",
         });
         const result = await response.json();
 
@@ -121,6 +120,7 @@ const PostForm = ({ currUser }: { currUser?: SafeUser }) => {
             const set = await fetch("/explore/stg/api/post", {
               method: "POST",
               body: JSON.stringify(fields),
+              cache: "no-store",
             });
             const msg = await set.json();
             if (!set.ok) {

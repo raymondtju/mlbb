@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "../../shared/button";
 import { toast } from "sonner";
-import LoadingDots from "../../shared/icons/loading-dots";
 import { revalPath } from "@/lib/revalidate";
+
+import { Button } from "../../shared/button";
+import LoadingDots from "../../shared/icons/loading-dots";
 
 interface DelCommentProps {
   commentId: string;

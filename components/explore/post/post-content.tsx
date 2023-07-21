@@ -2,14 +2,13 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import useSWR from "swr";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Link from "next/link";
 import Image from "next/image";
 
 import { SafeUser } from "@/types";
-import { Post, User, Comment } from "@prisma/client";
+import { Post, User } from "@prisma/client";
 
 import {
   ArrowLeftCircle,
@@ -32,15 +31,6 @@ import { revalPath } from "@/lib/revalidate";
 
 interface PostContentProp {
   post: Post;
-  // postInfo:
-  //   | {
-  //       likes: string[];
-  //       dislikes: string[];
-  //       favourites: string[];
-  //       comments: Comment[];
-  //     }
-  //   | undefined;
-  // mutate?: () => void;
   user: User | null;
   currUser?: SafeUser | null;
   comments: any;
@@ -48,8 +38,6 @@ interface PostContentProp {
 
 const PostContent: React.FC<PostContentProp> = ({
   post,
-  // postInfo,
-  // mutate,
   user,
   currUser,
   comments,
@@ -276,11 +264,13 @@ const PostContent: React.FC<PostContentProp> = ({
                         setLoading(false);
                         setLike(true);
                         if (dislike) {
+                          revalPath("/explore" + post.id);
                           setDislike(false);
-                          setTotalVotes(totalVotes + 2);
+                          // setTotalVotes(totalVotes + 2);
                           toast.success(msg.message);
                         } else {
-                          setTotalVotes(totalVotes + 1);
+                          revalPath("/explore" + post.id);
+                          // setTotalVotes(totalVotes + 1);
                           toast.success(msg.message);
                         }
                       }
@@ -309,9 +299,10 @@ const PostContent: React.FC<PostContentProp> = ({
                         toast.error(msg.message);
                         setLoading(false);
                       } else {
+                        revalPath("/explore" + post.id);
                         setLoading(false);
                         setLike(false);
-                        setTotalVotes(totalVotes - 1);
+                        // setTotalVotes(totalVotes - 1);
                         toast.success(msg.message);
                       }
                     }}
@@ -349,11 +340,13 @@ const PostContent: React.FC<PostContentProp> = ({
                         setLoading(false);
                         setDislike(true);
                         if (like) {
+                          revalPath("/explore" + post.id);
                           setLike(false);
-                          setTotalVotes(totalVotes - 2);
+                          // setTotalVotes(totalVotes - 2);
                           toast.success(msg.message);
                         } else {
-                          setTotalVotes(totalVotes - 1);
+                          revalPath("/explore" + post.id);
+                          // setTotalVotes(totalVotes - 1);
                           toast.success(msg.message);
                         }
                       }
@@ -382,9 +375,10 @@ const PostContent: React.FC<PostContentProp> = ({
                         toast.error(msg.message);
                         setLoading(false);
                       } else {
+                        revalPath("/explore" + post.id);
                         setLoading(false);
                         setDislike(false);
-                        setTotalVotes(totalVotes + 1);
+                        // setTotalVotes(totalVotes + 1);
                         toast.success(msg.message);
                       }
                     }}
@@ -412,10 +406,10 @@ const PostContent: React.FC<PostContentProp> = ({
                       toast.error(msg.message);
                       setStarLoading(false);
                     } else {
-                      revalPath("/explore" + post.id);
                       setFavourite(true);
                       setStarLoading(false);
                       toast.success(msg.message);
+                      revalPath("/explore" + post.id);
                     }
                   }}
                 >
