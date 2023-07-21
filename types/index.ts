@@ -1,4 +1,4 @@
-import { Comment, Post, User } from "@prisma/client";
+import { Comment, Post, Reply, User } from "@prisma/client";
 
 export type SafeUser = Omit<
   User,
@@ -9,6 +9,10 @@ export type SafeUser = Omit<
   emailVerified?: string;
 };
 
+export interface IFullComment extends Comment {
+  replies: Reply[];
+}
+
 export interface IFullPost extends Post {
-  comments: Comment[];
+  comments: IFullComment[];
 }

@@ -25,18 +25,11 @@ export async function GET(req: Request) {
           orderBy: {
             createdAt: "desc",
           },
+          include: {
+            replies: true,
+          },
         },
       },
-      // select: {
-      //   likes: true,
-      //   dislikes: true,
-      //   favourites: true,
-      //   comments: {
-      //     orderBy: {
-      //       createdAt: "desc",
-      //     },
-      //   },
-      // },
     });
 
     if (!postInfo) {
@@ -63,35 +56,3 @@ export async function GET(req: Request) {
     );
   }
 }
-
-// export async function POST(req: Request) {
-//   try {
-//     const { postId }: { postId: string } = await req.json();
-
-//     const postInfo = await prisma.post.findFirst({
-//       where: {
-//         id: postId,
-//       },
-//       select: {
-//         likes: true,
-//         dislikes: true,
-//         favourites: true,
-//       },
-//     });
-
-//     if (!postInfo) {
-//       return NextResponse.json(
-//         {
-//           message: "There is no such post",
-//         },
-//         {
-//           status: 400,
-//         }
-//       );
-//     }
-//     return NextResponse.json(postInfo);
-//   } catch (error) {
-//     console.log("Error:", error);
-//     return null;
-//   }
-// }
