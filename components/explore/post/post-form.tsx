@@ -184,6 +184,7 @@ const PostForm = ({ currUser }: { currUser?: SafeUser }) => {
               type="text"
               placeholder={"Enter up to 3 tags (e.g. 'heroes', 'meta')"}
               value={tags}
+              id="tags"
               onChange={(e) => {
                 const inputValue = e.target.value;
                 setTags(inputValue);
