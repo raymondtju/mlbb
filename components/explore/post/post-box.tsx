@@ -67,6 +67,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post, posts, index, currUser }) => {
     } else {
       setLoading(false);
       togMut.togMut();
+      revalPath("/explore/" + postId);
       toast.success(msg.message);
     }
   }
