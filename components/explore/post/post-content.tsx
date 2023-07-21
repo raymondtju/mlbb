@@ -28,18 +28,19 @@ import TimeStamp from "@/components/shared/time-stamp";
 import LoadingDots from "@/components/shared/icons/loading-dots";
 import DialogFit from "@/components/shared/dialog-fit";
 import { GradiantCard } from "@/components/shared/gradiant-card";
+import { revalPath } from "@/lib/revalidate";
 
 interface PostContentProp {
   post: Post;
-  postInfo:
-    | {
-        likes: string[];
-        dislikes: string[];
-        favourites: string[];
-        comments: Comment[];
-      }
-    | undefined;
-  mutate?: () => void;
+  // postInfo:
+  //   | {
+  //       likes: string[];
+  //       dislikes: string[];
+  //       favourites: string[];
+  //       comments: Comment[];
+  //     }
+  //   | undefined;
+  // mutate?: () => void;
   user: User | null;
   currUser?: SafeUser | null;
   comments: any;
@@ -47,16 +48,16 @@ interface PostContentProp {
 
 const PostContent: React.FC<PostContentProp> = ({
   post,
-  postInfo,
-  mutate,
+  // postInfo,
+  // mutate,
   user,
   currUser,
   comments,
 }) => {
   const router = useRouter();
 
-  const isLiked = postInfo?.likes.includes(currUser?.id as string);
-  const isDisliked = postInfo?.dislikes.includes(currUser?.id as string);
+  const isLiked = post?.likes.includes(currUser?.id as string);
+  const isDisliked = post?.dislikes.includes(currUser?.id as string);
   const isStarred = currUser?.favourite.includes(post.id as string);
 
   const [like, setLike] = useState<boolean>(isLiked);
@@ -75,7 +76,7 @@ const PostContent: React.FC<PostContentProp> = ({
   const optionRef = useRef();
 
   const [isOpen, setIsOpen] = useState(false);
-  const dateTime = post.createdAt.toISOString().split("T");
+  const dateTime = new Date(post?.createdAt).toISOString().split("T");
   const date = dateTime[0];
   const time = dateTime[1].split(".")[0];
 
@@ -92,21 +93,21 @@ const PostContent: React.FC<PostContentProp> = ({
     isExpandable() === true ? setExpandedable(true) : setExpandedable(false);
   }, []);
 
-  useEffect(() => {
-    let handler = (event: MouseEvent) => {
-      if (
-        optionRef.current &&
-        !optionRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handler);
+  // useEffect(() => {
+  //   let handler = (event: MouseEvent) => {
+  //     if (
+  //       optionRef.current &&
+  //       !optionRef.current.contains(event.target as Node)
+  //     ) {
+  //       setIsOpen(false);
+  //     }
+  //   };
+  //   document.addEventListener("mousedown", handler);
 
-    return () => {
-      document.removeEventListener("mousedown", handler);
-    };
-  });
+  //   return () => {
+  //     document.removeEventListener("mousedown", handler);
+  //   };
+  // });
 
   const toggleExpand = () => {
     setExpanded(!expanded);
@@ -123,7 +124,7 @@ const PostContent: React.FC<PostContentProp> = ({
   return (
     <>
       <div
-        className="mb-4 ml-1 flex cursor-pointer flex-row items-center"
+        className="mb-4 ml-1 flex w-fit cursor-pointer flex-row items-center duration-300 hover:underline"
         onClick={() => {
           router.push("/explore");
         }}
@@ -411,7 +412,7 @@ const PostContent: React.FC<PostContentProp> = ({
                       toast.error(msg.message);
                       setStarLoading(false);
                     } else {
-                      mutate;
+                      revalPath("/explore" + post.id);
                       setFavourite(true);
                       setStarLoading(false);
                       toast.success(msg.message);
@@ -447,7 +448,7 @@ const PostContent: React.FC<PostContentProp> = ({
                       toast.error(msg.message);
                       setStarLoading(false);
                     } else {
-                      mutate;
+                      revalPath("/explore" + post.id);
                       setFavourite(false);
                       setStarLoading(false);
                       toast.success(msg.message);
@@ -469,13 +470,13 @@ const PostContent: React.FC<PostContentProp> = ({
                 </button>
               )}
               <p className="ml-2 mr-8 flex">
-                {postInfo?.favourites.length >= 1000
+                {post?.favourites.length >= 1000
                   ? `${
-                      (postInfo?.favourites.length -
-                        (postInfo?.favourites.length % 100)) /
+                      (post?.favourites.length -
+                        (post?.favourites.length % 100)) /
                       1000
                     }k`
-                  : postInfo?.favourites.length || 0}
+                  : post?.favourites.length || 0}
               </p>
 
               <MessageCircle size={24} strokeWidth={0.5} />

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "../../shared/button";
 import { toast } from "sonner";
 import LoadingDots from "../../shared/icons/loading-dots";
+import { revalPath } from "@/lib/revalidate";
 
 interface DelCommentProps {
   commentId: string;
@@ -20,13 +21,12 @@ const DelCommentButton: React.FC<DelCommentProps> = ({ commentId }) => {
         onClick={async (e) => {
           e.preventDefault();
           setLoading(true);
-          const fields = {
-            commentId: commentId,
-          };
 
           const set = await fetch("/explore/stg/api/comDelete", {
             method: "POST",
-            body: JSON.stringify(fields),
+            body: JSON.stringify({
+              commentId,
+            }),
           });
           const msg = await set.json();
           if (!set.ok) {
@@ -35,7 +35,7 @@ const DelCommentButton: React.FC<DelCommentProps> = ({ commentId }) => {
           } else {
             setLoading(false);
             toast.success(msg.message);
-            // window.location.reload();
+            revalPath("/explore" + commentId);
           }
         }}
         className="w-full"

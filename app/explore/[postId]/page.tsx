@@ -1,8 +1,19 @@
 import getCurrentUser from "@/lib/actions/getCurrentUser";
 import getUser from "@/lib/actions/getUser";
-import getCurrentPost from "@/lib/actions/getCurrentPost";
 
 import Post from "@/components/explore/post";
+import { IFullPost } from "@/types";
+
+async function getPost(postId: string) {
+  const get = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/post/info?postId=${postId}`,
+    {
+      method: "GET",
+      cache: "no-store",
+    }
+  );
+  return await get.json();
+}
 
 export default async function PostPage({
   params,
@@ -10,7 +21,7 @@ export default async function PostPage({
   params: { postId: string };
 }) {
   const postId = params.postId;
-  const post = await getCurrentPost(postId);
+  const post: IFullPost = await getPost(postId);
   const currentUser = await getCurrentUser();
 
   if (post) {
