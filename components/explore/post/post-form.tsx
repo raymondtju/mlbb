@@ -117,8 +117,11 @@ const PostForm = ({ currUser }: { currUser?: SafeUser }) => {
               tags: array.slice(0, 3),
             };
 
-            const set = await fetch("/explore/stg/api/post", {
+            const set = await fetch(`/api/explore/post?id=${currUser?.id}`, {
               method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
               body: JSON.stringify(fields),
               cache: "no-store",
             });
@@ -182,7 +185,7 @@ const PostForm = ({ currUser }: { currUser?: SafeUser }) => {
             <Label htmlFor="tags">Tags (Optional)</Label>
             <input
               type="text"
-              placeholder={"Enter up to 3 tags (e.g. 'heroes', 'meta')"}
+              placeholder={"Enter up to 3 tags (e.g. heroes, 'meta, bug)"}
               value={tags}
               id="tags"
               onChange={(e) => {

@@ -112,14 +112,12 @@ export async function POST(req: Request) {
     }
 
     // Dislike
-    else if (action === "dislike"){
+    else if (action === "dislike") {
       // If user doesn't dislike the post
       if (!post.dislikes.includes(currentUser.id as string)) {
         Obj.dislikes = [...Obj.dislikes, currentUser.id];
         if (post.likes.includes(currentUser?.id as string)) {
-          const updatedLikes = post.likes.filter(
-            (id) => id !== currentUser.id
-          );
+          const updatedLikes = post.likes.filter((id) => id !== currentUser.id);
           Obj.likes = [...updatedLikes];
 
           await prisma.post.update({
@@ -160,7 +158,9 @@ export async function POST(req: Request) {
 
       // If user dislike the post, then we remove user from list
       else {
-        const updatedDisikes = post.dislikes.filter((id) => id !== currentUser.id);
+        const updatedDisikes = post.dislikes.filter(
+          (id) => id !== currentUser.id
+        );
         Obj.dislikes = updatedDisikes;
         await prisma.post.update({
           where: {

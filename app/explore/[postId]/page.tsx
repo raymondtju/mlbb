@@ -10,7 +10,6 @@ async function getPost(postId: string) {
     {
       method: "GET",
       cache: "no-store",
-      next: { revalidate: 2 },
     }
   );
   return await get.json();
@@ -25,6 +24,7 @@ export default async function PostPage({
   const post: IFullPost = await getPost(postId);
   const currentUser = await getCurrentUser();
 
+  // console.log(post);
   if (post) {
     const user = await getUser(post.createdBy);
     return <Post currentUser={currentUser} post={post} user={user} />;

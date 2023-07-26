@@ -6,9 +6,11 @@ import { NextResponse } from "next/server";
 import ProfileBio from "@/components/profile/bio";
 import ProfileTab from "@/components/profile/profile-tab";
 
-export async function generateMetadata(
-  { params }: {params: {username: string}}
-): Promise<Metadata>{
+export async function generateMetadata({
+  params,
+}: {
+  params: { username: string };
+}): Promise<Metadata> {
   return {
     title: `@${params.username} - mlbb.fyi`,
     description:
@@ -36,8 +38,8 @@ export async function generateMetadata(
         "Access hero stats, optimal builds, and connect with a community of expert players.",
       images: ["/og.jpg"],
     },
-  }
-};
+  };
+}
 
 const ProfileTabList = [
   {
