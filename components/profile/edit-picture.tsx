@@ -32,12 +32,6 @@ const EditPicture: React.FC<EditPictureProps> = ({ currentUser }) => {
       if (acceptedFiles.length > 0) {
         setSelectedImage(acceptedFiles[0]);
       }
-    },
-    []
-  );
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop: (acceptedFiles, fileRejections) => {
       fileRejections.forEach((file) => {
         file.errors.forEach((err) => {
           if (err.code === "file-too-large") {
@@ -46,6 +40,11 @@ const EditPicture: React.FC<EditPictureProps> = ({ currentUser }) => {
         });
       });
     },
+    []
+  );
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
     maxFiles: 1,
     maxSize: 5242880,
     multiple: false,
