@@ -36,13 +36,20 @@ const EditPicture: React.FC<EditPictureProps> = ({ currentUser }) => {
     []
   );
 
-  const {
-    getRootProps,
-    getInputProps,
-    isDragActive,
-    isDragAccept,
-    isDragReject,
-  } = useDropzone({ onDrop, maxFiles: 1, maxSize: 5242880, multiple: false });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop: (acceptedFiles, fileRejections) => {
+      fileRejections.forEach((file) => {
+        file.errors.forEach((err) => {
+          if (err.code === "file-too-large") {
+            toast.error(`Sorry, maximum file size was 5MB`);
+          }
+        });
+      });
+    },
+    maxFiles: 1,
+    maxSize: 5242880,
+    multiple: false,
+  });
 
   const handleUpload = async (dataUrl: string) => {
     const sign = await fetch("/profile/stg/api/cdn-sign");
