@@ -11,7 +11,18 @@ export async function POST(req: Request) {
   if (!currentUser) {
     return NextResponse.json(
       {
-        message: "Username already exists",
+        message: "Please log in first",
+      },
+      {
+        status: 400,
+      }
+    );
+  }
+
+  if (!currentUser.username) {
+    return NextResponse.json(
+      {
+        message: "Please set username first",
       },
       {
         status: 400,
@@ -24,7 +35,8 @@ export async function POST(req: Request) {
       body: message,
       userId: currentUser?.id,
       postId: postId,
-      createdBy: currentUser?.username,
+      createdBy: currentUser.username,
+      userImage: currentUser.image,
     },
   });
 

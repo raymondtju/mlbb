@@ -56,13 +56,53 @@ model HeroDetails {
   hero           Hero                @relation(fields: [heroId], references: [id])
 }
 
+type Stats {
+  win String?
+  use String?
+  ban String?
+}
+
+type HeroStats {
+  all    Stats
+  mythic Stats
+  glory  Stats
+}
+
 model Hero {
   id      String       @id @default(auto()) @map("_id") @db.ObjectId
   name    String       @unique
   img     String
   heroId  Int          @unique
+  tier    String
   role    String[]
+  stats   HeroStats
   details HeroDetails?
+}
+
+type PickStats {
+  picks    String
+  win      String
+  lose     String
+  winRate  String
+  presence String?
+}
+
+type PickedHero {
+  id                 String
+  hero               String
+  picks              PickStats
+  blueSide           PickStats
+  redSide            PickStats
+  totalBans          String
+  banPresence        String
+  pickAndBan         String
+  pickAndBanPresence String
+}
+
+model TourneyStats {
+  id         String       @id @default(auto()) @map("_id") @db.ObjectId
+  tournament String
+  data       PickedHero[]
 }
 
 model MlbbAcc {
@@ -115,7 +155,9 @@ model User {
 
   posts    Post[]
   comments Comment[]
+  Reply    Reply[]
 
+  @@unique([id, username, image])
   @@unique([id, username])
 }
 
@@ -142,31 +184,62 @@ model VerificationToken {
 }
 
 model Post {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  title     String
-  body      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId    String   @db.ObjectId
-  createdBy String
-  image     String?
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  title      String
+  body       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  userId     String   @db.ObjectId
+  createdBy  String
+  image      String?
+  likes      String[]
+  dislikes   String[]
+  totalVotes Int      @default(0)
+  favourites String[]
+  tags       String[]
 
   user User @relation(fields: [userId, createdBy], references: [id, username], onDelete: Cascade)
 
   comments Comment[]
+  replies  Reply[]
 }
 
 model Comment {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  body      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId    String   @db.ObjectId
-  postId    String   @db.ObjectId
-  createdBy String?
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  body       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  userId     String   @db.ObjectId
+  userImage  String
+  postId     String   @db.ObjectId
+  createdBy  String
+  likes      String[]
+  dislikes   String[]
+  totalVotes Int      @default(0)
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId, createdBy, userImage], references: [id, username, image], onDelete: Cascade)
   post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  replies Reply[]
+}
+
+model Reply {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  body       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  userId     String   @db.ObjectId
+  userImage  String
+  commentId  String   @db.ObjectId
+  postId     String   @db.ObjectId
+  createdBy  String
+  likes      String[]
+  dislikes   String[]
+  totalVotes Int      @default(0)
+
+  user    User    @relation(fields: [userId, createdBy, userImage], references: [id, username, image], onDelete: Cascade)
+  comment Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  Post    Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
 }
 
 type Field {

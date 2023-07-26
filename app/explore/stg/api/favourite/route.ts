@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   if (!currentUser) {
     return NextResponse.json(
       {
-        message: "User not found",
+        message: "Pleese log in first",
       },
       {
         status: 400,
@@ -50,9 +50,30 @@ export async function POST(req: Request) {
       }
     );
 
+  const setPost = await prisma.post.update({
+    where: {
+      id: postId,
+    },
+    data: {
+      favourites: {
+        push: currentUser.id,
+      },
+    },
+  });
+
+  if (!setPost)
+    return NextResponse.json(
+      {
+        message: "Error editing post. Please try again",
+      },
+      {
+        status: 400,
+      }
+    );
+
   return NextResponse.json(
     {
-      message: "Post has been set to favourites",
+      message: "Post has been saved to favourites",
     },
     {
       status: 200,

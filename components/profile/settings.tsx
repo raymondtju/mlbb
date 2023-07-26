@@ -86,9 +86,13 @@ const Settings: React.FC<ISettings> = ({ currentUser, mlbbAcc }) => {
               src={
                 currentUser?.image === ""
                   ? "/nana.jpg"
-                  : currentUser?.image?.split("/image/upload/")[0] +
-                    "/image/upload/c_fill,h_150,w_150/" +
-                    currentUser?.image?.split("/image/upload/")[1]
+                  : currentUser?.image?.includes("/image/upload")
+                  ? `${
+                      currentUser?.image?.split("/image/upload/")[0]
+                    }/image/upload/c_fill,h_150,w_150/${
+                      currentUser?.image?.split("/image/upload/")[1]
+                    }`
+                  : currentUser?.image || "/nana.jpg"
               }
               alt=""
               width={150}
@@ -128,7 +132,7 @@ const Settings: React.FC<ISettings> = ({ currentUser, mlbbAcc }) => {
               type="email"
               placeholder="Email"
               value={currentUser?.email}
-              name="email"
+              id="email"
               disabled
             />
           </div>
@@ -140,7 +144,7 @@ const Settings: React.FC<ISettings> = ({ currentUser, mlbbAcc }) => {
               placeholder="Username"
               onChange={(e) => setUsername(e.target.value)}
               defaultValue={currentUser?.username || ""}
-              name="username"
+              id="username"
               maxLength={20}
               required
               pattern="[a-z0-9]{4,}"
@@ -165,7 +169,7 @@ const Settings: React.FC<ISettings> = ({ currentUser, mlbbAcc }) => {
               onFocus={() => setIsInputFocused(true)}
               onBlur={() => setIsInputFocused(false)}
               defaultValue={currentUser?.desc || ""}
-              name="description"
+              id="description"
               maxLength={50}
             />
             {isInputFocused && (
@@ -210,7 +214,7 @@ const Settings: React.FC<ISettings> = ({ currentUser, mlbbAcc }) => {
 
           <Button
             disabled={
-              (username === currentUser?.username &&
+              ((username === currentUser?.username || username.length < 4) &&
                 description === currentUser?.desc &&
                 link1 === currentUser?.links[0] &&
                 link2 === currentUser?.links[1] &&

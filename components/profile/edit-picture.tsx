@@ -1,7 +1,7 @@
 // @ts-nocheck
 "use client";
 
-import { useRef, useState, useCallback, ChangeEvent } from "react";
+import { useRef, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { FileRejection, useDropzone } from "react-dropzone";
 import { toast } from "sonner";
@@ -32,37 +32,23 @@ const EditPicture: React.FC<EditPictureProps> = ({ currentUser }) => {
       if (acceptedFiles.length > 0) {
         setSelectedImage(acceptedFiles[0]);
       }
+      rejectedFiles.forEach((file) => {
+        file.errors.forEach((err) => {
+          if (err.code === "file-too-large") {
+            toast.error(`Sorry, maximum file size was 5MB`);
+          }
+        });
+      });
     },
     []
   );
 
-  const {
-    getRootProps,
-    getInputProps,
-    isDragActive,
-    isDragAccept,
-    isDragReject,
-  } = useDropzone({ onDrop, maxFiles: 1, maxSize: 5242880, multiple: false });
-
-  const updateImage = async (imageUrl: string) => {
-    const set = await fetch("/profile/stg/api/edit-picture", {
-      method: "POST",
-      body: JSON.stringify({ img: imageUrl }),
-    });
-    const msg = await set.json();
-    if (!set.ok) {
-      setLoading(false);
-      toast.error(msg.message);
-      setButtonDisabled(false);
-    } else {
-      toast.success(
-        "Successfully updated profile picture, kindly wait before making any more updates"
-      );
-      router.push(
-        `/profile/${currentUser?.username ? currentUser?.username : "stg"}`
-      );
-    }
-  };
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    maxFiles: 1,
+    maxSize: 5242880,
+    multiple: false,
+  });
 
   const handleUpload = async (dataUrl: string) => {
     const sign = await fetch("/profile/stg/api/cdn-sign");
@@ -79,13 +65,28 @@ const EditPicture: React.FC<EditPictureProps> = ({ currentUser }) => {
         formData.append("eager", data.eager);
         formData.append("folder", data.folder);
 
-        const response = await fetch(url, {
-          method: "POST",
-          body: formData,
+        const upload = await fetch("/api/profile/picture", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            data,
+            url,
+            dataUrl,
+            userId: currentUser?.id,
+          }),
         });
-        const result = await response.json();
-        toast.success("Profile picture uploaded");
-        updateImage(result.secure_url);
+        if (upload.ok) {
+          toast.success("Successfully updated profile picture");
+          router.push(
+            `/profile/${currentUser?.username ? currentUser?.username : "stg"}`
+          );
+        } else {
+          setLoading(false);
+          toast.error(msg.message);
+          setButtonDisabled(false);
+        }
       } else {
         setLoading(false);
         setButtonDisabled(false);
