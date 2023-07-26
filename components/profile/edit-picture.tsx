@@ -32,7 +32,7 @@ const EditPicture: React.FC<EditPictureProps> = ({ currentUser }) => {
       if (acceptedFiles.length > 0) {
         setSelectedImage(acceptedFiles[0]);
       }
-      fileRejections.forEach((file) => {
+      rejectedFiles.forEach((file) => {
         file.errors.forEach((err) => {
           if (err.code === "file-too-large") {
             toast.error(`Sorry, maximum file size was 5MB`);
